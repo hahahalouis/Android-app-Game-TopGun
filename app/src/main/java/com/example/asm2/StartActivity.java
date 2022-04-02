@@ -16,7 +16,7 @@ public class StartActivity extends AppCompatActivity {
         {
             public void run(){
                 try{
-                    sleep(3000);
+                    sleep(5000);
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally {
@@ -31,6 +31,6 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        finish();
     }
 }
