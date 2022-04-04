@@ -17,7 +17,7 @@ import android.view.WindowManager;
 
 public class FlyingPlaneView extends View {
 
-    private Bitmap plane, bg,resize_bg,resize_plane,rocket;
+    private Bitmap plane, bg,resize_bg,resize_plane,rocket,resize_rocket;
 
     private Paint scorePaint = new Paint();
 
@@ -31,8 +31,13 @@ public class FlyingPlaneView extends View {
 
     public FlyingPlaneView(Context context) {
         super(context);
+        //Declare Bitmap
         plane = BitmapFactory.decodeResource(getResources(), R.drawable.plane);
+        rocket = BitmapFactory.decodeResource(getResources(), R.drawable.rocket);
+
+        //resize Bitmap
         resize_plane = Bitmap.createScaledBitmap(plane, 200, 200 ,false);
+        resize_rocket = Bitmap.createScaledBitmap(rocket, 200, 200 ,false);
 
 
         scorePaint.setColor(Color.WHITE);
@@ -91,8 +96,8 @@ public class FlyingPlaneView extends View {
             Log.d("rocket-Y",""+rocketY);
             Log.d("randomTest",""+randomTest);
         }
-        canvas.drawBitmap(resize_plane,rocketX,rocketY,null);
-        canvas.drawBitmap(resize_plane,rocket2X,rocket2Y,null);
+        canvas.drawBitmap(resize_rocket,rocketX,rocketY,null);
+        canvas.drawBitmap(resize_rocket,rocket2X,rocket2Y,null);
 
     }
 
