@@ -107,7 +107,7 @@ public class FlyingPlaneView extends View {
         if(hitRocketChecker(rocketX,rocketY))
         {
             score = score + 10;
-            rocketX = rocketX + 100;
+            rocketX = rocketX - 100;
         }
         canvas.drawText("Score : "+score,70,100,scorePaint);
 
