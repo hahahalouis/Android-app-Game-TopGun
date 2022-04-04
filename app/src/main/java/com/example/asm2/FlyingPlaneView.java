@@ -17,7 +17,7 @@ import android.view.WindowManager;
 
 public class FlyingPlaneView extends View {
 
-    private Bitmap plane, bg,resize_bg,resize_plane;
+    private Bitmap plane, bg,resize_bg,resize_plane,rocket;
 
     private Paint scorePaint = new Paint();
 
@@ -33,6 +33,7 @@ public class FlyingPlaneView extends View {
         super(context);
         plane = BitmapFactory.decodeResource(getResources(), R.drawable.plane);
         resize_plane = Bitmap.createScaledBitmap(plane, 200, 200 ,false);
+
 
         scorePaint.setColor(Color.WHITE);
         scorePaint.setTextSize(70);
