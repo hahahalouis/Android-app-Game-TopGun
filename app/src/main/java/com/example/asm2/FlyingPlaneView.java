@@ -17,12 +17,14 @@ import android.view.WindowManager;
 
 public class FlyingPlaneView extends View {
 
-    private Bitmap plane, bg,resize_bg,resize_plane,rocket,resize_rocket;
+    private Bitmap bg,resize_bg,resize_plane,rocket,resize_rocket;
+    private Bitmap life[] = new Bitmap[2];
+    private Bitmap plane[] = new Bitmap[2];
 
     private Paint scorePaint = new Paint();
 
     private int planeX = 50, planeY,planeSpeed;
-    private int rocketX,rocketY,rocket2X,rocket2Y,rocket2Speed = 30,rocketSpeed =25;
+    private int rocketX,rocketY,rocketSpeed =20;
     private int canvasWidth, canvasHeight;
 
     private boolean touchStatus = false;
@@ -32,13 +34,14 @@ public class FlyingPlaneView extends View {
     public FlyingPlaneView(Context context) {
         super(context);
         //Declare Bitmap
-        plane = BitmapFactory.decodeResource(getResources(), R.drawable.plane);
         rocket = BitmapFactory.decodeResource(getResources(), R.drawable.rocket);
 
         //resize Bitmap
-        resize_plane = Bitmap.createScaledBitmap(plane, 200, 200 ,false);
+        plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 200, 200 ,false);
+        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 200, 200 ,false);
         resize_rocket = Bitmap.createScaledBitmap(rocket, 200, 200 ,false);
-
+        life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 100, 100 ,false);
+        life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 100, 100 ,false);
 
         scorePaint.setColor(Color.WHITE);
         scorePaint.setTextSize(70);
@@ -59,10 +62,10 @@ public class FlyingPlaneView extends View {
         resize_bg = Bitmap.createScaledBitmap(bg, canvas.getWidth(),canvas.getHeight(),false);
 
         canvas.drawBitmap(resize_bg,0,0,null);
-        canvas.drawText("Score : ",30,70,scorePaint);
+        canvas.drawText("Score : ",70,100,scorePaint);
 
-        int minPlaneY = resize_plane.getHeight();
-        int maxPlaneY = canvasHeight - resize_plane.getHeight() * 2;
+        int minPlaneY = plane[0].getHeight();
+        int maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
         planeY = planeY + planeSpeed;
 
         if(planeY < minPlaneY)
@@ -76,28 +79,25 @@ public class FlyingPlaneView extends View {
         planeSpeed = planeSpeed + 2;
         if(touchStatus)
         {
-            canvas.drawBitmap(resize_plane,planeX,planeY,null);
+            canvas.drawBitmap(plane[1],planeX,planeY,null);
             touchStatus = false;
         }else
         {
-            canvas.drawBitmap(resize_plane,planeX,planeY,null);
+            canvas.drawBitmap(plane[0],planeX,planeY,null);
         }
+        //heart drawing
+        canvas.drawBitmap(life[0],780,30,null);
+        canvas.drawBitmap(life[0],880,30,null);
+        canvas.drawBitmap(life[0],990,30,null);
 
         //Rocket
         rocketX = rocketX - rocketSpeed;
-        rocket2X = rocket2X - rocket2Speed;
         if(rocketX < 0)
         {
             rocketX = canvasWidth + 21;
-            rocket2X = canvasWidth +21;
             rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-            rocket2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-            Double randomTest = Math.floor(Math.random());
-            Log.d("rocket-Y",""+rocketY);
-            Log.d("randomTest",""+randomTest);
         }
         canvas.drawBitmap(resize_rocket,rocketX,rocketY,null);
-        canvas.drawBitmap(resize_rocket,rocket2X,rocket2Y,null);
 
     }
 

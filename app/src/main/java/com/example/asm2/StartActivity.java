@@ -16,11 +16,11 @@ public class StartActivity extends AppCompatActivity {
         {
             public void run(){
                 try{
-                    sleep(3000);
+                    sleep(1000);
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally {
-                    Intent prepareIntent = new Intent(StartActivity.this, PrepareActivity.class);
+                    Intent prepareIntent = new Intent(StartActivity.this, MainActivity.class);
                     startActivity(prepareIntent);
                 }
             }

@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FlyingPlaneView gameView;
     private Handler handler = new Handler();
-    private final static long Interval = 30;
+    private final static long Interval = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
