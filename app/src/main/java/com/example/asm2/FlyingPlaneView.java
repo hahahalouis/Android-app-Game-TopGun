@@ -24,7 +24,7 @@ public class FlyingPlaneView extends View {
     private Paint scorePaint = new Paint();
 
     private int planeX = 50, planeY,planeSpeed;
-    private int rocketX,rocketY,rocketSpeed =20;
+    private int rocketX,rocketY,rocketSpeed =10;
     private int canvasWidth, canvasHeight,score;
 
     private boolean touchStatus = false;
@@ -95,7 +95,6 @@ public class FlyingPlaneView extends View {
         canvas.drawBitmap(life[0],990,30,null);
 
         //Rocket
-        rocketX = rocketX - rocketSpeed;
         if(rocketX < 0)
         {
             rocketX = canvasWidth + 21;
@@ -107,10 +106,10 @@ public class FlyingPlaneView extends View {
         if(hitRocketChecker(rocketX,rocketY))
         {
             score = score + 10;
-            rocketX = rocketX - 100;
+            rocketX = rocketX - 500;
         }
         canvas.drawText("Score : "+score,70,100,scorePaint);
-
+        rocketX = rocketX - rocketSpeed;
     }
 
     public boolean hitRocketChecker(int x, int y)
