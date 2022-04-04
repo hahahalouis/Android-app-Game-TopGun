@@ -10,10 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Asm2">
         <activity
+            android:name=".PrepareActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".StartActivity"
             android:exported="true">
@@ -23,8 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>
