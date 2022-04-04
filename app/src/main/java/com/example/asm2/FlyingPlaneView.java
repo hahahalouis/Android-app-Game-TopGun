@@ -25,7 +25,7 @@ public class FlyingPlaneView extends View {
 
     private int planeX = 50, planeY,planeSpeed;
     private int rocketX,rocketY,rocketSpeed =20;
-    private int canvasWidth, canvasHeight;
+    private int canvasWidth, canvasHeight,score;
 
     private boolean touchStatus = false;
 
@@ -49,6 +49,7 @@ public class FlyingPlaneView extends View {
         scorePaint.setAntiAlias(true);
 
         planeY = 550;
+        score = 0;
     }
 
     @Override
@@ -62,12 +63,12 @@ public class FlyingPlaneView extends View {
         resize_bg = Bitmap.createScaledBitmap(bg, canvas.getWidth(),canvas.getHeight(),false);
 
         canvas.drawBitmap(resize_bg,0,0,null);
-        canvas.drawText("Score : ",70,100,scorePaint);
 
         int minPlaneY = plane[0].getHeight();
         int maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
         planeY = planeY + planeSpeed;
 
+        // plane position
         if(planeY < minPlaneY)
         {
             planeY = minPlaneY;
@@ -76,7 +77,9 @@ public class FlyingPlaneView extends View {
         {
             planeY = maxPlaneY;
         }
+
         planeSpeed = planeSpeed + 2;
+
         if(touchStatus)
         {
             canvas.drawBitmap(plane[1],planeX,planeY,null);
@@ -85,6 +88,7 @@ public class FlyingPlaneView extends View {
         {
             canvas.drawBitmap(plane[0],planeX,planeY,null);
         }
+
         //heart drawing
         canvas.drawBitmap(life[0],780,30,null);
         canvas.drawBitmap(life[0],880,30,null);
@@ -99,6 +103,25 @@ public class FlyingPlaneView extends View {
         }
         canvas.drawBitmap(resize_rocket,rocketX,rocketY,null);
 
+        //plane hit detect
+        if(hitRocketChecker(rocketX,rocketY))
+        {
+            score = score + 10;
+            rocketX = rocketX + 100;
+        }
+        canvas.drawText("Score : "+score,70,100,scorePaint);
+
+    }
+
+    public boolean hitRocketChecker(int x, int y)
+    {
+        if((planeX < x && x < (planeX + plane[0].getWidth()) && planeY < y && y < (planeY + plane[0].getHeight())) || (planeX < x && x < (planeX + plane[1].getWidth()) && planeY < y && y < (planeY + plane[1].getHeight())))
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
     }
 
     @Override
