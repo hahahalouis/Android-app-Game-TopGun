@@ -27,7 +27,7 @@ public class FlyingPlaneView extends View {
 
     private int planeX = 50, planeY,planeSpeed;
     private int gasX,gasY,gasSpeed =20;
-    private int rocketX, rocketY, rocketSpeed = 15;
+    private int rocketX, rocketY, rocketSpeed = 12;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
 
