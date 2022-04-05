@@ -1,6 +1,7 @@
 package com.example.asm2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,18 +15,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class FlyingPlaneView extends View {
 
-    private Bitmap bg,resize_bg,resize_plane,rocket,resize_rocket;
+    private Bitmap bg,resize_bg,gas,resize_gas, rocket;
     private Bitmap life[] = new Bitmap[2];
     private Bitmap plane[] = new Bitmap[2];
 
     private Paint scorePaint = new Paint();
 
     private int planeX = 50, planeY,planeSpeed;
-    private int rocketX,rocketY,rocketSpeed =10;
-    private int canvasWidth, canvasHeight,score;
+    private int gasX,gasY,gasSpeed =20;
+    private int rocketX, rocketY, rocketSpeed = 15;
+    private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
+    private int lifeCounter = 3;
 
     private boolean touchStatus = false;
 
@@ -34,12 +38,13 @@ public class FlyingPlaneView extends View {
     public FlyingPlaneView(Context context) {
         super(context);
         //Declare Bitmap
-        rocket = BitmapFactory.decodeResource(getResources(), R.drawable.rocket);
+        gas = BitmapFactory.decodeResource(getResources(), R.drawable.oil);
+        rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 150, 150 ,false);
 
         //resize Bitmap
-        plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 200, 200 ,false);
-        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 200, 200 ,false);
-        resize_rocket = Bitmap.createScaledBitmap(rocket, 200, 200 ,false);
+        plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 250, 250 ,false);
+        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 250, 250 ,false);
+        resize_gas = Bitmap.createScaledBitmap(gas, 150, 150 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 100, 100 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 100, 100 ,false);
 
@@ -64,8 +69,8 @@ public class FlyingPlaneView extends View {
 
         canvas.drawBitmap(resize_bg,0,0,null);
 
-        int minPlaneY = plane[0].getHeight();
-        int maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
+        minPlaneY = plane[0].getHeight();
+        maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
         planeY = planeY + planeSpeed;
 
         // plane position
@@ -89,27 +94,68 @@ public class FlyingPlaneView extends View {
             canvas.drawBitmap(plane[0],planeX,planeY,null);
         }
 
-        //heart drawing
-        canvas.drawBitmap(life[0],780,30,null);
-        canvas.drawBitmap(life[0],880,30,null);
-        canvas.drawBitmap(life[0],990,30,null);
+        //gas
+        gas();
+        canvas.drawBitmap(resize_gas,gasX,gasY,null);
 
-        //Rocket
-        if(rocketX < 0)
+        //rocket
+       rocket();
+       canvas.drawBitmap(rocket,rocketX,rocketY,null);
+
+
+       //Display Score
+       canvas.drawText("Score: "+score,70,100,scorePaint);
+
+       //Display heart
+       for( int j = 0 ; j <3 ; j++)
+       {
+           int heartX = (int) (780 + j*100);
+           int heartY = 30;
+
+           if(j < lifeCounter)
+           {
+               canvas.drawBitmap(life[0], heartX, heartY,null);
+           }else
+           {
+               canvas.drawBitmap(life[1], heartX, heartY,null);
+           }
+       }
+    }
+
+    public void gas(){
+        gasX = gasX - gasSpeed;
+
+        if(hitRocketChecker(gasX,gasY))
+        {
+            score = score + 10;
+            gasX = gasX - 500;
+        }
+        if(gasX < 0)
+        {
+            gasX = canvasWidth + 21;
+            gasY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+        }
+    }
+
+    public void rocket(){
+        rocketX = rocketX - rocketSpeed;
+        if(hitRocketChecker(rocketX,rocketY))
+        {
+            rocketX = rocketX - 500;
+            lifeCounter --;
+            if(lifeCounter == 0)
+            {
+                Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
+                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
+                getContext().startActivity(gameoverIntent);
+            }
+        }
+        if(rocketX< 0)
         {
             rocketX = canvasWidth + 21;
             rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
-        canvas.drawBitmap(resize_rocket,rocketX,rocketY,null);
 
-        //plane hit detect
-        if(hitRocketChecker(rocketX,rocketY))
-        {
-            score = score + 10;
-            rocketX = rocketX - 500;
-        }
-        canvas.drawText("Score : "+score,70,100,scorePaint);
-        rocketX = rocketX - rocketSpeed;
     }
 
     public boolean hitRocketChecker(int x, int y)
