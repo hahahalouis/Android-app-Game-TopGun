@@ -24,6 +24,7 @@ public class FlyingPlaneView extends View {
     private Bitmap plane[] = new Bitmap[2];
 
     private Paint scorePaint = new Paint();
+    private Paint clickAlertPaint = new Paint();
 
     private int planeX = 50, planeY,planeSpeed;
     private int gasX,gasY,gasSpeed =20;
@@ -34,13 +35,15 @@ public class FlyingPlaneView extends View {
     private boolean touchStatus = false;
     private boolean startTouchStatus = false;
 
+    private String clickAlert = "Tap to start";
+
 
 
     public FlyingPlaneView(Context context) {
         super(context);
         //Declare Bitmap
         gas = BitmapFactory.decodeResource(getResources(), R.drawable.oil);
-        rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 150, 150 ,false);
+        rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 200, 200 ,false);
 
         //resize Bitmap
         plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 250, 250 ,false);
@@ -49,10 +52,16 @@ public class FlyingPlaneView extends View {
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 100, 100 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 100, 100 ,false);
 
+        // Paint style
         scorePaint.setColor(Color.WHITE);
         scorePaint.setTextSize(70);
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
         scorePaint.setAntiAlias(true);
+
+        clickAlertPaint.setColor(Color.WHITE);
+        clickAlertPaint.setTextSize(100);
+        clickAlertPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        clickAlertPaint.setAntiAlias(true);
 
         planeY = 250;
         score = 0;
@@ -69,12 +78,7 @@ public class FlyingPlaneView extends View {
         resize_bg = Bitmap.createScaledBitmap(bg, canvas.getWidth(),canvas.getHeight(),false);
 
         canvas.drawBitmap(resize_bg,0,0,null);
-
-        Log.d("Y",""+planeY+ "     " + planeX);
-
-        //Display Score
         canvas.drawText("Score: "+score,70,100,scorePaint);
-        invalidate();
 
        //Display heart
        for( int j = 0 ; j <3 ; j++)
@@ -124,7 +128,10 @@ public class FlyingPlaneView extends View {
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
+            clickAlert = "";
         }
+        //Display alert
+        canvas.drawText(clickAlert,450,1050,clickAlertPaint);
     }
 
     public void gas(){
