@@ -33,8 +33,8 @@ public class FlyingPlaneView extends View{
 
 
     private int planeX = 50, planeY,planeSpeed;
-    private int gasX,gasY,gasSpeed =20;
-    private int rocketX, rocketY, rocketSpeed = 12;
+    private int gasX,gasY,gasSpeed =18;
+    private int rocketX, rocketY, rocketSpeed = 10;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
     private int timerCLickStutas;
@@ -58,14 +58,14 @@ public class FlyingPlaneView extends View{
         sound = new SoundEffect(context);
         //Declare Bitmap
         gas = BitmapFactory.decodeResource(getResources(), R.drawable.oil);
-        rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 200, 200 ,false);
+        rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 150, 150 ,false);
 
         //resize Bitmap
-        plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 250, 250 ,false);
-        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 250, 250 ,false);
-        resize_gas = Bitmap.createScaledBitmap(gas, 150, 150 ,false);
-        life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 100, 100 ,false);
-        life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 100, 100 ,false);
+        plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 200, 200 ,false);
+        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 200, 200,false);
+        resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
+        life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
+        life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
 
         // Paint style
         scorePaint.setColor(Color.WHITE);
@@ -79,7 +79,7 @@ public class FlyingPlaneView extends View{
         clickAlertPaint.setAntiAlias(true);
 
         timerPaint.setColor(Color.WHITE);
-        timerPaint.setTextSize(70);
+        timerPaint.setTextSize(50);
 
         planeY = 250;
         score = 0;
@@ -107,8 +107,8 @@ public class FlyingPlaneView extends View{
        //Display heart
        for( int j = 0 ; j <3 ; j++)
        {
-           int heartX = (int) (1080 + j*100);
-           int heartY = 30;
+           int heartX = (int) (700 + j*100);
+           int heartY = 50;
 
            if(j < lifeCounter)
            {
@@ -122,11 +122,11 @@ public class FlyingPlaneView extends View{
 
 
        //Display timer
-        canvas.drawText(timeText,600,180,scorePaint);
+        canvas.drawText(timeText,450,200,scorePaint);
 
 
         //Display alert
-        canvas.drawText(clickAlert,450,1050,clickAlertPaint);
+        canvas.drawText(clickAlert,300,900,clickAlertPaint);
 
         //start the game
         if(startTouchStatus) {
