@@ -26,6 +26,7 @@ public class FlyingPlaneView extends View {
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
 
+
     private int planeX = 50, planeY,planeSpeed;
     private int gasX,gasY,gasSpeed =20;
     private int rocketX, rocketY, rocketSpeed = 12;
@@ -37,10 +38,13 @@ public class FlyingPlaneView extends View {
 
     private String clickAlert = "Tap to start";
 
+    private SoundEffect sound;
 
 
     public FlyingPlaneView(Context context) {
         super(context);
+        //sound
+        sound = new SoundEffect(context);
         //Declare Bitmap
         gas = BitmapFactory.decodeResource(getResources(), R.drawable.oil);
         rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 200, 200 ,false);
@@ -65,7 +69,12 @@ public class FlyingPlaneView extends View {
 
         planeY = 250;
         score = 0;
+
+
     }
+
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -95,6 +104,8 @@ public class FlyingPlaneView extends View {
            }
        }
 
+
+
         //press to start
         if(startTouchStatus) {
 
@@ -103,6 +114,8 @@ public class FlyingPlaneView extends View {
             planeY = planeY + planeSpeed;
 
             planeSpeed = planeSpeed + 2;
+
+
 
             // plane position
             if(planeY < minPlaneY)
@@ -155,8 +168,10 @@ public class FlyingPlaneView extends View {
         {
             rocketX = rocketX - 500;
             lifeCounter --;
+            sound.playHitSound();
             if(lifeCounter == 0)
             {
+                sound.playOverSound();
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
@@ -172,6 +187,8 @@ public class FlyingPlaneView extends View {
 
     public boolean hitRocketChecker(int x, int y)
     {
+
+
         if((planeX < x && x < (planeX + plane[0].getWidth()) && planeY < y && y < (planeY + plane[0].getHeight())) || (planeX < x && x < (planeX + plane[1].getWidth()) && planeY < y && y < (planeY + plane[1].getHeight())))
         {
             return true;
