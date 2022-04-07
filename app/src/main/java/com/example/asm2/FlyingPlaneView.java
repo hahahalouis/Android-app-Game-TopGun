@@ -239,7 +239,7 @@ public class FlyingPlaneView extends View {
         int seconds = time %  60;
         int minutes = (time % 3600) / 60;
 
-        Log.d("timer2","m: "+ minutes +" s: "+ seconds);
+        Log.d("timer2"," m: "+ minutes +" s: "+ seconds);
 
 
         return  formatTime(seconds,minutes);
