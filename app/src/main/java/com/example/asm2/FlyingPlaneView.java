@@ -263,7 +263,7 @@ public class FlyingPlaneView extends View{
             planeSpeed = -22;
             timerCLickStutas++;
             startTimer();
-            Log.d("time3",""+timerCLickStutas);
+            Log.d("time4",""+timerCLickStutas);
         }
 
         return super.onTouchEvent(event);
