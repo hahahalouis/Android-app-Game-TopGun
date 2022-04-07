@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,7 +38,7 @@ public class FlyingPlaneView extends View {
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
 
-    private Double time = 0.0;
+    private int totalTime = 0;
 
     private boolean touchStatus = false;
     private boolean startTouchStatus = false;
@@ -47,6 +48,7 @@ public class FlyingPlaneView extends View {
     private String timeText ="00.00";
 
     private SoundEffect sound;
+
 
 
     public FlyingPlaneView(Context context) {
@@ -81,12 +83,10 @@ public class FlyingPlaneView extends View {
         planeY = 250;
         score = 0;
 
-
     }
 
 
-    Timer timer;
-    TimerTask timerTask;
+
 
 
 
@@ -123,11 +123,13 @@ public class FlyingPlaneView extends View {
        //Display timer
         canvas.drawText(timeText,600,180,scorePaint);
 
+
         //Display alert
         canvas.drawText(clickAlert,450,1050,clickAlertPaint);
 
         //start the game
         if(startTouchStatus) {
+
 
             clickAlert = "";
             minPlaneY = plane[0].getHeight();
@@ -162,7 +164,7 @@ public class FlyingPlaneView extends View {
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
-//            startTimer();
+
         }
     }
 
@@ -219,25 +221,25 @@ public class FlyingPlaneView extends View {
     }
 
     public void startTimer(){
-        timer = new Timer();
-       timerTask = new TimerTask() {
+       Timer timer = new Timer();
+       TimerTask timerTask = new TimerTask() {
            @Override
            public void run() {
-                time++;
-               timeText = getTimerText();
+               totalTime++;
+               timeText = getTimerText(totalTime);
+               Log.d("timer"," s: "+ totalTime);
            }
        };
-       timer.scheduleAtFixedRate(timerTask,0,1000);
+       timer.schedule(timerTask,0,1000);
     }
 
-    public String getTimerText(){
-        int rounded = (int) Math.round(time);
+    public String getTimerText(int time){
 
-//        int seconds = ((rounded % 86400) % 3600) / 60;
-//        int minutes = ((rounded % 86400) /3600);
-        int seconds = (int) ((rounded/1000)%60);
-        int minutes = (int) ((rounded/1000)/60);
-        Log.d("timer",""+rounded);
+
+        int seconds = time %  60;
+        int minutes = (time % 3600) / 60;
+
+        Log.d("timer2","m: "+ minutes +" s: "+ seconds);
 
 
         return  formatTime(seconds,minutes);
@@ -254,6 +256,7 @@ public class FlyingPlaneView extends View {
             touchStatus = true;
             startTouchStatus = true;
             planeSpeed = -22;
+            startTimer();
         }
 
         return super.onTouchEvent(event);
