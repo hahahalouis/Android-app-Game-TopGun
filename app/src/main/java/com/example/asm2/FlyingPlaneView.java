@@ -17,6 +17,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class FlyingPlaneView extends View {
 
     private Bitmap bg,resize_bg,gas,resize_gas, rocket;
@@ -25,6 +28,7 @@ public class FlyingPlaneView extends View {
 
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
+    private Paint timerPaint = new Paint();
 
 
     private int planeX = 50, planeY,planeSpeed;
@@ -33,10 +37,14 @@ public class FlyingPlaneView extends View {
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
 
+    private Double time = 0.0;
+
     private boolean touchStatus = false;
     private boolean startTouchStatus = false;
+    private boolean timerStutas =false;
 
     private String clickAlert = "Tap to start";
+    private String timeText ="00.00";
 
     private SoundEffect sound;
 
@@ -67,12 +75,18 @@ public class FlyingPlaneView extends View {
         clickAlertPaint.setTypeface(Typeface.DEFAULT_BOLD);
         clickAlertPaint.setAntiAlias(true);
 
+        timerPaint.setColor(Color.WHITE);
+        timerPaint.setTextSize(70);
+
         planeY = 250;
         score = 0;
 
 
     }
 
+
+    Timer timer;
+    TimerTask timerTask;
 
 
 
@@ -92,7 +106,7 @@ public class FlyingPlaneView extends View {
        //Display heart
        for( int j = 0 ; j <3 ; j++)
        {
-           int heartX = (int) (780 + j*100);
+           int heartX = (int) (1080 + j*100);
            int heartY = 30;
 
            if(j < lifeCounter)
@@ -106,9 +120,16 @@ public class FlyingPlaneView extends View {
 
 
 
-        //press to start
+       //Display timer
+        canvas.drawText(timeText,600,180,scorePaint);
+
+        //Display alert
+        canvas.drawText(clickAlert,450,1050,clickAlertPaint);
+
+        //start the game
         if(startTouchStatus) {
 
+            clickAlert = "";
             minPlaneY = plane[0].getHeight();
             maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
             planeY = planeY + planeSpeed;
@@ -141,10 +162,8 @@ public class FlyingPlaneView extends View {
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
-            clickAlert = "";
+//            startTimer();
         }
-        //Display alert
-        canvas.drawText(clickAlert,450,1050,clickAlertPaint);
     }
 
     public void gas(){
@@ -197,6 +216,35 @@ public class FlyingPlaneView extends View {
         {
             return false;
         }
+    }
+
+    public void startTimer(){
+        timer = new Timer();
+       timerTask = new TimerTask() {
+           @Override
+           public void run() {
+                time++;
+               timeText = getTimerText();
+           }
+       };
+       timer.scheduleAtFixedRate(timerTask,0,1000);
+    }
+
+    public String getTimerText(){
+        int rounded = (int) Math.round(time);
+
+//        int seconds = ((rounded % 86400) % 3600) / 60;
+//        int minutes = ((rounded % 86400) /3600);
+        int seconds = (int) ((rounded/1000)%60);
+        int minutes = (int) ((rounded/1000)/60);
+        Log.d("timer",""+rounded);
+
+
+        return  formatTime(seconds,minutes);
+    }
+
+    public String formatTime(int seconds,int minutes){
+        return String.format("%02d",minutes) +" : "+ String.format("%02d",seconds);
     }
 
     @Override
