@@ -154,6 +154,7 @@ public class FlyingPlaneView extends View {
         {
             score = score + 10;
             gasX = gasX - 500;
+            sound.playRewardSound();
         }
         if(gasX < 0)
         {
