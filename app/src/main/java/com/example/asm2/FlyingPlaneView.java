@@ -98,8 +98,8 @@ public class FlyingPlaneView extends View{
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
 
-        bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingame_bg);
-        resize_bg = Bitmap.createScaledBitmap(bg, canvas.getWidth(),canvas.getHeight(),false);
+        bg = BitmapFactory.decodeResource(getResources(),R.drawable.testimg3);
+        resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
 
         canvas.drawBitmap(resize_bg,0,0,null);
         canvas.drawText("Score: "+score,70,100,scorePaint);
