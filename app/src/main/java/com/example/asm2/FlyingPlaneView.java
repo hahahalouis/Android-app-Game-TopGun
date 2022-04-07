@@ -98,7 +98,7 @@ public class FlyingPlaneView extends View{
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
 
-        bg = BitmapFactory.decodeResource(getResources(),R.drawable.testimg3);
+        bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg);
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
 
         canvas.drawBitmap(resize_bg,0,0,null);
