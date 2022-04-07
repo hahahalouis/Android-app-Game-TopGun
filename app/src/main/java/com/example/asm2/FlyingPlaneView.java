@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FlyingPlaneView extends View {
+public class FlyingPlaneView extends View{
 
     private Bitmap bg,resize_bg,gas,resize_gas, rocket;
     private Bitmap life[] = new Bitmap[2];
@@ -37,6 +37,7 @@ public class FlyingPlaneView extends View {
     private int rocketX, rocketY, rocketSpeed = 12;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
+    private int timerCLickStutas;
 
     private int totalTime = 0;
 
@@ -164,7 +165,9 @@ public class FlyingPlaneView extends View {
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
+            if(timerCLickStutas == 1){
 
+            }
         }
     }
 
@@ -222,15 +225,17 @@ public class FlyingPlaneView extends View {
 
     public void startTimer(){
        Timer timer = new Timer();
-       TimerTask timerTask = new TimerTask() {
-           @Override
-           public void run() {
-               totalTime++;
-               timeText = getTimerText(totalTime);
-               Log.d("timer"," s: "+ totalTime);
-           }
-       };
-       timer.schedule(timerTask,0,1000);
+       if(timerCLickStutas == 1){
+           TimerTask timerTask = new TimerTask() {
+               @Override
+               public void run() {
+                   totalTime++;
+                   timeText = getTimerText(totalTime);
+                   Log.d("timer"," s: "+ totalTime);
+               }
+           };
+           timer.schedule(timerTask,0,1000);
+       }
     }
 
     public String getTimerText(int time){
@@ -256,7 +261,9 @@ public class FlyingPlaneView extends View {
             touchStatus = true;
             startTouchStatus = true;
             planeSpeed = -22;
+            timerCLickStutas++;
             startTimer();
+            Log.d("time3",""+timerCLickStutas);
         }
 
         return super.onTouchEvent(event);
