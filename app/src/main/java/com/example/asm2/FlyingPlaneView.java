@@ -68,7 +68,7 @@ public class FlyingPlaneView extends View{
 
         //resize Bitmap
         plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 200, 200 ,false);
-        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 200, 200,false);
+        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
         plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
@@ -172,7 +172,13 @@ public class FlyingPlaneView extends View{
 
             if (touchStatus) {
                 canvas.drawBitmap(plane[applyNum+1], planeX, planeY, null);
-                touchStatus = false;
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        touchStatus = false;
+                    }
+                }, 200);
             } else {
                 canvas.drawBitmap(plane[applyNum], planeX, planeY, null);
             }
