@@ -10,11 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShopActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton shopBackbtn,shopPlane1,shopPlane2;
+
+    private TextView shopCoinNum;
 
     private View applyPlaneView;
 
@@ -25,8 +28,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean tooglestutas_1 = true, tooglestutas_2 = true;
 
-    private int coin_num = 120;
-
+    private int coin_num;
     public int applyNum;
 
     SharedPreferences sp;
@@ -73,6 +75,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlane2 = findViewById(R.id.shopPlane2);
         shopPlanebtn2 = findViewById(R.id.shopPlanebtn2);
         applyPlaneView = findViewById(R.id.applyPlaneView);
+        shopCoinNum = findViewById(R.id.shopCoinNum);
 
         shopBackbtn.setOnClickListener(this);
         shopPlane1.setOnClickListener(this);
@@ -80,7 +83,11 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlane2.setOnClickListener(this);
         shopPlanebtn2.setOnClickListener(this);
 
+        //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
+        coin_num = sp.getInt("coinNum",3);
+
+//        setCoinNum();
     }
 
     public void stuffStatus(Boolean buyStatus, Boolean applyStatus, Button btn){
@@ -99,7 +106,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = sp.edit();
 
             if(!buyStatus_2 && coin_num >= 100){
-                coin_num = coin_num - 100;
+//                coin_num = coin_num - 100;
                 buyStatus_2 = true;
                 stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
                 //sp
@@ -113,7 +120,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-
     public void apply1(){
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_1){
@@ -121,6 +127,10 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             editor.putString("applyNum","0");
             editor.commit();
             Toast.makeText(getApplicationContext(), "SP sf", Toast.LENGTH_SHORT).show();
+
+            //testing
+            Log.d("coinNum","From Fly "+ coin_num);
+
         }
     }
 
@@ -152,5 +162,10 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             shopPlanebtn2.setVisibility(View.INVISIBLE);
         }
     }
+
+    public void setCoinNum(){
+        shopCoinNum.setText(coin_num);
+    }
+
 
 }

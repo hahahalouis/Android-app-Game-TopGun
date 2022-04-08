@@ -57,6 +57,8 @@ public class FlyingPlaneView extends View{
 
     private Integer gameSpeed=100;
 
+    SharedPreferences sp;
+
     public FlyingPlaneView(Context context) {
         super(context);
 
@@ -103,9 +105,10 @@ public class FlyingPlaneView extends View{
         timer2.schedule(timerTask2,0,250);
 
         //SP
-        SharedPreferences sp = context.getSharedPreferences("ShopSp",Context.MODE_PRIVATE);
-        applyNum = Integer.parseInt(sp.getString("applyNum",""));
+        sp = context.getSharedPreferences("ShopSp",Context.MODE_PRIVATE);
 
+        //getsp
+        applyNum = Integer.parseInt(sp.getString("applyNum",""));
     }
 
     public void setSpeed(Integer speed){
@@ -219,8 +222,14 @@ public class FlyingPlaneView extends View{
             sound.playHitSound();
             if(lifeCounter == 0)
             {
+                SharedPreferences.Editor editor = sp.edit();
                 sound.playOverSound();
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
+                //sp
+                String str_coinNum = Integer.toString(score);
+                editor.putInt("coinNum",20);
+                Log.d("Flysp","though rocket"+sp.);
+
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
