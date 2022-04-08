@@ -84,7 +84,10 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void stuffStatus(Boolean buyStatus, Boolean applyStatus, Button btn){
-        if(buyStatus){
+        SharedPreferences.Editor editor = sp.edit();
+        boolean test = sp.getBoolean("buyStatus_2",false);
+
+        if(buyStatus || test == true){
             btn.setText("Apply");
         }else{
             btn.setText("Buy");
@@ -93,15 +96,23 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void buyPlane2(){
-        if(!buyStatus_2 && coin_num >= 100){
-            coin_num = coin_num - 100;
-            buyStatus_2 = true;
-            stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
-            Log.d("coin",""+coin_num+" "+buyStatus_2);
-        }else{
-            Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+        SharedPreferences.Editor editor = sp.edit();
+
+            if(!buyStatus_2 && coin_num >= 100){
+                coin_num = coin_num - 100;
+                buyStatus_2 = true;
+                stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
+                //sp
+                editor.putBoolean("buyStatus_2",buyStatus_2);
+                editor.commit();
+
+                Log.d("buy-stutas","Not sp");
+                Log.d("coin",""+coin_num+" "+buyStatus_2);
+            }else{
+                Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            }
         }
-    }
+
 
     public void apply1(){
         SharedPreferences.Editor editor = sp.edit();
