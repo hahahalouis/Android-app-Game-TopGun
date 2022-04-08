@@ -107,15 +107,18 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_1){
             applyPlaneView.setBackgroundResource(R.drawable.plane);
-            editor.putString("applyNum","1");
+            editor.putString("applyNum","0");
             editor.commit();
             Toast.makeText(getApplicationContext(), "SP sf", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void apply2(){
+        SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_2){
-            applyPlaneView.setBackgroundResource(R.drawable.planeup);
+            applyPlaneView.setBackgroundResource(R.drawable.plane2);
+            editor.putString("applyNum","2");
+            editor.commit();
         }
     }
 
