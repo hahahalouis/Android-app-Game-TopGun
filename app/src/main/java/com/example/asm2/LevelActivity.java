@@ -39,7 +39,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void shopclicked(){
-
+        //startActivity();
     }
 
     public void goLevel(Integer level) {
