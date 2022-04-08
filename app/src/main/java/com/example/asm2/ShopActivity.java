@@ -22,7 +22,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private boolean applyStatus_1 = false, applyStatus_2 = true;
     private boolean toggleStutas_1;
 
-    private int coin_num = 200 ;
+    private int coin_num = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,25 +52,31 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(shopintent);
                 break;
             case R.id.shopPlane1:
-                buyStutas(buyStatus_1, applyStatus_1 ,shopPlanebtn1);
+                stuffStatus(buyStatus_1, applyStatus_1 ,shopPlanebtn1);
                 break;
             case R.id.shopPlanebtn1:
-                buy(buyStatus_1, coin_num,applyStatus_1, shopPlanebtn1);
+                if(!buyStatus_1){
+                    buy(buyStatus_1, coin_num,applyStatus_1, shopPlanebtn1);
+                }
+                Log.d("buystutas",""+buyStatus_1);
                 apply1();
                 break;
             case R.id.shopPlane2:
-                buyStutas(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
+                stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
                 break;
             case R.id.shopPlanebtn2:
-                buy(buyStatus_2, coin_num,applyStatus_2, shopPlanebtn2);
+                if(!buyStatus_2){
+                    buy(buyStatus_2, coin_num,applyStatus_2, shopPlanebtn2);
+                }
+                Log.d("buystutas",""+buyStatus_2);
                 apply2();
                 break;
         }
     }
 
 
-    public void buyStutas(Boolean buyStatus, Boolean applyStatus, Button btn){
-        if(buyStatus && applyStatus != true){
+    public void stuffStatus(Boolean buyStatus, Boolean applyStatus, Button btn){
+        if(buyStatus){
             btn.setText("Apply");
         }else{
             btn.setText("Buy");
@@ -79,10 +85,11 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void buy(Boolean buyStatus, int coin_num, Boolean applyStatus, Button btn){
-        if(buyStatus != true && coin_num > 100){
+        if(!buyStatus && coin_num >= 100){
             coin_num = coin_num - 100;
             buyStatus = true;
-            buyStutas(buyStatus, applyStatus ,btn);
+            stuffStatus(buyStatus, applyStatus ,btn);
+            Log.d("coin",""+coin_num);
         }else{
             Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
         }
