@@ -2,6 +2,7 @@ package com.example.asm2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -41,6 +42,7 @@ public class FlyingPlaneView extends View{
     private int lifeCounter = 3;
     private int timerCLickStutas;
     private boolean cLickStutas=false;
+    private int applyNum;
 
     private int totalTime = 0;
 
@@ -97,6 +99,10 @@ public class FlyingPlaneView extends View{
             }
         };
         timer2.schedule(timerTask2,0,250);
+
+        //SP
+        SharedPreferences sp = context.getSharedPreferences("ShopSp",Context.MODE_PRIVATE);
+        applyNum = Integer.parseInt(sp.getString("applyNum",""));
 
     }
 
@@ -176,9 +182,6 @@ public class FlyingPlaneView extends View{
             //rocket
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
-
-
-
 
         }
     }

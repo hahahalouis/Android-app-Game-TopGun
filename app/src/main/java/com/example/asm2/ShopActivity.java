@@ -2,7 +2,9 @@ package com.example.asm2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,10 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private boolean tooglestutas_1 = true, tooglestutas_2 = true;
 
     private int coin_num = 120;
+
+    public int applyNum;
+
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,8 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlanebtn1.setOnClickListener(this);
         shopPlane2.setOnClickListener(this);
         shopPlanebtn2.setOnClickListener(this);
+
+        sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
     }
 
     public void stuffStatus(Boolean buyStatus, Boolean applyStatus, Button btn){
@@ -96,8 +104,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void apply1(){
+        SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_1){
             applyPlaneView.setBackgroundResource(R.drawable.plane);
+            editor.putString("applyNum","1");
+            editor.commit();
+            Toast.makeText(getApplicationContext(), "SP sf", Toast.LENGTH_SHORT).show();
         }
     }
 
