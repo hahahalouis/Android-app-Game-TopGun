@@ -22,6 +22,8 @@ import android.widget.Toast;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 import android.os.Handler;
 
 public class FlyingPlaneView extends View{
@@ -68,7 +70,7 @@ public class FlyingPlaneView extends View{
 
         //resize Bitmap
         plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 200, 200 ,false);
-        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 200, 200,false);
+        plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
@@ -103,6 +105,7 @@ public class FlyingPlaneView extends View{
         //SP
         SharedPreferences sp = context.getSharedPreferences("ShopSp",Context.MODE_PRIVATE);
         applyNum = Integer.parseInt(sp.getString("applyNum",""));
+
 
     }
 
@@ -170,9 +173,20 @@ public class FlyingPlaneView extends View{
 
             if (touchStatus) {
                 canvas.drawBitmap(plane[1], planeX, planeY, null);
-                touchStatus = false;
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        touchStatus = false;
+                    }
+                }, 200);
+
+
             } else {
-                canvas.drawBitmap(plane[0], planeX, planeY, null);
+
+              canvas.drawBitmap(plane[0], planeX, planeY, null);
+
             }
 
             //gas
@@ -293,8 +307,6 @@ public class FlyingPlaneView extends View{
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();
-
-
             Log.d("time4",""+timerCLickStutas);
         }
 
