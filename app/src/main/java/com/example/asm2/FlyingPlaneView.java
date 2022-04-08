@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.os.Handler;
 
 public class FlyingPlaneView extends View{
 
@@ -38,6 +39,7 @@ public class FlyingPlaneView extends View{
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
     private int timerCLickStutas;
+    private boolean cLickStutas=false;
 
     private int totalTime = 0;
 
@@ -84,12 +86,24 @@ public class FlyingPlaneView extends View{
         planeY = 250;
         score = 0;
 
+        //bottom
+        Timer timer2 = new Timer();
+        TimerTask timerTask2 = new TimerTask() {
+            @Override
+            public void run() {
+                bottom();
+            }
+        };
+        timer2.schedule(timerTask2,0,250);
+
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        cLickStutas=false;
 
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
@@ -147,10 +161,7 @@ public class FlyingPlaneView extends View{
             } else {
                 canvas.drawBitmap(plane[0], planeX, planeY, null);
             }
-            if(planeY == maxPlaneY){
-                lifeCounter --;
-                planeY = 250;
-            }
+
             //gas
             gas();
             canvas.drawBitmap(resize_gas, gasX, gasY, null);
@@ -158,6 +169,9 @@ public class FlyingPlaneView extends View{
             //rocket
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
+
+
+
 
         }
     }
@@ -200,6 +214,20 @@ public class FlyingPlaneView extends View{
         }
 
     }
+
+    public void bottom(){
+
+        if(planeY==maxPlaneY && score>=10 && cLickStutas==false)
+        {
+          score = score - 10;
+
+          sound.playBottomSound();
+        }
+
+
+    }
+
+
 
     public boolean hitRocketChecker(int x, int y)
     {
@@ -253,7 +281,10 @@ public class FlyingPlaneView extends View{
             startTouchStatus = true;
             planeSpeed = -22;
             timerCLickStutas++;
+            cLickStutas=true;
             startTimer();
+
+
             Log.d("time4",""+timerCLickStutas);
         }
 

@@ -9,6 +9,7 @@ public class SoundEffect {
     private static int hitSound;
     private static int overSound;
     private static int rewardSound;
+    private static int botoomSound;
 
     public SoundEffect(Context context) {
 
@@ -17,6 +18,7 @@ public class SoundEffect {
         hitSound = soundPool.load(context,R.raw.hit,1);
         overSound = soundPool.load(context,R.raw.game_over,1);
         rewardSound = soundPool.load(context,R.raw.reward,1);
+        botoomSound = soundPool.load(context,R.raw.bottom,1);
 
     }
 
@@ -32,6 +34,11 @@ public class SoundEffect {
 
     public void playRewardSound(){
         soundPool.play(rewardSound,1.0f,1.0f,1,0,1.0f);
+
+    }
+
+    public void playBottomSound(){
+        soundPool.play(botoomSound,1.0f,1.0f,1,0,1.0f);
 
     }
 
