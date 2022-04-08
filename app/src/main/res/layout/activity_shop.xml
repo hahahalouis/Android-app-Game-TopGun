@@ -101,7 +101,7 @@
         android:layout_marginTop="21dp"
         android:background="@drawable/shopplanbg"
         android:scaleType="fitXY"
-        android:src="@drawable/planeup" />
+        android:src="@drawable/plane2" />
 
     <Button
         android:id="@+id/shopPlanebtn1"

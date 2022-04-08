@@ -28,7 +28,7 @@ public class FlyingPlaneView extends View{
 
     private Bitmap bg,resize_bg,gas,resize_gas, rocket;
     private Bitmap life[] = new Bitmap[2];
-    private Bitmap plane[] = new Bitmap[2];
+    private Bitmap plane[] = new Bitmap[4];
 
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
@@ -69,6 +69,8 @@ public class FlyingPlaneView extends View{
         //resize Bitmap
         plane[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane), 200, 200 ,false);
         plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.planeup), 200, 200,false);
+        plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
+        plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
@@ -152,8 +154,8 @@ public class FlyingPlaneView extends View{
         if(startTouchStatus) {
 
             clickAlert = "";
-            minPlaneY = plane[0].getHeight();
-            maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
+            minPlaneY = plane[applyNum].getHeight();
+            maxPlaneY = canvasHeight - plane[applyNum].getHeight() * 2;
             planeY = planeY + planeSpeed;
 
             planeSpeed = planeSpeed + 2;
@@ -169,10 +171,10 @@ public class FlyingPlaneView extends View{
             }
 
             if (touchStatus) {
-                canvas.drawBitmap(plane[1], planeX, planeY, null);
+                canvas.drawBitmap(plane[applyNum+1], planeX, planeY, null);
                 touchStatus = false;
             } else {
-                canvas.drawBitmap(plane[0], planeX, planeY, null);
+                canvas.drawBitmap(plane[applyNum], planeX, planeY, null);
             }
 
             //gas
@@ -243,7 +245,7 @@ public class FlyingPlaneView extends View{
     {
 
 
-        if((planeX < x && x < (planeX + plane[0].getWidth()) && planeY < y && y < (planeY + plane[0].getHeight())) || (planeX < x && x < (planeX + plane[1].getWidth()) && planeY < y && y < (planeY + plane[1].getHeight())))
+        if((planeX < x && x < (planeX + plane[applyNum].getWidth()) && planeY < y && y < (planeY + plane[applyNum].getHeight())) || (planeX < x && x < (planeX + plane[applyNum+1].getWidth()) && planeY < y && y < (planeY + plane[applyNum+1].getHeight())))
         {
             return true;
         }else
@@ -293,7 +295,6 @@ public class FlyingPlaneView extends View{
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();
-
 
             Log.d("time4",""+timerCLickStutas);
         }
