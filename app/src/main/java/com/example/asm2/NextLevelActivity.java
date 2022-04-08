@@ -38,7 +38,8 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
                 //getApplicationContext().startActivity(NextIntent);
                 break;
             case R.id.btn_menu2:
-
+                Intent MenuIntent = new Intent(getApplicationContext(), LevelActivity.class);
+                getApplicationContext().startActivity(MenuIntent);
                 break;
         }
     }
