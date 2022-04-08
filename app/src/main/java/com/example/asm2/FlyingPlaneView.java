@@ -87,10 +87,6 @@ public class FlyingPlaneView extends View{
     }
 
 
-
-
-
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -119,11 +115,8 @@ public class FlyingPlaneView extends View{
            }
        }
 
-
-
        //Display timer
         canvas.drawText(timeText,450,200,scorePaint);
-
 
         //Display alert
         canvas.drawText(clickAlert,300,900,clickAlertPaint);
@@ -131,15 +124,12 @@ public class FlyingPlaneView extends View{
         //start the game
         if(startTouchStatus) {
 
-
             clickAlert = "";
             minPlaneY = plane[0].getHeight();
             maxPlaneY = canvasHeight - plane[0].getHeight() * 2;
             planeY = planeY + planeSpeed;
 
             planeSpeed = planeSpeed + 2;
-
-
 
             // plane position
             if(planeY < minPlaneY)
@@ -157,6 +147,10 @@ public class FlyingPlaneView extends View{
             } else {
                 canvas.drawBitmap(plane[0], planeX, planeY, null);
             }
+            if(planeY == maxPlaneY){
+                lifeCounter --;
+                planeY = 250;
+            }
             //gas
             gas();
             canvas.drawBitmap(resize_gas, gasX, gasY, null);
@@ -165,9 +159,6 @@ public class FlyingPlaneView extends View{
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
-            if(timerCLickStutas == 1){
-
-            }
         }
     }
 
