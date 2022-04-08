@@ -22,7 +22,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private boolean applyStatus_1 = false, applyStatus_2 = true;
     private boolean toggleStutas_1;
 
-    private int coin_num = 100;
+    private int coin_num = 120;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +61,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("buystutas",""+buyStatus_1);
                 apply1();
                 break;
-            case R.id.shopPlane2:
-                stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
-                break;
-            case R.id.shopPlanebtn2:
-                if(!buyStatus_2){
-                    buy(buyStatus_2, coin_num,applyStatus_2, shopPlanebtn2);
-                }
-                Log.d("buystutas",""+buyStatus_2);
-                apply2();
-                break;
         }
     }
 
@@ -89,20 +79,20 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             coin_num = coin_num - 100;
             buyStatus = true;
             stuffStatus(buyStatus, applyStatus ,btn);
-            Log.d("coin",""+coin_num);
+            Log.d("coin",""+coin_num+" "+buyStatus);
         }else{
             Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void apply1(){
-        if(buyStatus_1 = true){
+        if(buyStatus_1){
             applyPlaneView.setBackgroundResource(R.drawable.planeup);
         }
     }
 
     public void apply2(){
-        if(buyStatus_2 = true){
+        if(buyStatus_2){
             applyPlaneView.setBackgroundResource(R.drawable.plane);
         }
     }
