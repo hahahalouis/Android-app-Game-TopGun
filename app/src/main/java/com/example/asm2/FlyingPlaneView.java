@@ -228,7 +228,8 @@ public class FlyingPlaneView extends View{
                 //sp
                 String str_coinNum = Integer.toString(score);
                 editor.putInt("coinNum",20);
-                Log.d("Flysp","though rocket"+sp.);
+                editor.commit();
+                Log.d("Flysp","though rocket");
 
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
