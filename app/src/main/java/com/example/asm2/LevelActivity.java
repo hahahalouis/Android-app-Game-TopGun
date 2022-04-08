@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.logging.Level;
+
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,btn_shop;
@@ -39,16 +41,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void shopclicked(){
-        //startActivity(ShopActivity);
+        Intent shopIntent = new Intent(LevelActivity.this, ShopActivity.class);
+        startActivity(shopIntent);
     }
 
     public void goLevel(Integer level) {
         //setting speed
-        Double flying_speed=0.96+level*0.04; //倍率
+        Integer flying_speed=96+level*4; //倍率
         //put the values
-        Intent intent = new Intent();
-        intent.putExtra("Speed",flying_speed);
-        //startActivity();
+        Intent gameIntent = new Intent(LevelActivity.this,MainActivity.class);
+        gameIntent.putExtra("Speed",flying_speed);
+        startActivity(gameIntent);
     }
 
     public void initObject(){

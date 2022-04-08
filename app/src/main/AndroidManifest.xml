@@ -13,6 +13,9 @@
             android:name=".ShopActivity"
             android:exported="false" />
         <activity
+            android:name=".LevelActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameOverActivity"
             android:exported="false" />
         <activity

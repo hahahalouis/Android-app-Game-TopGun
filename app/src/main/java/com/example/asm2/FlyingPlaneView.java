@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -52,10 +53,11 @@ public class FlyingPlaneView extends View{
 
     private SoundEffect sound;
 
-
+    private Integer gameSpeed=100;
 
     public FlyingPlaneView(Context context) {
         super(context);
+
         //sound
         sound = new SoundEffect(context);
         //Declare Bitmap
@@ -98,6 +100,11 @@ public class FlyingPlaneView extends View{
 
     }
 
+    public void setSpeed(Integer speed){
+        gameSpeed = speed;
+        rocketSpeed=(rocketSpeed*gameSpeed)/100;
+        gasSpeed=(gasSpeed*gameSpeed)/100;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -279,7 +286,7 @@ public class FlyingPlaneView extends View{
         {
             touchStatus = true;
             startTouchStatus = true;
-            planeSpeed = -22;
+            planeSpeed = -(22*gameSpeed)/100;
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();

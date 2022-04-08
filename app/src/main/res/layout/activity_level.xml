@@ -350,4 +350,5 @@
         android:text="Shop"
         android:textSize="24sp" />
 
+
 </RelativeLayout>
