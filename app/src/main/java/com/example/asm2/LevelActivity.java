@@ -30,13 +30,39 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_shop:
                 shopclicked();
                 break;
-            default:
+                case R.id.textView:
+            case R.id.textView2:
+            case R.id.textView3:
+            case R.id.textView4:
+            case R.id.textView5:
+            case R.id.textView6:
+            case R.id.textView7:
+            case R.id.textView8:
+            case R.id.textView9:
+            case R.id.textView10:
+            case R.id.textView11:
+            case R.id.textView12:
+            case R.id.textView13:
+            case R.id.textView14:
+            case R.id.textView15:
+            case R.id.textView16:
+            case R.id.textView17:
+            case R.id.textView18:
+            case R.id.textView19:
+            case R.id.textView20:
+            case R.id.textView21:
+            case R.id.textView22:
+            case R.id.textView23:
+            case R.id.textView24:
+            case R.id.textView25:
                 try {
                     TextView selected_level=findViewById(view.getId());
                     goLevel(Integer.parseInt(selected_level.getText().toString()));
                 } catch (Exception e) {
                     Log.e("Oh no", e.getMessage(),e);
                 }
+            default:
+
         }
     }
 
