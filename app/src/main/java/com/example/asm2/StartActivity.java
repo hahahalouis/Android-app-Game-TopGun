@@ -20,7 +20,7 @@ public class StartActivity extends AppCompatActivity {
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally {
-                    Intent prepareIntent = new Intent(StartActivity.this, ShopActivity.class);
+                    Intent prepareIntent = new Intent(StartActivity.this, MainActivity.class);
                     startActivity(prepareIntent);
                 }
             }
