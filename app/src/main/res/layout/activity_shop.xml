@@ -65,7 +65,7 @@
         android:layout_marginTop="21dp"
         android:background="@drawable/shopplanbg"
         android:scaleType="fitXY"
-        android:src="@drawable/planedown" />
+        android:src="@drawable/plane" />
 
     <TextView
         android:id="@+id/textView"
@@ -77,7 +77,7 @@
         android:layout_marginStart="94dp"
         android:layout_marginTop="114dp"
         android:layout_marginBottom="309dp"
-        android:text="$100"
+        android:text="$0"
         android:textColor="@color/black" />
 
     <TextView
@@ -88,7 +88,7 @@
         android:layout_alignTop="@+id/shopPlane2"
         android:layout_marginStart="53dp"
         android:layout_marginTop="113dp"
-        android:text="$0"
+        android:text="$100"
         android:textColor="@color/black" />
 
     <ImageButton
@@ -101,7 +101,7 @@
         android:layout_marginTop="21dp"
         android:background="@drawable/shopplanbg"
         android:scaleType="fitXY"
-        android:src="@drawable/plane" />
+        android:src="@drawable/planeup" />
 
     <Button
         android:id="@+id/shopPlanebtn1"
