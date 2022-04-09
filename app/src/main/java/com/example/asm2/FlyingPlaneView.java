@@ -262,7 +262,11 @@ public class FlyingPlaneView extends View{
         gasX = gasX - gasSpeed;
 
         if(hitRocketChecker(gasX,gasY))
-        {
+        {    if(score >=40)
+            {
+                Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
+                getContext().startActivity(winIntent);
+            }
             score = score + 10;
             gasX = gasX - 500;
             sound.playRewardSound();
@@ -461,7 +465,6 @@ public class FlyingPlaneView extends View{
             planeSpeed = -22;
             timerCLickStutas++;
             cLickStutas=true;
-            winDetect();
             startTimer();
         }
 
