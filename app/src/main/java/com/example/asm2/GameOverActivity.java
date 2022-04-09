@@ -23,12 +23,12 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
             btn_retry.setOnClickListener(this);
             btn_menu.setOnClickListener(this);
 
-            getScore_over = findViewById(R.id.textView4);
+            getScore_over = findViewById(R.id.getScore_over);
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
         int score = sp.getInt("coinNum", 0);
 
-        getScore_over.setText(score);
+        getScore_over.setText(String.valueOf(score));
         }
 
         public void onClick(View v) {
