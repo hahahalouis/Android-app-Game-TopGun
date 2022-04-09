@@ -14,7 +14,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
     Button btn_retry, btn_menu;
     TextView getScore_over;
 
-    private int level;
+    Integer level;
 
     SharedPreferences sp;
     @Override
@@ -45,6 +45,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                     //put the values
                     Intent gameIntent = new Intent(getApplicationContext(),MainActivity.class);
                     gameIntent.putExtra("Speed",flying_speed);
+                    gameIntent.putExtra("levelNum",level);
                     startActivity(gameIntent);
                     break;
 

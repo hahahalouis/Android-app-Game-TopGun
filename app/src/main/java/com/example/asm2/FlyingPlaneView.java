@@ -251,6 +251,10 @@ public class FlyingPlaneView extends View{
 
     public void winDetect(){
         if(score >=40){
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt("Heart",lifeCounter);
+            editor.putInt("coinNum",score);
+            editor.commit();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
         }
