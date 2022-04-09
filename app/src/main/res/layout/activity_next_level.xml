@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#FFFFFF"
+    android:background="#A4BBFF"
     tools:context=".NextLevelActivity">
 
     <pl.droidsonroids.gif.GifImageView
@@ -18,12 +18,14 @@
 
     <TextView
         android:id="@+id/passView"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-black"
         android:gravity="center_horizontal"
         android:text="You have passed the level!!!"
         android:textAlignment="inherit"
+        android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,9 +36,10 @@
         android:id="@+id/getScore"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:background="@drawable/custom_text"
+        android:fontFamily="@font/arbutus"
         android:text="Your Score:"
         android:textAlignment="center"
+        android:textColor="#673AB7"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -121,8 +124,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-black"
         android:text="Score:"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
