@@ -256,7 +256,7 @@ public class FlyingPlaneView extends View{
                         }catch(Exception e){
                             e.printStackTrace();
                         }finally {
-                            Intent prepareIntent = new Intent(getContext().getApplicationContext(), GameOverActivity.class);
+                            Intent prepareIntent = new Intent(getContext().getApplicationContext(), NextLevelActivity.class);
                             getContext().startActivity(prepareIntent);
                         }
                     }
@@ -268,7 +268,7 @@ public class FlyingPlaneView extends View{
 
     public void winDetect(){
         if(score >=50){
-            Intent winIntent = new Intent(getContext(), GameOverActivity.class);
+            Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
         }
     }
@@ -309,7 +309,7 @@ public class FlyingPlaneView extends View{
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
-                Intent gameoverIntent = new Intent(getContext(), NextLevelActivity.class);
+                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
@@ -355,7 +355,7 @@ public class FlyingPlaneView extends View{
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
-                Intent gameoverIntent = new Intent(getContext(), NextLevelActivity.class);
+                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
@@ -401,7 +401,7 @@ public class FlyingPlaneView extends View{
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
-                Intent gameoverIntent = new Intent(getContext(), NextLevelActivity.class);
+                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
