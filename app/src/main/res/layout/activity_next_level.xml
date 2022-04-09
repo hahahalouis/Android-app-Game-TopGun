@@ -7,6 +7,15 @@
     android:backgroundTint="#FFFFFF"
     tools:context=".NextLevelActivity">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/congrat2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/passView"
         android:layout_width="414dp"
@@ -19,122 +28,105 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/gifimage" />
 
     <TextView
         android:id="@+id/getScore"
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/custom_text"
         android:text="Your Score:"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="53dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passView">
-
-        <ImageView
-            android:id="@+id/star1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/emptystar" />
-
-
-        <ImageView
-            android:id="@+id/star2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/emptystar" />
-
-        <ImageView
-            android:id="@+id/star3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/emptystar" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="404dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getScore">
-
-        <Button
-            android:id="@+id/btn_again"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/custom_button"
-            android:text="Play Again"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btn_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/custom_button"
-            android:text="Next Level"
-            android:textColor="#FFFFFF" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+    <Button
+        android:id="@+id/btn_menu2"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
+        android:background="@drawable/custom_button"
+        android:text="Main Menu"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/btn_next" />
 
-        <Button
-            android:id="@+id/btn_menu2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/custom_button"
-            android:text="Main Menu"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_again"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button"
+        android:text="Play Again"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getScore" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button"
+        android:text="Next Level"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getScore" />
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="413dp"
-        android:layout_height="311dp"
-        android:layout_marginTop="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/giphy" />
+        android:id="@+id/star3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="52dp"
+        android:layout_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/star2"
+        app:layout_constraintTop_toBottomOf="@+id/passView"
+        app:srcCompat="@drawable/emptystar" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="413dp"
-        android:layout_height="340dp"
-        android:layout_marginTop="2dp"
+        android:id="@+id/star2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/congratulations" />
+        app:layout_constraintTop_toBottomOf="@+id/passView"
+        app:srcCompat="@drawable/emptystar" />
+
+    <ImageView
+        android:id="@+id/star1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="44dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toStartOf="@+id/star2"
+        app:layout_constraintTop_toBottomOf="@+id/passView"
+        app:srcCompat="@drawable/emptystar" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Score:"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/star3" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

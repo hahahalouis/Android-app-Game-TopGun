@@ -283,7 +283,7 @@ public class FlyingPlaneView extends View{
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
-                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
+                Intent gameoverIntent = new Intent(getContext(), NextLevelActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
@@ -329,7 +329,7 @@ public class FlyingPlaneView extends View{
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
-                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
+                Intent gameoverIntent = new Intent(getContext(), NextLevelActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
@@ -375,7 +375,7 @@ public class FlyingPlaneView extends View{
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
-                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
+                Intent gameoverIntent = new Intent(getContext(), NextLevelActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
