@@ -2,15 +2,22 @@ package com.example.asm2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,l26,l27,l28,l29,l30,l31,l32,l33,l34,l35,btn_shop;
+
+    SharedPreferences sp;
+
+    public int level_Num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +69,15 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.textView34:
             case R.id.textView35:
                 try {
+                    SharedPreferences.Editor editor = sp.edit();
+
                     TextView selected_level=findViewById(view.getId());
-                    goLevel(Integer.parseInt(selected_level.getText().toString()));
+                    level_Num = Integer.parseInt(selected_level.getText().toString());
+                    goLevel(level_Num);
+
+                    editor.putInt("levelNum",level_Num);
+                    editor.commit();
+
                 } catch (Exception e) {
                     Log.e("Oh no", e.getMessage(),e);
                 }
@@ -160,5 +174,9 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         l34.setOnClickListener(this);
         l35.setOnClickListener(this);
         btn_shop.setOnClickListener(this);
+
+        //sp
+        sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
+
     }
 }
