@@ -14,7 +14,7 @@ import java.util.logging.Level;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,btn_shop;
+    TextView l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,l26,l27,l28,l29,l30,l31,l32,l33,l34,l35,btn_shop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,16 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.textView23:
             case R.id.textView24:
             case R.id.textView25:
+            case R.id.textView26:
+            case R.id.textView27:
+            case R.id.textView28:
+            case R.id.textView29:
+            case R.id.textView30:
+            case R.id.textView31:
+            case R.id.textView32:
+            case R.id.textView33:
+            case R.id.textView34:
+            case R.id.textView35:
                 try {
                     TextView selected_level=findViewById(view.getId());
                     goLevel(Integer.parseInt(selected_level.getText().toString()));
@@ -73,7 +83,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public void goLevel(Integer level) {
         //setting speed
-        Integer flying_speed=96+level*4; //倍率
+        Integer flying_speed=97+level*3; //min:100% max:280%
         //put the values
         Intent gameIntent = new Intent(LevelActivity.this,MainActivity.class);
         gameIntent.putExtra("Speed",flying_speed);
@@ -106,6 +116,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         l23=findViewById(R.id.textView23);
         l24=findViewById(R.id.textView24);
         l25=findViewById(R.id.textView25);
+        l26=findViewById(R.id.textView26);
+        l27=findViewById(R.id.textView27);
+        l28=findViewById(R.id.textView28);
+        l29=findViewById(R.id.textView29);
+        l30=findViewById(R.id.textView30);
+        l31=findViewById(R.id.textView31);
+        l32=findViewById(R.id.textView32);
+        l33=findViewById(R.id.textView33);
+        l34=findViewById(R.id.textView34);
+        l35=findViewById(R.id.textView35);
+
         btn_shop=findViewById(R.id.tv_shop);
 
         l1.setOnClickListener(this);
@@ -132,6 +153,16 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         l23.setOnClickListener(this);
         l24.setOnClickListener(this);
         l25.setOnClickListener(this);
+        l26.setOnClickListener(this);
+        l27.setOnClickListener(this);
+        l28.setOnClickListener(this);
+        l29.setOnClickListener(this);
+        l30.setOnClickListener(this);
+        l31.setOnClickListener(this);
+        l32.setOnClickListener(this);
+        l33.setOnClickListener(this);
+        l34.setOnClickListener(this);
+        l35.setOnClickListener(this);
         btn_shop.setOnClickListener(this);
     }
 }
