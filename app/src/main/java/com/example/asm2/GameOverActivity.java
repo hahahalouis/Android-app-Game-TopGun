@@ -29,7 +29,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case R.id.btn_menu:
-                    Intent MenuIntent = new Intent(getApplicationContext(), ShopActivity.class);
+                    Intent MenuIntent = new Intent(getApplicationContext(), LevelActivity.class);
                     startActivity(MenuIntent);
                     break;
             }

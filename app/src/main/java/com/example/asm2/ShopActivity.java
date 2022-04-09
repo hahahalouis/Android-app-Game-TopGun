@@ -28,7 +28,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean tooglestutas_1 = true, tooglestutas_2 = true;
 
-    private int coin_num;
+    private int coin_num, newCoin,totalCoin;
     public int applyNum;
 
     SharedPreferences sp;
@@ -44,8 +44,15 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.shopBackbtn:
-                Intent shopintent = new Intent(getApplicationContext(),MainActivity.class);
+                SharedPreferences.Editor editor = sp.edit();
+
+                Intent shopintent = new Intent(getApplicationContext(),LevelActivity.class);
                 startActivity(shopintent);
+
+                editor.putInt("oldCoinNum",totalCoin);
+                editor.commit();
+
+                Log.d("oldcoin","put "+totalCoin);
                 break;
             case R.id.shopPlane1:
                 stuffStatus(buyStatus_1, applyStatus_1 ,shopPlanebtn1);
@@ -85,9 +92,9 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
         //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        coin_num = sp.getInt("coinNum",3);
+        newCoin = sp.getInt("coinNum",0);
 
-//        setCoinNum();
+        setCoinNum();
     }
 
     public void stuffStatus(Boolean buyStatus, Boolean applyStatus, Button btn){
@@ -105,8 +112,9 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void buyPlane2(){
         SharedPreferences.Editor editor = sp.edit();
 
-            if(!buyStatus_2 && coin_num >= 100){
-//                coin_num = coin_num - 100;
+            if(!buyStatus_2 && totalCoin >= 100){
+                totalCoin = totalCoin - 100;
+                shopCoinNum.setText(Integer.toString(totalCoin));
                 buyStatus_2 = true;
                 stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
                 //sp
@@ -124,7 +132,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_1){
             applyPlaneView.setBackgroundResource(R.drawable.plane);
-            editor.putString("applyNum","0");
+            editor.putInt("applyNum",0);
             editor.commit();
             Toast.makeText(getApplicationContext(), "SP sf", Toast.LENGTH_SHORT).show();
 
@@ -138,7 +146,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_2){
             applyPlaneView.setBackgroundResource(R.drawable.plane2);
-            editor.putString("applyNum","2");
+            editor.putInt("applyNum",2);
             editor.commit();
         }
     }
@@ -164,7 +172,10 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setCoinNum(){
-        shopCoinNum.setText(coin_num);
+        coin_num = sp.getInt("oldCoinNum",0);
+        Log.d("oldCoin","get "+ coin_num);
+        totalCoin = coin_num + newCoin;
+        shopCoinNum.setText(Integer.toString(totalCoin));
     }
 
 

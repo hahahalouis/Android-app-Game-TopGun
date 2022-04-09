@@ -108,7 +108,7 @@ public class FlyingPlaneView extends View{
         sp = context.getSharedPreferences("ShopSp",Context.MODE_PRIVATE);
 
         //getsp
-        applyNum = Integer.parseInt(sp.getString("applyNum",""));
+        applyNum = sp.getInt("applyNum",0);
     }
 
     public void setSpeed(Integer speed){
@@ -227,7 +227,7 @@ public class FlyingPlaneView extends View{
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
                 //sp
                 String str_coinNum = Integer.toString(score);
-                editor.putInt("coinNum",20);
+                editor.putInt("coinNum",score);
                 editor.commit();
                 Log.d("Flysp","though rocket");
 
