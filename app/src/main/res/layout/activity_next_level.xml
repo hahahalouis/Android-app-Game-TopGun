@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A4BBFF"
+    android:background="#E0F7FA"
     tools:context=".NextLevelActivity">
 
     <pl.droidsonroids.gif.GifImageView
@@ -21,12 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginTop="28dp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/arbutus"
         android:gravity="center_horizontal"
         android:text="You have passed the level!!!"
         android:textAlignment="inherit"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +92,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="52dp"
         android:layout_weight="1"
+        android:rotation="-40"
         app:layout_constraintStart_toEndOf="@+id/star2"
         app:layout_constraintTop_toBottomOf="@+id/passView"
         app:srcCompat="@drawable/emptystar" />
@@ -104,6 +105,7 @@
         android:layout_marginTop="24dp"
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passView"
         app:srcCompat="@drawable/emptystar" />
@@ -115,6 +117,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="44dp"
         android:layout_weight="1"
+        android:rotation="40"
         app:layout_constraintEnd_toStartOf="@+id/star2"
         app:layout_constraintTop_toBottomOf="@+id/passView"
         app:srcCompat="@drawable/emptystar" />
@@ -124,7 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/arbutus"
         android:text="Score:"
         android:textAlignment="center"
         android:textColor="#000000"
