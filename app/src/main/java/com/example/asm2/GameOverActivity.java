@@ -13,6 +13,10 @@ import android.widget.TextView;
 public class GameOverActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_retry, btn_menu;
     TextView getScore_over;
+
+    private int level;
+
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +33,19 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         int score = sp.getInt("coinNum", 0);
 
         getScore_over.setText(String.valueOf(score));
+
+        level = sp.getInt("levelNum",0);
         }
 
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_retry:
-                    Intent GameIntent = new Intent(getApplicationContext(), FlyingPlaneView.class);
-                    getApplicationContext().startActivity(GameIntent);
+                    //setting speed
+                    Integer flying_speed=97+level*3; //min:100% max:280%
+                    //put the values
+                    Intent gameIntent = new Intent(getApplicationContext(),MainActivity.class);
+                    gameIntent.putExtra("Speed",flying_speed);
+                    startActivity(gameIntent);
                     break;
 
                 case R.id.btn_menu:
