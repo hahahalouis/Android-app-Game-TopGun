@@ -246,8 +246,34 @@ public class FlyingPlaneView extends View{
                     canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
                 }
             }
+
+            if(score >=50){
+                Thread thread = new Thread()
+                {
+                    public void run(){
+                        try{
+                            sleep(500);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }finally {
+                            Intent prepareIntent = new Intent(getContext().getApplicationContext(), GameOverActivity.class);
+                            getContext().startActivity(prepareIntent);
+                        }
+                    }
+                };
+                thread.start();
+            }
         }
     }
+
+    public void winDetect(){
+        if(score >=50){
+            Intent winIntent = new Intent(getContext(), GameOverActivity.class);
+            getContext().startActivity(winIntent);
+        }
+    }
+
+
 
     public void gas(){
         gasX = gasX - gasSpeed;
