@@ -28,8 +28,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                 break;
                 case R.id.textView:
             case R.id.textView2:
-            case R.id.getScore:
-            case R.id.getScore_over:
+            case R.id.textView3:
+            case R.id.textView4:
             case R.id.textView5:
             case R.id.textView6:
             case R.id.textView7:
@@ -89,8 +89,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     public void initObject(){
         l1=findViewById(R.id.textView);
         l2=findViewById(R.id.textView2);
-        l3=findViewById(R.id.getScore);
-        l4=findViewById(R.id.getScore_over);
+        l3=findViewById(R.id.textView3);
+        l4=findViewById(R.id.textView4);
         l5=findViewById(R.id.textView5);
         l6=findViewById(R.id.textView6);
         l7=findViewById(R.id.textView7);

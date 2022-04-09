@@ -144,8 +144,23 @@ public class FlyingPlaneView extends View{
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
 
-        bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg);
+        if(gamelevel<=5){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg);
+        }else if(gamelevel<=10){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
+        }else if(gamelevel<=15){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg3);
+        }else if(gamelevel<=20){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
+        }else if(gamelevel<=25){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg5);
+        }else if(gamelevel<=30){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg6);
+        }else if(gamelevel<=35){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg7);
+        }
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
+
 
         canvas.drawBitmap(resize_bg,0,0,null);
         canvas.drawText("Score: "+score,70,100,scorePaint);
@@ -435,7 +450,7 @@ public class FlyingPlaneView extends View{
         {
             touchStatus = true;
             startTouchStatus = true;
-            planeSpeed = -(22*gameSpeed)/100;
+            planeSpeed = -22;
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();

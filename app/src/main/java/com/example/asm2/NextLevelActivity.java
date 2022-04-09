@@ -27,7 +27,7 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
         btn_next.setOnClickListener(this);
         btn_again.setOnClickListener(this);
         btn_menu2.setOnClickListener(this);
-        getScore = findViewById(R.id.getScore);
+        getScore = findViewById(R.id.textView3);
     }
 
     public void onClick(View v) {
