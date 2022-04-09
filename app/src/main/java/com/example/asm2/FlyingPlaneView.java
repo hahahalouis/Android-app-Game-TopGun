@@ -250,7 +250,7 @@ public class FlyingPlaneView extends View{
     }
 
     public void winDetect(){
-        if(score >=50){
+        if(score >=40){
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
         }
@@ -262,11 +262,7 @@ public class FlyingPlaneView extends View{
         gasX = gasX - gasSpeed;
 
         if(hitRocketChecker(gasX,gasY))
-        {    if(score >=40)
-            {
-                Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
-                getContext().startActivity(winIntent);
-            }
+        {    winDetect();
             score = score + 10;
             gasX = gasX - 500;
             sound.playRewardSound();
