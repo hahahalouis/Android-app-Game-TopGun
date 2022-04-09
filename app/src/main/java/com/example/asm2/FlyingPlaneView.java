@@ -42,7 +42,7 @@ public class FlyingPlaneView extends View{
     private int lifeCounter = 3;
     private int timerCLickStutas;
     private boolean cLickStutas=false;
-    private int applyNum;
+    private int applyNum, level;
     private int gamelevel=1;
 
     private int totalTime = 0;
@@ -108,8 +108,9 @@ public class FlyingPlaneView extends View{
         //SP
         sp = context.getSharedPreferences("ShopSp",Context.MODE_PRIVATE);
 
-        //getsp
+        //GetSap
         applyNum = sp.getInt("applyNum",0);
+        level = sp.getInt("levelNum",0);
     }
 
     public void setSpeed(Integer speed){
@@ -117,19 +118,19 @@ public class FlyingPlaneView extends View{
         rocketSpeed=(rocketSpeed*gameSpeed)/100;
         gasSpeed=(gasSpeed*gameSpeed)/100;
         gamelevel=gameSpeed/8;
-        if(gamelevel>5){
-            if(gamelevel<=10){
+        if(level>5){
+            if(level<=10){
                 //set background2
-            }else if(gamelevel<=15){
+            }else if(level<=15){
                 //set background3
             }
-            else if(gamelevel<=16){
+            else if(level<=16){
                 //set background4
             }
-            else if(gamelevel<=20){
+            else if(level<=20){
                 //set background5
             }
-            else if(gamelevel<=25){
+            else if(level<=25){
                 //set background6
             }
         }
@@ -144,19 +145,19 @@ public class FlyingPlaneView extends View{
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
 
-        if(gamelevel<=5){
+        if(level<=5){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg);
-        }else if(gamelevel<=10){
+        }else if(level<=10){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
-        }else if(gamelevel<=15){
+        }else if(level<=15){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg3);
-        }else if(gamelevel<=20){
+        }else if(level<=20){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
-        }else if(gamelevel<=25){
+        }else if(level<=25){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg5);
-        }else if(gamelevel<=30){
+        }else if(level<=30){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg6);
-        }else if(gamelevel<=35){
+        }else if(level<=35){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg7);
         }
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
@@ -394,8 +395,6 @@ public class FlyingPlaneView extends View{
 
           sound.playBottomSound();
         }
-
-
     }
 
 
@@ -454,8 +453,6 @@ public class FlyingPlaneView extends View{
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();
-
-            Log.d("time4",""+timerCLickStutas);
         }
 
         return super.onTouchEvent(event);
