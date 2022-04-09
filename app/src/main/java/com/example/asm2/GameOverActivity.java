@@ -26,7 +26,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
             getScore_over = findViewById(R.id.textView4);
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        String score = sp.getString("coinNum", "");
+        int score = sp.getInt("coinNum", 0);
 
         getScore_over.setText(score);
         }
