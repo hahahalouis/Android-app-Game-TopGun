@@ -52,7 +52,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putInt("oldCoinNum",totalCoin);
                 editor.commit();
 
-                Log.d("oldcoin","put "+totalCoin);
                 break;
             case R.id.shopPlane1:
                 stuffStatus(buyStatus_1, applyStatus_1 ,shopPlanebtn1);
@@ -121,8 +120,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putBoolean("buyStatus_2",buyStatus_2);
                 editor.commit();
 
-                Log.d("buy-stutas","Not sp");
-                Log.d("coin",""+coin_num+" "+buyStatus_2);
             }else{
                 Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
             }
@@ -135,10 +132,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             editor.putInt("applyNum",0);
             editor.commit();
             Toast.makeText(getApplicationContext(), "SP sf", Toast.LENGTH_SHORT).show();
-
-            //testing
-            Log.d("coinNum","From Fly "+ coin_num);
-
         }
     }
 
@@ -173,7 +166,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setCoinNum(){
         coin_num = sp.getInt("oldCoinNum",0);
-        Log.d("oldCoin","get "+ coin_num);
         totalCoin = coin_num + newCoin;
         shopCoinNum.setText(Integer.toString(totalCoin));
     }
