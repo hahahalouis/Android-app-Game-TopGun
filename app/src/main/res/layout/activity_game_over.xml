@@ -37,7 +37,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/btn_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/getScore_over" />
 
     <Button
         android:id="@+id/btn_menu"
@@ -51,10 +51,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_retry"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/getScore_over" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/getScore_over"
         android:layout_width="326dp"
         android:layout_height="58dp"
         android:layout_marginStart="45dp"

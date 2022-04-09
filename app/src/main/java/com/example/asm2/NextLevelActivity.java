@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class NextLevelActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_again, btn_next, btn_menu2;
     ImageView star1, star2, star3;
+    TextView getScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
         btn_next.setOnClickListener(this);
         btn_again.setOnClickListener(this);
         btn_menu2.setOnClickListener(this);
+        getScore = findViewById(R.id.getScore);
     }
 
     public void onClick(View v) {

@@ -8,10 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.logging.Level;
-
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,l26,l27,l28,l29,l30,l31,l32,l33,l34,l35,btn_shop;
@@ -32,8 +28,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                 break;
                 case R.id.textView:
             case R.id.textView2:
-            case R.id.textView3:
-            case R.id.textView4:
+            case R.id.getScore:
+            case R.id.getScore_over:
             case R.id.textView5:
             case R.id.textView6:
             case R.id.textView7:
@@ -93,8 +89,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     public void initObject(){
         l1=findViewById(R.id.textView);
         l2=findViewById(R.id.textView2);
-        l3=findViewById(R.id.textView3);
-        l4=findViewById(R.id.textView4);
+        l3=findViewById(R.id.getScore);
+        l4=findViewById(R.id.getScore_over);
         l5=findViewById(R.id.textView5);
         l6=findViewById(R.id.textView6);
         l7=findViewById(R.id.textView7);

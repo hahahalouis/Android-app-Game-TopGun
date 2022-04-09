@@ -22,7 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/getScore"
         android:layout_width="415dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
@@ -75,7 +75,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/getScore">
 
         <Button
             android:id="@+id/btn_again"
