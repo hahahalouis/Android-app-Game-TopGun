@@ -26,7 +26,7 @@ import android.os.Handler;
 
 public class FlyingPlaneView extends View{
 
-    private Bitmap bg,resize_bg,gas,resize_gas, rocket;
+    private Bitmap bg,resize_bg,gas,resize_gas, rocket, pause, play;
     private Bitmap life[] = new Bitmap[2];
     private Bitmap plane[] = new Bitmap[4];
 
@@ -42,7 +42,7 @@ public class FlyingPlaneView extends View{
     private int lifeCounter = 3;
     private int timerCLickStutas;
     private boolean cLickStutas=false;
-    private int applyNum, level;
+    private int applyNum, level, targetScor;
     private int gamelevel=1;
 
     private int totalTime = 0;
@@ -50,8 +50,12 @@ public class FlyingPlaneView extends View{
     private boolean touchStatus = false;
     private boolean startTouchStatus = false;
     private boolean timerStutas =false;
+    private boolean pauseStutas =true;
+    private boolean playStutas =false;
 
     private String clickAlert = "Tap to start";
+    private String clickTagAlert = "Score ";
+    private String str_targetScor;
     private String timeText ="00.00";
 
     private SoundEffect sound;
@@ -77,6 +81,8 @@ public class FlyingPlaneView extends View{
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
+        pause = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pause), 100, 100 ,false);
+        play = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.play), 60, 60 ,false);
 
         // Paint style
         scorePaint.setColor(Color.WHITE);
@@ -89,11 +95,10 @@ public class FlyingPlaneView extends View{
         clickAlertPaint.setTypeface(Typeface.DEFAULT_BOLD);
         clickAlertPaint.setAntiAlias(true);
 
-        timerPaint.setColor(Color.WHITE);
-        timerPaint.setTextSize(50);
-
         planeY = 250;
         score = 0;
+        targetScor = level*10+50;
+        str_targetScor = Integer.toString(level*10+50);
 
         //bottom
         Timer timer2 = new Timer();
@@ -141,6 +146,8 @@ public class FlyingPlaneView extends View{
         super.onDraw(canvas);
 
         cLickStutas=false;
+        countTar();
+        targetScor = level*10+50;
 
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
@@ -162,9 +169,13 @@ public class FlyingPlaneView extends View{
         }
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
 
-
+        //BG
         canvas.drawBitmap(resize_bg,0,0,null);
+        //Score
         canvas.drawText("Score: "+score,70,100,scorePaint);
+        //Pause
+//        canvas.drawBitmap(pause,860,130,null);
+//        canvas.drawBitmap(play,860,150,null);
 
        //Display heart
        for( int j = 0 ; j <3 ; j++)
@@ -185,12 +196,16 @@ public class FlyingPlaneView extends View{
         canvas.drawText(timeText,450,200,scorePaint);
 
         //Display alert
-        canvas.drawText(clickAlert,300,900,clickAlertPaint);
+        canvas.drawText(clickAlert,300,800,clickAlertPaint);
+        canvas.drawText(clickTagAlert + str_targetScor,300,900,clickAlertPaint);
+
 
         //start the game
-        if(startTouchStatus) {
+        if(startTouchStatus && pauseStutas) {
 
             clickAlert = "";
+            clickTagAlert = "";
+            str_targetScor = "";
             minPlaneY = plane[applyNum].getHeight();
             maxPlaneY = canvasHeight - plane[applyNum].getHeight() * 2;
             planeY = planeY + planeSpeed;
@@ -246,11 +261,26 @@ public class FlyingPlaneView extends View{
                     canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
                 }
             }
+
+            if(pauseStutas){
+                canvas.drawBitmap(pause,860,130,null);
+            }else{
+                canvas.drawBitmap(play,890,150,null);
+            }
+        }else{
+            canvas.drawBitmap(play,890,150,null);
         }
     }
 
+    public String countTar(){
+        if(timerCLickStutas== 0){
+            str_targetScor = Integer.toString(targetScor);
+        }
+        return str_targetScor;
+    }
+
     public void winDetect(){
-        if(score >=40){
+        if(score >=targetScor){
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
             editor.putInt("coinNum",score);
@@ -414,8 +444,6 @@ public class FlyingPlaneView extends View{
 
     public boolean hitRocketChecker(int x, int y)
     {
-
-
         if((planeX < x && x < (planeX + plane[applyNum].getWidth()) && planeY < y && y < (planeY + plane[applyNum].getHeight())) || (planeX < x && x < (planeX + plane[applyNum+1].getWidth()) && planeY < y && y < (planeY + plane[applyNum+1].getHeight())))
         {
             return true;
@@ -427,16 +455,19 @@ public class FlyingPlaneView extends View{
 
     public void startTimer(){
        Timer timer = new Timer();
-       if(timerCLickStutas == 1){
+       if(timerCLickStutas == 1 && pauseStutas){
            TimerTask timerTask = new TimerTask() {
                @Override
                public void run() {
                    totalTime++;
                    timeText = getTimerText(totalTime);
-                   Log.d("timer"," s: "+ totalTime);
+//                   Log.d("timerCancecl"," s: "+ totalTime);
                }
            };
            timer.schedule(timerTask,0,1000);
+       }else if(!pauseStutas){
+           timer.cancel();
+           Log.d("timerCancel","cancel");
        }
     }
 
@@ -456,8 +487,22 @@ public class FlyingPlaneView extends View{
         return String.format("%02d",minutes) +" : "+ String.format("%02d",seconds);
     }
 
+    public void pauseChecker(float eventX, float eventY){
+        if (eventX > 890 && eventX < 860 + 100 && eventY > 150 && eventY < 150 + 100 ){
+            if(pauseStutas){
+                pauseStutas = false;
+            }else{
+                pauseStutas = true;
+//                timerCLickStutas = 1;
+            }
+        }
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int eventX = (int)event.getX();
+        int eventY = (int)event.getY();
+
         if(event.getAction() == MotionEvent.ACTION_DOWN)
         {
             touchStatus = true;
@@ -466,6 +511,9 @@ public class FlyingPlaneView extends View{
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();
+            pauseChecker(eventX,eventY);
+            winDetect();
+            Log.d("through", ""+pauseStutas);
         }
 
         return super.onTouchEvent(event);
