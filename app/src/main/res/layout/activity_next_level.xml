@@ -55,6 +55,7 @@
         android:background="@drawable/custom_button"
         android:text="Main Menu"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_next" />
@@ -70,6 +71,7 @@
         android:background="@drawable/custom_button"
         android:text="Play Again"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getScore" />
@@ -85,6 +87,7 @@
         android:background="@drawable/custom_button"
         android:text="Next Level"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_again"
         app:layout_constraintTop_toBottomOf="@+id/getScore" />
@@ -132,10 +135,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/arbutus"
-        android:text="Score:"
+        android:text="Score"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/star3" />
