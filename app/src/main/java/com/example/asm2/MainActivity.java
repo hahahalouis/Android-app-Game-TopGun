@@ -51,22 +51,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startTimer(){
-       Timer timer = new Timer();
-       if(gameView.timerCLickStutas == 1 && gameView.pauseStutas){
-           TimerTask timerTask = new TimerTask() {
-               @Override
-               public void run() {
-                   gameView.totalTime++;
-                   gameView.timeText = gameView.getTimerText(gameView.totalTime);
-//                   Log.d("timerCancecl"," s: "+ totalTime);
-               }
-           };
-           timer.schedule(timerTask,0,1000);
-       }else if(!gameView.pauseStutas){
-           timer.cancel();
-           Log.d("timerCancel","cancel");
-       }
-    }
+//    public void startTimer(){
+//       Timer timer = new Timer();
+//       if(gameView.timerCLickStutas == 1 && gameView.pauseStutas){
+//           TimerTask timerTask = new TimerTask() {
+//               @Override
+//               public void run() {
+//                   gameView.totalTime++;
+//                   gameView.timeText = gameView.getTimerText(gameView.totalTime);
+////                   Log.d("timerCancecl"," s: "+ totalTime);
+//               }
+//           };
+//           timer.schedule(timerTask,0,1000);
+//       }else if(!gameView.pauseStutas){
+//           timer.cancel();
+//           Log.d("timerCancel","cancel");
+//       }
+//    }
 
     }

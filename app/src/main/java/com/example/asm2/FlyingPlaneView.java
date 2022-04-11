@@ -168,7 +168,7 @@ public class FlyingPlaneView extends View{
         }else if(level<=10){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
         }else if(level<=15){
-            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg3);
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingame9);
         }else if(level<=20){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
         }else if(level<=25){
@@ -284,6 +284,50 @@ public class FlyingPlaneView extends View{
             canvas.drawBitmap(play,890,150,null);
         }
     }
+    public void startTimer(){
+        Timer timer = new Timer();
+        if(timerCLickStutas == 1 && pauseStutas){
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    totalTime++;
+                    timeText = getTimerText(totalTime);
+                    Log.d("timerCancecl"," s: "+ totalTime);
+                }
+            };
+            timer.schedule(timerTask,0,1000);
+        }else if(pauseStutas == false && timerCLickStutas == 0){
+            timer.cancel();
+            Log.d("timerCancel","cancel");
+        }
+    }
+
+    public String getTimerText(int time){
+
+
+        int seconds = time %  60;
+        int minutes = (time % 3600) / 60;
+
+        Log.d("timer2"," m: "+ minutes +" s: "+ seconds);
+
+
+        return  formatTime(seconds,minutes);
+    }
+
+    public String formatTime(int seconds,int minutes){
+        return String.format("%02d",minutes) +" : "+ String.format("%02d",seconds);
+    }
+
+    public void pauseChecker(float eventX, float eventY){
+        if (eventX > 890 && eventX < 860 + 100 && eventY > 150 && eventY < 150 + 100 ){
+            if(pauseStutas){
+                pauseStutas = false;
+            }else{
+                pauseStutas = true;
+//                timerCLickStutas = 1;
+            }
+        }
+    }
 
     public String countTar(){
         if(timerCLickStutas== 0){
@@ -333,11 +377,6 @@ public class FlyingPlaneView extends View{
                 SharedPreferences.Editor editor = sp.edit();
                 sound.playOverSound();
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
-                //sp
-                String str_coinNum = Integer.toString(score);
-                editor.putInt("coinNum",score);
-                editor.commit();
-                Log.d("Flysp","though rocket");
 
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
@@ -463,51 +502,6 @@ public class FlyingPlaneView extends View{
         }else
         {
             return false;
-        }
-    }
-
-    public void startTimer(){
-       Timer timer = new Timer();
-       if(timerCLickStutas == 1 && pauseStutas){
-           TimerTask timerTask = new TimerTask() {
-               @Override
-               public void run() {
-                   totalTime++;
-                   timeText = getTimerText(totalTime);
-//                   Log.d("timerCancecl"," s: "+ totalTime);
-               }
-           };
-           timer.schedule(timerTask,0,1000);
-       }else if(!pauseStutas){
-           timer.cancel();
-           Log.d("timerCancel","cancel");
-       }
-    }
-
-    public String getTimerText(int time){
-
-
-        int seconds = time %  60;
-        int minutes = (time % 3600) / 60;
-
-        Log.d("timer2"," m: "+ minutes +" s: "+ seconds);
-
-
-        return  formatTime(seconds,minutes);
-    }
-
-    public String formatTime(int seconds,int minutes){
-        return String.format("%02d",minutes) +" : "+ String.format("%02d",seconds);
-    }
-
-    public void pauseChecker(float eventX, float eventY){
-        if (eventX > 890 && eventX < 860 + 100 && eventY > 150 && eventY < 150 + 100 ){
-            if(pauseStutas){
-                pauseStutas = false;
-            }else{
-                pauseStutas = true;
-//                timerCLickStutas = 1;
-            }
         }
     }
 
