@@ -170,10 +170,6 @@ public class FlyingPlaneView extends View{
         canvas.drawBitmap(resize_bg,0,0,null);
         //Score
         canvas.drawText("Score: "+score,70,100,scorePaint);
-        //Pause
-//        canvas.drawBitmap(pause,860,130,null);
-//        canvas.drawBitmap(play,860,150,null);
-
        //Display heart
        for( int j = 0 ; j <3 ; j++)
        {
@@ -371,7 +367,7 @@ public class FlyingPlaneView extends View{
                 getContext().startActivity(gameoverIntent);
             }
         }
-        if(rocketX< 0)
+        if(rocketX < 0 )
         {
             rocketX = canvasWidth + 21;
             rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
