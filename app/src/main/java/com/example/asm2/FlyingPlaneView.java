@@ -377,7 +377,9 @@ public class FlyingPlaneView extends View{
                 SharedPreferences.Editor editor = sp.edit();
                 sound.playOverSound();
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
-
+                String str_coinNum = Integer.toString(score);
+                editor.putInt("coinNum",score);
+                editor.commit();
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
