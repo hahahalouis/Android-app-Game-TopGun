@@ -41,17 +41,17 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_again:
-                Integer flying_speed=97+level_next*3; //min:100% max:280%
+                Double flying_speed_acc=level_next*0.7; //min:100% max:280%
                 //put the values
                 Intent gameIntent = new Intent(getApplicationContext(),MainActivity.class);
-                gameIntent.putExtra("Speed",flying_speed);
+                gameIntent.putExtra("Speed",flying_speed_acc);
                 startActivity(gameIntent);
                 break;
             case R.id.btn_next:
-                Integer flying_speed2=97+(level_next+1)*3; //min:100% max:280%
+                Double flying_speed_acc2=(level_next+1)*0.7; //min:100% max:280%
                 //put the values
                 Intent nextIntent = new Intent(getApplicationContext(),MainActivity.class);
-                nextIntent.putExtra("Speed",flying_speed2);
+                nextIntent.putExtra("Speed",flying_speed_acc2);
                 startActivity(nextIntent);
                 break;
             case R.id.btn_menu2:
