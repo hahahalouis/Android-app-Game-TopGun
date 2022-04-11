@@ -114,6 +114,8 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlane3.setOnClickListener(this);
         shopPlane4.setOnClickListener(this);
         shopPlanebtn2.setOnClickListener(this);
+        shopPlanebtn3.setOnClickListener(this);
+        shopPlanebtn4.setOnClickListener(this);
 
         //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);

@@ -71,15 +71,13 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btn_next:
                 SharedPreferences.Editor editor = sp.edit();
-                Integer flying_speed2 = 97+(level_next)*3; //min:100% max:280%
                 //put the values
                 editor.putInt("levelNum",level_next+1);
-                Log.d("Level", String.valueOf(level_next));
                 editor.commit();
-                Intent nextIntent = new Intent(NextLevelActivity.this,MainActivity.class);
+                Intent nextIntent = new Intent(getApplicationContext(),MainActivity.class);
+                Integer flying_speed2 = 97+(level_next+1)*3; //min:100% max:280%
                 nextIntent.putExtra("Speed",flying_speed2);
                 startActivity(nextIntent);
-
                 break;
             case R.id.btn_menu2:
                 Intent MenuIntent = new Intent(getApplicationContext(), LevelActivity.class);

@@ -157,7 +157,7 @@
         android:layout_marginTop="213dp"
         android:background="@drawable/shopplanbg"
         android:scaleType="fitXY"
-        android:src="@drawable/plane2" />
+        android:src="@drawable/plane3" />
 
     <ImageButton
         android:id="@+id/shopPlane4"
@@ -169,7 +169,7 @@
         android:layout_marginTop="213dp"
         android:background="@drawable/shopplanbg"
         android:scaleType="fitXY"
-        android:src="@drawable/plane2" />
+        android:src="@drawable/plane4" />
 
     <Button
         android:id="@+id/shopPlanebtn1"
