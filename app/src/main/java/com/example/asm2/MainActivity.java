@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import java.sql.Time;
@@ -17,26 +16,22 @@ public class MainActivity extends AppCompatActivity {
     private FlyingPlaneView gameView;
     private Handler handler = new Handler();
     private final static long Interval = 30;
-    private Integer gameSpeed = 100;
-
-    Timer timer2;
-    TimerTask timerTask;
+    private double flying_speed_acc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameView = new FlyingPlaneView(this);
-
         try {
-            Intent levelIntent = getIntent();
-            gameSpeed = levelIntent.getIntExtra("Speed", 100);
-            gameView.setSpeed(gameSpeed);
-        } catch (Exception e) {
+            Intent levelIntent=getIntent();
+            flying_speed_acc=levelIntent.getDoubleExtra("Speed",0);
+            gameView.setSpeed(flying_speed_acc);
         }
+        catch (Exception e){}
         setContentView(gameView);
 
         Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask(){
             @Override
             public void run() {
                 handler.post(new Runnable() {
@@ -46,27 +41,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, Interval);
+        },0,Interval);
 
 
     }
-
-//    public void startTimer(){
-//       Timer timer = new Timer();
-//       if(gameView.timerCLickStutas == 1 && gameView.pauseStutas){
-//           TimerTask timerTask = new TimerTask() {
-//               @Override
-//               public void run() {
-//                   gameView.totalTime++;
-//                   gameView.timeText = gameView.getTimerText(gameView.totalTime);
-////                   Log.d("timerCancecl"," s: "+ totalTime);
-//               }
-//           };
-//           timer.schedule(timerTask,0,1000);
-//       }else if(!gameView.pauseStutas){
-//           timer.cancel();
-//           Log.d("timerCancel","cancel");
-//       }
-//    }
-
-    }
+}
