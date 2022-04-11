@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.number.IntegerWidth;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
     ImageView star1, star2, star3;
     TextView getScore;
     Integer level_next, star;
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,12 +70,13 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
                 startActivity(gameIntent);
                 break;
             case R.id.btn_next:
-                level_next += 1;
-                Integer flying_speed2=97+(level_next)*3; //min:100% max:280%
+                SharedPreferences.Editor editor = sp.edit();
                 //put the values
+                editor.putInt("levelNum",level_next+1);
+                editor.commit();
                 Intent nextIntent = new Intent(getApplicationContext(),MainActivity.class);
-                nextIntent.putExtra("levelNum",level_next);
-                nextIntent.putExtra("NextSpeed",flying_speed2);
+                Integer flying_speed2 = 97+(level_next+1)*3; //min:100% max:280%
+                nextIntent.putExtra("Speed",flying_speed2);
                 startActivity(nextIntent);
                 break;
             case R.id.btn_menu2:
@@ -81,4 +85,5 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
     }
+
 }
