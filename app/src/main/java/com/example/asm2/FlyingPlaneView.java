@@ -26,6 +26,8 @@ import android.os.Handler;
 
 public class FlyingPlaneView extends View{
 
+    MainActivity mainActivity;
+
     private Bitmap bg,resize_bg,gas,resize_gas, rocket, pause, play;
     private Bitmap life[] = new Bitmap[2];
     private Bitmap plane[] = new Bitmap[4];
@@ -33,6 +35,7 @@ public class FlyingPlaneView extends View{
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
     private Paint timerPaint = new Paint();
+    private Paint tapPaint = new Paint();
 
 
     private int planeX = 50, planeY,planeSpeed;
@@ -40,23 +43,24 @@ public class FlyingPlaneView extends View{
     private int rocketX, rocketY, rocketSpeed = 10,rocket2X, rocket2Y, rocket2Speed = 10,rocket3X, rocket3Y, rocket3Speed = 10;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
-    private int timerCLickStutas;
+    public int timerCLickStutas;
     private boolean cLickStutas=false;
     private int applyNum, level, targetScor;
     private int gamelevel=1;
 
-    private int totalTime = 0;
+    public int totalTime = 0;
 
     private boolean touchStatus = false;
-    private boolean startTouchStatus = false;
+    public boolean startTouchStatus = false;
     private boolean timerStutas =false;
-    private boolean pauseStutas =true;
+    public boolean pauseStutas =true;
     private boolean playStutas =false;
 
     private String clickAlert = "Tap to start";
     private String clickTagAlert = "Score ";
     private String str_targetScor;
-    private String timeText ="00.00";
+    private String levlNum,str_level = "Level ";
+    public String timeText ="00.00";
 
     private SoundEffect sound;
 
@@ -90,6 +94,11 @@ public class FlyingPlaneView extends View{
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
         scorePaint.setAntiAlias(true);
 
+        tapPaint.setColor(Color.RED);
+        tapPaint.setTextSize(100);
+        tapPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        tapPaint.setAntiAlias(true);
+
         clickAlertPaint.setColor(Color.WHITE);
         clickAlertPaint.setTextSize(100);
         clickAlertPaint.setTypeface(Typeface.DEFAULT_BOLD);
@@ -116,6 +125,8 @@ public class FlyingPlaneView extends View{
         //GetSap
         applyNum = sp.getInt("applyNum",0);
         level = sp.getInt("levelNum",0);
+
+        levlNum = Integer.toString(level);
     }
 
     public void setSpeed(Integer speed){
@@ -196,9 +207,9 @@ public class FlyingPlaneView extends View{
         canvas.drawText(timeText,450,200,scorePaint);
 
         //Display alert
-        canvas.drawText(clickAlert,300,800,clickAlertPaint);
-        canvas.drawText(clickTagAlert + str_targetScor,300,900,clickAlertPaint);
-
+        canvas.drawText(clickAlert,300,700,tapPaint);
+        canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
+        canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
 
         //start the game
         if(startTouchStatus && pauseStutas) {
@@ -206,6 +217,8 @@ public class FlyingPlaneView extends View{
             clickAlert = "";
             clickTagAlert = "";
             str_targetScor = "";
+            str_level ="";
+            levlNum = "";
             minPlaneY = plane[applyNum].getHeight();
             maxPlaneY = canvasHeight - plane[applyNum].getHeight() * 2;
             planeY = planeY + planeSpeed;
