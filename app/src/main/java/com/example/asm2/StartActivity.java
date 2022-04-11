@@ -16,7 +16,7 @@ public class StartActivity extends AppCompatActivity {
         {
             public void run(){
                 try{
-                    sleep(1000);
+                    sleep(5000);
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally {
