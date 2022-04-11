@@ -26,39 +26,45 @@ import android.os.Handler;
 
 public class FlyingPlaneView extends View{
 
-    private Bitmap bg,resize_bg,gas,resize_gas, rocket;
+    MainActivity mainActivity;
+
+    private Bitmap bg,resize_bg,gas,resize_gas, rocket, pause, play;
     private Bitmap life[] = new Bitmap[2];
     private Bitmap plane[] = new Bitmap[4];
 
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
     private Paint timerPaint = new Paint();
+    private Paint tapPaint = new Paint();
 
 
     private int planeX = 50, planeY,planeSpeed;
     private int gasX,gasY,gasSpeed =18,gas2X,gas2Y,gas2Speed =18,gas3X,gas3Y,gas3Speed =18;
     private int rocketX, rocketY, rocketSpeed = 10,rocket2X, rocket2Y, rocket2Speed = 10,rocket3X, rocket3Y, rocket3Speed = 10;
-    private int startX,startX2,startX3;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
-    private int timerCLickStutas;
+    public int timerCLickStutas;
     private boolean cLickStutas=false;
-    private int applyNum, level;
+    private int applyNum, level, targetScor;
     private int gamelevel=1;
 
-
-    private int totalTime = 0;
+    public int totalTime = 0;
 
     private boolean touchStatus = false;
-    private boolean startTouchStatus = false;
+    public boolean startTouchStatus = false;
     private boolean timerStutas =false;
+    public boolean pauseStutas =true;
+    private boolean playStutas =false;
 
     private String clickAlert = "Tap to start";
-    private String timeText ="00.00";
+    private String clickTagAlert = "Score ";
+    private String str_targetScor;
+    private String levlNum,str_level = "Level ";
+    public String timeText ="00.00";
 
     private SoundEffect sound;
 
-    private double flying_speed_acc;
+    private Integer gameSpeed=100;
 
     SharedPreferences sp;
 
@@ -76,13 +82,11 @@ public class FlyingPlaneView extends View{
         plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
         plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
-        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3), 200, 200,false);
-        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3_1), 200, 200,false);
-        plane[6] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
-        plane[7] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
+        pause = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pause), 100, 100 ,false);
+        play = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.play), 60, 60 ,false);
 
         // Paint style
         scorePaint.setColor(Color.WHITE);
@@ -90,16 +94,20 @@ public class FlyingPlaneView extends View{
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
         scorePaint.setAntiAlias(true);
 
+        tapPaint.setColor(Color.RED);
+        tapPaint.setTextSize(100);
+        tapPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        tapPaint.setAntiAlias(true);
+
         clickAlertPaint.setColor(Color.WHITE);
         clickAlertPaint.setTextSize(100);
         clickAlertPaint.setTypeface(Typeface.DEFAULT_BOLD);
         clickAlertPaint.setAntiAlias(true);
 
-        timerPaint.setColor(Color.WHITE);
-        timerPaint.setTextSize(50);
-
         planeY = 250;
         score = 0;
+        targetScor = level*10+50;
+        str_targetScor = Integer.toString(level*10+50);
 
         //bottom
         Timer timer2 = new Timer();
@@ -117,12 +125,17 @@ public class FlyingPlaneView extends View{
         //GetSap
         applyNum = sp.getInt("applyNum",0);
         level = sp.getInt("levelNum",0);
+
+        levlNum = Integer.toString(level);
     }
 
-    public void setSpeed(double speed){
-        flying_speed_acc = Math.floor(speed);
-        rocketSpeed=rocketSpeed+ (int) flying_speed_acc;
-
+    public void setSpeed(Integer speed){
+        gameSpeed = speed;
+        rocketSpeed=(rocketSpeed*gameSpeed)/100;
+        gasSpeed=(gasSpeed*gameSpeed)/100;
+        rocket2Speed=(rocket2Speed*gameSpeed*150)/10000;
+        rocket3Speed=(rocket3Speed*gameSpeed*200)/10000;
+        gamelevel=gameSpeed/8;
     }
 
     @Override
@@ -130,6 +143,8 @@ public class FlyingPlaneView extends View{
         super.onDraw(canvas);
 
         cLickStutas=false;
+        countTar();
+        targetScor = level*10+50;
 
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
@@ -139,7 +154,7 @@ public class FlyingPlaneView extends View{
         }else if(level<=10){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
         }else if(level<=15){
-            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg3);
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingame9);
         }else if(level<=20){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
         }else if(level<=25){
@@ -151,35 +166,41 @@ public class FlyingPlaneView extends View{
         }
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
 
-
+        //BG
         canvas.drawBitmap(resize_bg,0,0,null);
+        //Score
         canvas.drawText("Score: "+score,70,100,scorePaint);
+        //Display heart
+        for( int j = 0 ; j <3 ; j++)
+        {
+            int heartX = (int) (700 + j*100);
+            int heartY = 50;
 
-       //Display heart
-       for( int j = 0 ; j <3 ; j++)
-       {
-           int heartX = (int) (700 + j*100);
-           int heartY = 50;
+            if(j < lifeCounter)
+            {
+                canvas.drawBitmap(life[0], heartX, heartY,null);
+            }else
+            {
+                canvas.drawBitmap(life[1], heartX, heartY,null);
+            }
+        }
 
-           if(j < lifeCounter)
-           {
-               canvas.drawBitmap(life[0], heartX, heartY,null);
-           }else
-           {
-               canvas.drawBitmap(life[1], heartX, heartY,null);
-           }
-       }
-
-       //Display timer
+        //Display timer
         canvas.drawText(timeText,450,200,scorePaint);
 
         //Display alert
-        canvas.drawText(clickAlert,300,900,clickAlertPaint);
+        canvas.drawText(clickAlert,300,700,tapPaint);
+        canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
+        canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
 
         //start the game
-        if(startTouchStatus) {
+        if(startTouchStatus && pauseStutas) {
 
             clickAlert = "";
+            clickTagAlert = "";
+            str_targetScor = "";
+            str_level ="";
+            levlNum = "";
             minPlaneY = plane[applyNum].getHeight();
             maxPlaneY = canvasHeight - plane[applyNum].getHeight() * 2;
             planeY = planeY + planeSpeed;
@@ -209,82 +230,101 @@ public class FlyingPlaneView extends View{
                 canvas.drawBitmap(plane[applyNum], planeX, planeY, null);
             }
 
+            //gas
+            gas();
+            canvas.drawBitmap(resize_gas, gasX, gasY, null);
+
+            //rocket
+            rocket();
+            canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
 
-            Log.d("startX","startX:"+startX+" "+startX2+" "+startX3);
-
-            if(gamelevel<=5) {
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
+            if(gamelevel>=15&&gamelevel<25) {
                 gas2();
                 canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
                 rocket2();
                 canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-
             }
-            else if (gamelevel<=10){
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
+            else{
                 gas2();
                 canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
                 rocket2();
                 canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                rocket3();
-                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
-            }
-            else if (gamelevel<=20){
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                rocket3();
-                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
 
-            }
-            else if (gamelevel<=30){
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
                 gas3();
                 canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
                 rocket3();
                 canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
             }
 
 
-
+            if(pauseStutas){
+                canvas.drawBitmap(pause,860,130,null);
+            }else{
+                canvas.drawBitmap(play,890,150,null);
+            }
+        }else{
+            canvas.drawBitmap(play,890,150,null);
+        }
+    }
+    public void startTimer(){
+        Timer timer = new Timer();
+        if(timerCLickStutas == 1 && pauseStutas){
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    totalTime++;
+                    timeText = getTimerText(totalTime);
+                    Log.d("timerCancecl"," s: "+ totalTime);
+                }
+            };
+            timer.schedule(timerTask,0,1000);
+        }else if(pauseStutas == false && timerCLickStutas == 0){
+            timer.cancel();
+            Log.d("timerCancel","cancel");
         }
     }
 
+    public String getTimerText(int time){
+
+
+        int seconds = time %  60;
+        int minutes = (time % 3600) / 60;
+
+        Log.d("timer2"," m: "+ minutes +" s: "+ seconds);
+
+
+        return  formatTime(seconds,minutes);
+    }
+
+    public String formatTime(int seconds,int minutes){
+        return String.format("%02d",minutes) +" : "+ String.format("%02d",seconds);
+    }
+
+    public void pauseChecker(float eventX, float eventY){
+        if (eventX > 890 && eventX < 860 + 100 && eventY > 150 && eventY < 150 + 100 ){
+            if(pauseStutas){
+                pauseStutas = false;
+            }else{
+                pauseStutas = true;
+//                timerCLickStutas = 1;
+            }
+        }
+    }
+
+    public String countTar(){
+        if(timerCLickStutas== 0){
+            str_targetScor = Integer.toString(targetScor);
+        }
+        return str_targetScor;
+    }
+
     public void winDetect(){
-        if(score >=40){
+        if(score >=targetScor){
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt("Heart",lifeCounter);
+            editor.putInt("coinNum",score);
+            editor.commit();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
         }
@@ -302,41 +342,9 @@ public class FlyingPlaneView extends View{
             sound.playRewardSound();
         }
         if(gasX < 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            gasX = canvasWidth + startX;
+        {
+            gasX = canvasWidth + 21;
             gasY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
-
-    public void gas2(){
-        gas2X = gas2X - gasSpeed;
-
-        if(hitRocketChecker(gas2X,gas2Y))
-        {    winDetect();
-            score = score + 10;
-            gas2X = gas2X - 500;
-            sound.playRewardSound();
-        }
-        if(gas2X < 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            gas2X = canvasWidth + startX;
-            gas2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
-
-    public void gas3(){
-        gas3X = gas3X - gasSpeed;
-
-        if(hitRocketChecker(gas3X,gas3Y))
-        {    winDetect();
-            score = score + 10;
-            gas3X = gas3X - 500;
-            sound.playRewardSound();
-        }
-        if(gas3X < 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            gas3X = canvasWidth + startX;
-            gas3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
     }
 
@@ -352,27 +360,39 @@ public class FlyingPlaneView extends View{
                 SharedPreferences.Editor editor = sp.edit();
                 sound.playOverSound();
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
-                //sp
                 String str_coinNum = Integer.toString(score);
                 editor.putInt("coinNum",score);
                 editor.commit();
-                Log.d("Flysp","though rocket");
-
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
-        if(rocketX< 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            rocketX = canvasWidth + startX;
+        if(rocketX < 0 )
+        {
+            rocketX = canvasWidth + 21;
             rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
 
     }
 
+    public void gas2(){
+        gas2X = gas2X - gas2Speed;
+
+        if(hitRocketChecker(gas2X,gas2Y))
+        {
+            score = score + 10;
+            gas2X = gas2X - 500;
+            sound.playRewardSound();
+        }
+        if(gas2X < 0)
+        {
+            gas2X = canvasWidth + 21;
+            gas2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+        }
+    }
 
     public void rocket2(){
-        rocket2X = rocket2X - rocketSpeed;
+        rocket2X = rocket2X - rocket2Speed;
         if(hitRocketChecker(rocket2X,rocket2Y))
         {
             rocket2X = rocket2X - 500;
@@ -394,17 +414,31 @@ public class FlyingPlaneView extends View{
             }
         }
         if(rocket2X< 0)
-        {   startX2=(int) Math.floor((Math.random()*2000)+1);
-            rocket2X = canvasWidth + startX2;
+        {
+            rocket2X = canvasWidth + 21;
             rocket2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
 
     }
 
+    public void gas3(){
+        gas3X = gas3X - gas3Speed;
 
+        if(hitRocketChecker(gas3X,gas3Y))
+        {
+            score = score + 10;
+            gas3X = gas3X - 500;
+            sound.playRewardSound();
+        }
+        if(gas3X < 0)
+        {
+            gas3X = canvasWidth + 21;
+            gas3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+        }
+    }
 
     public void rocket3(){
-        rocket3X = rocket3X - rocketSpeed;
+        rocket3X = rocket3X - rocket3Speed;
         if(hitRocketChecker(rocket3X,rocket3Y))
         {
             rocket3X = rocket3X - 500;
@@ -426,22 +460,20 @@ public class FlyingPlaneView extends View{
             }
         }
         if(rocket3X< 0)
-        {   startX3=(int) Math.floor((Math.random()*2000)+1);
-            rocket3X = canvasWidth + startX3;
+        {
+            rocket3X = canvasWidth + 21;
             rocket3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
 
     }
 
-
-
     public void bottom(){
 
         if(planeY==maxPlaneY && score>=10 && cLickStutas==false)
         {
-          score = score - 10;
+            score = score - 10;
 
-          sound.playBottomSound();
+            sound.playBottomSound();
         }
     }
 
@@ -449,8 +481,6 @@ public class FlyingPlaneView extends View{
 
     public boolean hitRocketChecker(int x, int y)
     {
-
-
         if((planeX < x && x < (planeX + plane[applyNum].getWidth()) && planeY < y && y < (planeY + plane[applyNum].getHeight())) || (planeX < x && x < (planeX + plane[applyNum+1].getWidth()) && planeY < y && y < (planeY + plane[applyNum+1].getHeight())))
         {
             return true;
@@ -460,39 +490,11 @@ public class FlyingPlaneView extends View{
         }
     }
 
-    public void startTimer(){
-       Timer timer = new Timer();
-       if(timerCLickStutas == 1){
-           TimerTask timerTask = new TimerTask() {
-               @Override
-               public void run() {
-                   totalTime++;
-                   timeText = getTimerText(totalTime);
-                   Log.d("timer"," s: "+ totalTime);
-               }
-           };
-           timer.schedule(timerTask,0,1000);
-       }
-    }
-
-    public String getTimerText(int time){
-
-
-        int seconds = time %  60;
-        int minutes = (time % 3600) / 60;
-
-        Log.d("timer2"," m: "+ minutes +" s: "+ seconds);
-
-
-        return  formatTime(seconds,minutes);
-    }
-
-    public String formatTime(int seconds,int minutes){
-        return String.format("%02d",minutes) +" : "+ String.format("%02d",seconds);
-    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int eventX = (int)event.getX();
+        int eventY = (int)event.getY();
+
         if(event.getAction() == MotionEvent.ACTION_DOWN)
         {
             touchStatus = true;
@@ -501,7 +503,9 @@ public class FlyingPlaneView extends View{
             timerCLickStutas++;
             cLickStutas=true;
             startTimer();
-            Log.d("speed222","s"+rocketSpeed);
+            pauseChecker(eventX,eventY);
+            winDetect();
+            Log.d("through", ""+pauseStutas);
         }
 
         return super.onTouchEvent(event);

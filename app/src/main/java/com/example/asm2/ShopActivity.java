@@ -114,8 +114,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlane3.setOnClickListener(this);
         shopPlane4.setOnClickListener(this);
         shopPlanebtn2.setOnClickListener(this);
-        shopPlanebtn3.setOnClickListener(this);
-        shopPlanebtn4.setOnClickListener(this);
 
         //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
@@ -139,19 +137,19 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void buyPlane2(){
         SharedPreferences.Editor editor = sp.edit();
 
-            if(!buyStatus_2 && totalCoin >= 100){
-                totalCoin = totalCoin - 100;
-                shopCoinNum.setText(Integer.toString(totalCoin));
-                buyStatus_2 = true;
-                stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
-                //sp
-                editor.putBoolean("buyStatus_2",buyStatus_2);
-                editor.commit();
+        if(!buyStatus_2 && totalCoin >= 100){
+            totalCoin = totalCoin - 100;
+            shopCoinNum.setText(Integer.toString(totalCoin));
+            buyStatus_2 = true;
+            stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
+            //sp
+            editor.putBoolean("buyStatus_2",buyStatus_2);
+            editor.commit();
 
-            }else{
-                Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
-            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
         }
+    }
     public void buyPlane3(){
         SharedPreferences.Editor editor = sp.edit();
 

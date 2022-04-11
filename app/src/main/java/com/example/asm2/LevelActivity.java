@@ -93,11 +93,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public void goLevel(Integer level) {
         //setting speed
-
-        Double flying_speed_acc=level*0.7; // 1lv+ 0.7 speed
+        Integer flying_speed=97+level*3; //min:100% max:280%
         //put the values
         Intent gameIntent = new Intent(LevelActivity.this,MainActivity.class);
-        gameIntent.putExtra("Speed",flying_speed_acc);
+        gameIntent.putExtra("Speed",flying_speed);
         startActivity(gameIntent);
     }
 
