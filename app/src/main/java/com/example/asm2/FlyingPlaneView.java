@@ -133,23 +133,9 @@ public class FlyingPlaneView extends View{
         gameSpeed = speed;
         rocketSpeed=(rocketSpeed*gameSpeed)/100;
         gasSpeed=(gasSpeed*gameSpeed)/100;
+        rocket2Speed=(rocket2Speed*gameSpeed*150)/10000;
+        rocket3Speed=(rocket3Speed*gameSpeed*200)/10000;
         gamelevel=gameSpeed/8;
-        if(level>5){
-            if(level<=10){
-                //set background2
-            }else if(level<=15){
-                //set background3
-            }
-            else if(level<=16){
-                //set background4
-            }
-            else if(level<=20){
-                //set background5
-            }
-            else if(level<=25){
-                //set background6
-            }
-        }
     }
 
     @Override
@@ -256,24 +242,25 @@ public class FlyingPlaneView extends View{
             rocket();
             canvas.drawBitmap(rocket, rocketX, rocketY, null);
 
-            if(gamelevel>=15) {
-                if(gamelevel<25) {
-                    gas2();
-                    canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                    rocket2();
-                    canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                }
-                else{
-                    gas2();
-                    canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                    gas3();
-                    canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                    rocket2();
-                    canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                    rocket3();
-                    canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
-                }
+
+            if(gamelevel>=15&&gamelevel<25) {
+                gas2();
+                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
+                rocket2();
+                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
             }
+            else{
+                gas2();
+                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
+                rocket2();
+                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
+
+                gas3();
+                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
+                rocket3();
+                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
+            }
+
 
             if(pauseStutas){
                 canvas.drawBitmap(pause,860,130,null);
