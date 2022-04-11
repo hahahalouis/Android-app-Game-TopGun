@@ -30,7 +30,7 @@ public class FlyingPlaneView extends View{
 
     private Bitmap bg,resize_bg,gas,resize_gas, rocket, pause, play;
     private Bitmap life[] = new Bitmap[2];
-    private Bitmap plane[] = new Bitmap[4];
+    private Bitmap plane[] = new Bitmap[8];
 
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
@@ -82,6 +82,8 @@ public class FlyingPlaneView extends View{
         plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
         plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
+        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3), 200, 200,false);
+        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3_1), 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);

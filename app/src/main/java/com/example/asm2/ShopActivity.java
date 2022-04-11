@@ -23,8 +23,8 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button shopPlanebtn1,shopPlanebtn2,shopPlanebtn3,shopPlanebtn4;
 
-    private boolean buyStatus_1 = true , buyStatus_2 = false, buyStatus_3 = false,buyStatus_4 = false;
-    private boolean applyStatus_1 = false, applyStatus_2 = true, applyStatus_3 = true, applyStatus_4 = true;
+    private boolean buyStatus_1 = true , buyStatus_2 = false, buyStatus_3 = false ,buyStatus_4 = false;
+    private boolean applyStatus_1 = false, applyStatus_2 = false, applyStatus_3 = false, applyStatus_4 = false;
 
     private boolean tooglestutas_1 = true, tooglestutas_2 = true, tooglestutas_3 = true, tooglestutas_4 = true;
 
@@ -54,37 +54,40 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.shopPlane1:
-                stuffStatus(buyStatus_1, applyStatus_1 ,shopPlanebtn1);
+                stuffStatus_2(buyStatus_1, applyStatus_1 ,shopPlanebtn1);
                 togglePlane1();
                 break;
             case R.id.shopPlanebtn1:
                 apply1();
                 break;
             case R.id.shopPlane2:
-                stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
+                stuffStatus_2(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
                 togglePlane2();
                 break;
             case R.id.shopPlanebtn2:
+                buyStatus_2 = sp.getBoolean("buyStatus_2",false);
                 if(!buyStatus_2){
                     buyPlane2();
                 }
                 apply2();
                 break;
             case R.id.shopPlane3:
-                stuffStatus(buyStatus_3, applyStatus_3 ,shopPlanebtn3);
+                stuffStatus_3(buyStatus_3, applyStatus_3 ,shopPlanebtn3);
                 togglePlane3();
                 break;
             case R.id.shopPlanebtn3:
+                buyStatus_3 = sp.getBoolean("buyStatus_3",false);
                 if(!buyStatus_3){
                     buyPlane3();
                 }
                 apply3();
                 break;
             case R.id.shopPlane4:
-                stuffStatus(buyStatus_4, applyStatus_4 ,shopPlanebtn4);
+                stuffStatus_4(buyStatus_4, applyStatus_4 ,shopPlanebtn4);
                 togglePlane4();
                 break;
             case R.id.shopPlanebtn4:
+                buyStatus_4 = sp.getBoolean("buyStatus_4",false);
                 if(!buyStatus_4){
                     buyPlane4();
                 }
@@ -114,6 +117,8 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlane3.setOnClickListener(this);
         shopPlane4.setOnClickListener(this);
         shopPlanebtn2.setOnClickListener(this);
+        shopPlanebtn3.setOnClickListener(this);
+        shopPlanebtn4.setOnClickListener(this);
 
         //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
@@ -122,11 +127,33 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         setCoinNum();
     }
 
-    public void stuffStatus(Boolean buyStatus, Boolean applyStatus, Button btn){
+    public void stuffStatus_2(Boolean buyStatus, Boolean applyStatus, Button btn){
         SharedPreferences.Editor editor = sp.edit();
-        boolean test = sp.getBoolean("buyStatus_2",false);
+        boolean  buyStatus_2_old = sp.getBoolean("buyStatus_2",false);
 
-        if(buyStatus || test == true){
+        if(buyStatus || buyStatus_2_old == true){
+            btn.setText("Apply");
+        }else{
+            btn.setText("Buy");
+        }
+        btn.setVisibility(View.VISIBLE);
+    }
+    public void stuffStatus_3(Boolean buyStatus, Boolean applyStatus, Button btn){
+        SharedPreferences.Editor editor = sp.edit();
+        boolean  buyStatus_3_old = sp.getBoolean("buyStatus_3",false);
+
+        if(buyStatus || buyStatus_3_old == true){
+            btn.setText("Apply");
+        }else{
+            btn.setText("Buy");
+        }
+        btn.setVisibility(View.VISIBLE);
+    }
+    public void stuffStatus_4(Boolean buyStatus, Boolean applyStatus, Button btn){
+        SharedPreferences.Editor editor = sp.edit();
+        boolean  buyStatus_4_old = sp.getBoolean("buyStatus_4",false);
+
+        if(buyStatus || buyStatus_4_old == true){
             btn.setText("Apply");
         }else{
             btn.setText("Buy");
@@ -141,10 +168,11 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             totalCoin = totalCoin - 100;
             shopCoinNum.setText(Integer.toString(totalCoin));
             buyStatus_2 = true;
-            stuffStatus(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
+            stuffStatus_2(buyStatus_2, applyStatus_2 ,shopPlanebtn2);
             //sp
             editor.putBoolean("buyStatus_2",buyStatus_2);
             editor.commit();
+            Log.d("b2",""+buyStatus_2);
 
         }else{
             Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
@@ -153,14 +181,16 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void buyPlane3(){
         SharedPreferences.Editor editor = sp.edit();
 
-        if(!buyStatus_3 && totalCoin >= 300){
-            totalCoin = totalCoin - 100;
+        if(!buyStatus_3 && totalCoin >= 100){
+            totalCoin = totalCoin - 300;
             shopCoinNum.setText(Integer.toString(totalCoin));
             buyStatus_3 = true;
-            stuffStatus(buyStatus_3, applyStatus_3 ,shopPlanebtn3);
+            stuffStatus_3(buyStatus_3, applyStatus_3 ,shopPlanebtn3);
             //sp
             editor.putBoolean("buyStatus_3",buyStatus_3);
             editor.commit();
+            Log.d("b2",""+buyStatus_3);
+            Log.d("buyplane3","pass and buy");
 
         }else{
             Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
@@ -169,17 +199,19 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void buyPlane4(){
         SharedPreferences.Editor editor = sp.edit();
 
-        if(!buyStatus_4 && totalCoin >= 420){
-            totalCoin = totalCoin - 100;
+        if(!buyStatus_4 && totalCoin >= 100){
+            totalCoin = totalCoin - 420;
             shopCoinNum.setText(Integer.toString(totalCoin));
             buyStatus_4 = true;
-            stuffStatus(buyStatus_4, applyStatus_4 ,shopPlanebtn4);
+            stuffStatus_4(buyStatus_4, applyStatus_4 ,shopPlanebtn4);
             //sp
             editor.putBoolean("buyStatus_4",buyStatus_4);
             editor.commit();
+            Log.d("b2",""+buyStatus_4);
 
         }else{
             Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            Log.d("b2",""+buyStatus_4);
         }
     }
 
@@ -207,6 +239,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             applyPlaneView.setBackgroundResource(R.drawable.plane3);
             editor.putInt("applyNum",4);
             editor.commit();
+            Log.d("buying","test");
         }
     }
 
