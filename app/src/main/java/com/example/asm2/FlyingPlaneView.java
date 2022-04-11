@@ -82,6 +82,10 @@ public class FlyingPlaneView extends View{
         plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
         plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
+        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3), 200, 200,false);
+        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3_1), 200, 200,false);
+        plane[6] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
+        plane[7] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
