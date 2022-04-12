@@ -50,10 +50,10 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.btn_retry:
                 //setting speed
-                Integer flying_speed=97+level*3; //min:100% max:280%
+                Double flying_speed_acc=level*0.7;//min:100% max:280%
                 //put the values
                 Intent gameIntent = new Intent(getApplicationContext(),MainActivity.class);
-                gameIntent.putExtra("Speed",flying_speed);
+                gameIntent.putExtra("Speed",flying_speed_acc);
                 gameIntent.putExtra("levelNum",level);
                 startActivity(gameIntent);
                 break;

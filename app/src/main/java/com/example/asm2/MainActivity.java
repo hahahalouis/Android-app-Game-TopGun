@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private FlyingPlaneView gameView;
     private Handler handler = new Handler();
     private final static long Interval = 30;
-    private Integer gameSpeed = 100;
+    private double flying_speed_acc;
 
     Timer timer2;
     TimerTask timerTask;
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Intent levelIntent = getIntent();
-            gameSpeed = levelIntent.getIntExtra("Speed", 100);
-            gameView.setSpeed(gameSpeed);
+            flying_speed_acc=levelIntent.getDoubleExtra("Speed",0);
+            gameView.setSpeed(flying_speed_acc);
         } catch (Exception e) {
         }
         setContentView(gameView);

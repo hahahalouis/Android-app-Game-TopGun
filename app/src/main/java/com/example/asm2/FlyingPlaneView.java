@@ -41,6 +41,7 @@ public class FlyingPlaneView extends View{
     private int planeX = 50, planeY,planeSpeed;
     private int gasX,gasY,gasSpeed =18,gas2X,gas2Y,gas2Speed =18,gas3X,gas3Y,gas3Speed =18;
     private int rocketX, rocketY, rocketSpeed = 10,rocket2X, rocket2Y, rocket2Speed = 10,rocket3X, rocket3Y, rocket3Speed = 10;
+    private int startX,startX2,startX3;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
     public int timerCLickStutas;
@@ -64,7 +65,7 @@ public class FlyingPlaneView extends View{
 
     private SoundEffect sound;
 
-    private Integer gameSpeed=100;
+    private double flying_speed_acc;
 
     SharedPreferences sp;
 
@@ -133,13 +134,9 @@ public class FlyingPlaneView extends View{
         levlNum = Integer.toString(level);
     }
 
-    public void setSpeed(Integer speed){
-        gameSpeed = speed;
-        rocketSpeed=(rocketSpeed*gameSpeed)/100;
-        gasSpeed=(gasSpeed*gameSpeed)/100;
-        rocket2Speed=(rocket2Speed*gameSpeed*150)/10000;
-        rocket3Speed=(rocket3Speed*gameSpeed*200)/10000;
-        gamelevel=gameSpeed/8;
+    public void setSpeed(double speed){
+        flying_speed_acc = Math.floor(speed);
+        rocketSpeed=rocketSpeed+ (int) flying_speed_acc;
     }
 
     @Override
@@ -234,29 +231,68 @@ public class FlyingPlaneView extends View{
                 canvas.drawBitmap(plane[applyNum], planeX, planeY, null);
             }
 
-            //gas
-            gas();
-            canvas.drawBitmap(resize_gas, gasX, gasY, null);
-
-            //rocket
-            rocket();
-            canvas.drawBitmap(rocket, rocketX, rocketY, null);
-
-
-            if(gamelevel>=15&&gamelevel<25) {
+            Log.d("startX","startX:"+startX+" "+startX2+" "+startX3);
+            if(gamelevel<=5) {
+                //gas
+                gas();
+                canvas.drawBitmap(resize_gas, gasX, gasY, null);
                 gas2();
                 canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-            }
-            else{
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-
                 gas3();
                 canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
+                //rocket
+                rocket();
+                canvas.drawBitmap(rocket, rocketX, rocketY, null);
+                rocket2();
+                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
+
+            }
+            else if (gamelevel<=10){
+                //gas
+                gas();
+                canvas.drawBitmap(resize_gas, gasX, gasY, null);
+                gas2();
+                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
+                gas3();
+                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
+                //rocket
+                rocket();
+                canvas.drawBitmap(rocket, rocketX, rocketY, null);
+                rocket2();
+                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
+                rocket3();
+                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
+            }
+            else if (gamelevel<=20){
+                //gas
+                gas();
+                canvas.drawBitmap(resize_gas, gasX, gasY, null);
+                gas2();
+                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
+                gas3();
+                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
+                //rocket
+                rocket();
+                canvas.drawBitmap(rocket, rocketX, rocketY, null);
+                rocket2();
+                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
+                rocket3();
+                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
+
+            }
+            else if (gamelevel<=30){
+                //gas
+                gas();
+                canvas.drawBitmap(resize_gas, gasX, gasY, null);
+                gas2();
+                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
+                gas3();
+                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
+                //rocket
+                rocket();
+                canvas.drawBitmap(rocket, rocketX, rocketY, null);
+                rocket2();
+                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
                 rocket3();
                 canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
             }
@@ -346,9 +382,41 @@ public class FlyingPlaneView extends View{
             sound.playRewardSound();
         }
         if(gasX < 0)
-        {
-            gasX = canvasWidth + 21;
+        {   startX=(int) Math.floor((Math.random()*2000)+1);
+            gasX = canvasWidth + startX;
             gasY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+        }
+    }
+
+    public void gas2(){
+        gas2X = gas2X - gasSpeed;
+
+        if(hitRocketChecker(gas2X,gas2Y))
+        {    winDetect();
+            score = score + 10;
+            gas2X = gas2X - 500;
+            sound.playRewardSound();
+        }
+        if(gas2X < 0)
+        {   startX=(int) Math.floor((Math.random()*2000)+1);
+            gas2X = canvasWidth + startX;
+            gas2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+        }
+    }
+
+    public void gas3(){
+        gas3X = gas3X - gasSpeed;
+
+        if(hitRocketChecker(gas3X,gas3Y))
+        {    winDetect();
+            score = score + 10;
+            gas3X = gas3X - 500;
+            sound.playRewardSound();
+        }
+        if(gas3X < 0)
+        {   startX=(int) Math.floor((Math.random()*2000)+1);
+            gas3X = canvasWidth + startX;
+            gas3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
     }
 
@@ -364,39 +432,27 @@ public class FlyingPlaneView extends View{
                 SharedPreferences.Editor editor = sp.edit();
                 sound.playOverSound();
                 Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
+                //sp
                 String str_coinNum = Integer.toString(score);
                 editor.putInt("coinNum",score);
                 editor.commit();
+                Log.d("Flysp","though rocket");
+
                 Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                 getContext().startActivity(gameoverIntent);
             }
         }
-        if(rocketX < 0 )
-        {
-            rocketX = canvasWidth + 21;
+        if(rocketX< 0)
+        {   startX=(int) Math.floor((Math.random()*2000)+1);
+            rocketX = canvasWidth + startX;
             rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
 
     }
 
-    public void gas2(){
-        gas2X = gas2X - gas2Speed;
-
-        if(hitRocketChecker(gas2X,gas2Y))
-        {
-            score = score + 10;
-            gas2X = gas2X - 500;
-            sound.playRewardSound();
-        }
-        if(gas2X < 0)
-        {
-            gas2X = canvasWidth + 21;
-            gas2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
 
     public void rocket2(){
-        rocket2X = rocket2X - rocket2Speed;
+        rocket2X = rocket2X - rocketSpeed;
         if(hitRocketChecker(rocket2X,rocket2Y))
         {
             rocket2X = rocket2X - 500;
@@ -418,31 +474,17 @@ public class FlyingPlaneView extends View{
             }
         }
         if(rocket2X< 0)
-        {
-            rocket2X = canvasWidth + 21;
+        {   startX2=(int) Math.floor((Math.random()*2000)+1);
+            rocket2X = canvasWidth + startX2;
             rocket2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
 
     }
 
-    public void gas3(){
-        gas3X = gas3X - gas3Speed;
 
-        if(hitRocketChecker(gas3X,gas3Y))
-        {
-            score = score + 10;
-            gas3X = gas3X - 500;
-            sound.playRewardSound();
-        }
-        if(gas3X < 0)
-        {
-            gas3X = canvasWidth + 21;
-            gas3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
 
     public void rocket3(){
-        rocket3X = rocket3X - rocket3Speed;
+        rocket3X = rocket3X - rocketSpeed;
         if(hitRocketChecker(rocket3X,rocket3Y))
         {
             rocket3X = rocket3X - 500;
@@ -464,8 +506,8 @@ public class FlyingPlaneView extends View{
             }
         }
         if(rocket3X< 0)
-        {
-            rocket3X = canvasWidth + 21;
+        {   startX3=(int) Math.floor((Math.random()*2000)+1);
+            rocket3X = canvasWidth + startX3;
             rocket3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
         }
 
@@ -509,6 +551,7 @@ public class FlyingPlaneView extends View{
             startTimer();
             pauseChecker(eventX,eventY);
             winDetect();
+            Log.d("speed222","s"+rocketSpeed);
             Log.d("through", ""+pauseStutas);
         }
 
