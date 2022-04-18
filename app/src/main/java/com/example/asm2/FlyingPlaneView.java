@@ -40,8 +40,8 @@ public class FlyingPlaneView extends View{
 
     private int planeX = 50, planeY,planeSpeed;
     private int gasX,gasY,gasSpeed =18,gas2X,gas2Y,gas2Speed =18,gas3X,gas3Y,gas3Speed =18;
-    private int rocketX, rocketY, rocketSpeed = 10,rocket2X, rocket2Y, rocket2Speed = 10,rocket3X, rocket3Y, rocket3Speed = 10;
-    private int startX,startX2,startX3;
+    private int speedForRocket=10;
+    private int startX;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
     public int timerCLickStutas;
@@ -68,6 +68,68 @@ public class FlyingPlaneView extends View{
     private double flying_speed_acc;
 
     SharedPreferences sp;
+
+    private Rocket r1=new Rocket(),r2=new Rocket(),r3=new Rocket(),r4=new Rocket();
+    private Gas g1=new Gas(),g2=new Gas(),g3=new Gas(),g4=new Gas();
+
+    public class Rocket{
+        public int rocketSpeed,rocketX,rocketY,startX;
+
+        public Rocket(){
+            this.rocketSpeed=speedForRocket;
+        }
+
+        public void fly(){
+            this.rocketX = this.rocketX - this.rocketSpeed;
+
+            if(hitRocketChecker(this.rocketX,this.rocketY))
+            {
+                this.rocketX = this.rocketX - 500;
+                lifeCounter --;
+                sound.playHitSound();
+                if(lifeCounter == 0)
+                {
+                    SharedPreferences.Editor editor = sp.edit();
+                    sound.playOverSound();
+                    Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
+                    //sp
+                    String str_coinNum = Integer.toString(score);
+                    editor.putInt("coinNum",score);
+                    editor.commit();
+                    Log.d("Flysp","though rocket");
+
+                    Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
+                    getContext().startActivity(gameoverIntent);
+                }
+            }
+            if(this.rocketX< 0)
+            {   this.startX=(int) Math.floor((Math.random()*2000)+1);
+                this.rocketX = canvasWidth + this.startX;
+                this.rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+            }
+        }
+    }
+
+    public class Gas{
+        int gasX,gasY,gasSpeed=18,startX;
+
+        public void fly(){
+            this.gasX = this.gasX - this.gasSpeed;
+
+            if(hitRocketChecker(this.gasX,this.gasY))
+            {    winDetect();
+                score = score + 10;
+                this.gasX = this.gasX - 500;
+                sound.playRewardSound();
+            }
+            if(this.gasX < 0)
+            {   this.startX=(int) Math.floor((Math.random()*2000)+1);
+                this.gasX = canvasWidth + this.startX;
+                this.gasY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
+            }
+        }
+
+    }
 
     public FlyingPlaneView(Context context) {
         super(context);
@@ -132,11 +194,12 @@ public class FlyingPlaneView extends View{
         level = sp.getInt("levelNum",0);
 
         levlNum = Integer.toString(level);
+
     }
 
     public void setSpeed(double speed){
         flying_speed_acc = Math.floor(speed);
-        rocketSpeed=rocketSpeed+ (int) flying_speed_acc;
+        speedForRocket=speedForRocket+ (int) flying_speed_acc;
     }
 
     @Override
@@ -231,72 +294,62 @@ public class FlyingPlaneView extends View{
                 canvas.drawBitmap(plane[applyNum], planeX, planeY, null);
             }
 
-            Log.d("startX","startX:"+startX+" "+startX2+" "+startX3);
-            if(gamelevel<=5) {
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
+            //Log.d("startX","startX:"+startX+" "+startX2+" "+startX3);
 
+            switch(level){
+                case 35:
+                case 34:
+                case 33:
+                case 32:
+                case 31:
+                case 30:
+                    g4.fly();
+                    canvas.drawBitmap(resize_gas, g4.gasX, g4.gasY, null);
+                    r4.fly();
+                    canvas.drawBitmap(rocket, r4.rocketX, r4.rocketY, null);
+                case 29:
+                case 28:
+                case 27:
+                case 26:
+                case 25:
+                case 24:
+                case 23:
+                case 22:
+                case 21:
+                case 20:
+                    g3.fly();
+                    canvas.drawBitmap(resize_gas, g3.gasX, g3.gasY, null);
+                    r3.fly();
+                    canvas.drawBitmap(rocket, r3.rocketX, r3.rocketY, null);
+                case 19:
+                case 18:
+                case 17:
+                case 16:
+                case 15:
+                case 14:
+                case 13:
+                case 12:
+                case 11:
+                case 10:
+                    g2.fly();
+                    canvas.drawBitmap(resize_gas, g2.gasX, g2.gasY, null);
+                    r2.fly();
+                    canvas.drawBitmap(rocket, r2.rocketX, r2.rocketY, null);
+                case 9:
+                case 8:
+                case 7:
+                case 6:
+                case 5:
+                case 4:
+                case 3:
+                case 2:
+                case 1:
+                    g1.fly();
+                    canvas.drawBitmap(resize_gas, g1.gasX, g1.gasY, null);
+                    r1.fly();
+                    canvas.drawBitmap(rocket, r1.rocketX, r1.rocketY, null);
+                    break;
             }
-            else if (gamelevel<=10){
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                rocket3();
-                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
-            }
-            else if (gamelevel<=20){
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                rocket3();
-                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
-
-            }
-            else if (gamelevel<=30){
-                //gas
-                gas();
-                canvas.drawBitmap(resize_gas, gasX, gasY, null);
-                gas2();
-                canvas.drawBitmap(resize_gas, gas2X, gas2Y, null);
-                gas3();
-                canvas.drawBitmap(resize_gas, gas3X, gas3Y, null);
-                //rocket
-                rocket();
-                canvas.drawBitmap(rocket, rocketX, rocketY, null);
-                rocket2();
-                canvas.drawBitmap(rocket, rocket2X, rocket2Y, null);
-                rocket3();
-                canvas.drawBitmap(rocket, rocket3X, rocket3Y, null);
-            }
-
 
             if(pauseStutas){
                 canvas.drawBitmap(pause,860,130,null);
@@ -370,149 +423,6 @@ public class FlyingPlaneView extends View{
         }
     }
 
-
-
-    public void gas(){
-        gasX = gasX - gasSpeed;
-
-        if(hitRocketChecker(gasX,gasY))
-        {    winDetect();
-            score = score + 10;
-            gasX = gasX - 500;
-            sound.playRewardSound();
-        }
-        if(gasX < 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            gasX = canvasWidth + startX;
-            gasY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
-
-    public void gas2(){
-        gas2X = gas2X - gasSpeed;
-
-        if(hitRocketChecker(gas2X,gas2Y))
-        {    winDetect();
-            score = score + 10;
-            gas2X = gas2X - 500;
-            sound.playRewardSound();
-        }
-        if(gas2X < 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            gas2X = canvasWidth + startX;
-            gas2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
-
-    public void gas3(){
-        gas3X = gas3X - gasSpeed;
-
-        if(hitRocketChecker(gas3X,gas3Y))
-        {    winDetect();
-            score = score + 10;
-            gas3X = gas3X - 500;
-            sound.playRewardSound();
-        }
-        if(gas3X < 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            gas3X = canvasWidth + startX;
-            gas3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-    }
-
-    public void rocket(){
-        rocketX = rocketX - rocketSpeed;
-        if(hitRocketChecker(rocketX,rocketY))
-        {
-            rocketX = rocketX - 500;
-            lifeCounter --;
-            sound.playHitSound();
-            if(lifeCounter == 0)
-            {
-                SharedPreferences.Editor editor = sp.edit();
-                sound.playOverSound();
-                Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
-                //sp
-                String str_coinNum = Integer.toString(score);
-                editor.putInt("coinNum",score);
-                editor.commit();
-                Log.d("Flysp","though rocket");
-
-                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
-                getContext().startActivity(gameoverIntent);
-            }
-        }
-        if(rocketX< 0)
-        {   startX=(int) Math.floor((Math.random()*2000)+1);
-            rocketX = canvasWidth + startX;
-            rocketY = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-
-    }
-
-
-    public void rocket2(){
-        rocket2X = rocket2X - rocketSpeed;
-        if(hitRocketChecker(rocket2X,rocket2Y))
-        {
-            rocket2X = rocket2X - 500;
-            lifeCounter --;
-            sound.playHitSound();
-            if(lifeCounter == 0)
-            {
-                SharedPreferences.Editor editor = sp.edit();
-                sound.playOverSound();
-                Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
-                //sp
-                String str_coinNum = Integer.toString(score);
-                editor.putInt("coinNum",score);
-                editor.commit();
-                Log.d("Flysp","though rocket");
-
-                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
-                getContext().startActivity(gameoverIntent);
-            }
-        }
-        if(rocket2X< 0)
-        {   startX2=(int) Math.floor((Math.random()*2000)+1);
-            rocket2X = canvasWidth + startX2;
-            rocket2Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-
-    }
-
-
-
-    public void rocket3(){
-        rocket3X = rocket3X - rocketSpeed;
-        if(hitRocketChecker(rocket3X,rocket3Y))
-        {
-            rocket3X = rocket3X - 500;
-            lifeCounter --;
-            sound.playHitSound();
-            if(lifeCounter == 0)
-            {
-                SharedPreferences.Editor editor = sp.edit();
-                sound.playOverSound();
-                Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
-                //sp
-                String str_coinNum = Integer.toString(score);
-                editor.putInt("coinNum",score);
-                editor.commit();
-                Log.d("Flysp","though rocket");
-
-                Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
-                getContext().startActivity(gameoverIntent);
-            }
-        }
-        if(rocket3X< 0)
-        {   startX3=(int) Math.floor((Math.random()*2000)+1);
-            rocket3X = canvasWidth + startX3;
-            rocket3Y = (int) Math.floor((Math.random()*(maxPlaneY - minPlaneY)) + minPlaneY);
-        }
-
-    }
-
     public void bottom(){
 
         if(planeY==maxPlaneY && score>=10 && cLickStutas==false)
@@ -522,8 +432,6 @@ public class FlyingPlaneView extends View{
             sound.playBottomSound();
         }
     }
-
-
 
     public boolean hitRocketChecker(int x, int y)
     {
@@ -551,7 +459,7 @@ public class FlyingPlaneView extends View{
             startTimer();
             pauseChecker(eventX,eventY);
             winDetect();
-            Log.d("speed222","s"+rocketSpeed);
+            Log.d("speed222","s"+speedForRocket);
             Log.d("through", ""+pauseStutas);
         }
 
