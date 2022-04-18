@@ -39,9 +39,7 @@ public class FlyingPlaneView extends View{
 
 
     private int planeX = 50, planeY,planeSpeed;
-    private int gasX,gasY,gasSpeed =18,gas2X,gas2Y,gas2Speed =18,gas3X,gas3Y,gas3Speed =18;
     private int speedForRocket=10;
-    private int startX;
     private int canvasWidth, canvasHeight,score,minPlaneY,maxPlaneY;
     private int lifeCounter = 3;
     public int timerCLickStutas;
@@ -69,8 +67,8 @@ public class FlyingPlaneView extends View{
 
     SharedPreferences sp;
 
-    private Rocket r1=new Rocket(),r2=new Rocket(),r3=new Rocket(),r4=new Rocket();
-    private Gas g1=new Gas(),g2=new Gas(),g3=new Gas(),g4=new Gas();
+    private Rocket r1=new Rocket(),r2=new Rocket(),r3=new Rocket(),r4=new Rocket(),r5=new Rocket(),r6=new Rocket(),r7=new Rocket(),r8=new Rocket(),r9=new Rocket(),r10=new Rocket(),r11=new Rocket();
+    private Gas g1=new Gas(),g2=new Gas(),g3=new Gas(),g4=new Gas(),g5=new Gas(),g6=new Gas(),g7=new Gas(),g8=new Gas(),g9=new Gas(),g10=new Gas(),g11=new Gas();
 
     public class Rocket{
         public int rocketSpeed,rocketX,rocketY,startX;
@@ -225,7 +223,7 @@ public class FlyingPlaneView extends View{
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg5);
         }else if(level<=30){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg6);
-        }else if(level<=35){
+        }else if(level<=100){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg7);
         }
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
@@ -297,6 +295,99 @@ public class FlyingPlaneView extends View{
             //Log.d("startX","startX:"+startX+" "+startX2+" "+startX3);
 
             switch(level){
+                case 100:
+                    g11.fly();
+                    canvas.drawBitmap(resize_gas, g11.gasX, g11.gasY, null);
+                    r11.fly();
+                    canvas.drawBitmap(rocket, r11.rocketX, r11.rocketY, null);
+                case 99:
+                case 98:
+                case 97:
+                case 96:
+                case 95:
+                case 94:
+                case 93:
+                case 92:
+                case 91:
+                case 90:
+                    g10.fly();
+                    canvas.drawBitmap(resize_gas, g10.gasX, g10.gasY, null);
+                    r10.fly();
+                    canvas.drawBitmap(rocket, r10.rocketX, r10.rocketY, null);
+                case 89:
+                case 88:
+                case 87:
+                case 86:
+                case 85:
+                case 84:
+                case 83:
+                case 82:
+                case 81:
+                case 80:
+                    g9.fly();
+                    canvas.drawBitmap(resize_gas, g9.gasX, g9.gasY, null);
+                    r9.fly();
+                    canvas.drawBitmap(rocket, r9.rocketX, r9.rocketY, null);
+                case 79:
+                case 78:
+                case 77:
+                case 76:
+                case 75:
+                case 74:
+                case 73:
+                case 72:
+                case 71:
+                case 70:
+                    g8.fly();
+                    canvas.drawBitmap(resize_gas, g8.gasX, g8.gasY, null);
+                    r8.fly();
+                    canvas.drawBitmap(rocket, r8.rocketX, r8.rocketY, null);
+                case 69:
+                case 68:
+                case 67:
+                case 66:
+                case 65:
+                case 64:
+                case 63:
+                case 62:
+                case 61:
+                case 60:
+                    g7.fly();
+                    canvas.drawBitmap(resize_gas, g7.gasX, g7.gasY, null);
+                    r7.fly();
+                    canvas.drawBitmap(rocket, r7.rocketX, r7.rocketY, null);
+                case 59:
+                case 58:
+                case 57:
+                case 56:
+                case 55:
+                case 54:
+                case 53:
+                case 52:
+                case 51:
+                case 50:
+                    g6.fly();
+                    canvas.drawBitmap(resize_gas, g6.gasX, g6.gasY, null);
+                    r6.fly();
+                    canvas.drawBitmap(rocket, r6.rocketX, r6.rocketY, null);
+                case 49:
+                case 48:
+                case 47:
+                case 46:
+                case 45:
+                case 44:
+                case 43:
+                case 42:
+                case 41:
+                case 40:
+                    g5.fly();
+                    canvas.drawBitmap(resize_gas, g5.gasX, g5.gasY, null);
+                    r5.fly();
+                    canvas.drawBitmap(rocket, r5.rocketX, r5.rocketY, null);
+                case 39:
+                case 38:
+                case 37:
+                case 36:
                 case 35:
                 case 34:
                 case 33:
