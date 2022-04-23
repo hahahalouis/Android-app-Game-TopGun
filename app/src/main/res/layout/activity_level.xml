@@ -701,7 +701,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="61" />
 
@@ -711,7 +711,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="62" />
 
@@ -721,7 +721,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="63" />
 
@@ -731,7 +731,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="64" />
 
@@ -757,7 +757,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="66" />
 
@@ -767,7 +767,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="67" />
 
@@ -777,7 +777,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="68" />
 
@@ -787,7 +787,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="69" />
 
@@ -797,7 +797,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="70" />
             </LinearLayout>
@@ -813,7 +813,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="71" />
 
@@ -823,7 +823,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="72" />
 
@@ -833,7 +833,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="73" />
 
@@ -843,7 +843,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="74" />
 
@@ -981,7 +981,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="86" />
 
@@ -991,7 +991,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="87" />
 
@@ -1001,7 +1001,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="88" />
 
@@ -1011,7 +1011,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="89" />
 
@@ -1021,7 +1021,7 @@
                     android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/level_ic"
-                    android:paddingLeft="28dp"
+                    android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="90" />
             </LinearLayout>
