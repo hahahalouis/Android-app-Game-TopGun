@@ -79,7 +79,7 @@ public class canvasActivity extends AppCompatActivity implements View.OnTouchLis
         clearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     }
 
-    private void setImg(ImageView mImageView) {
+    private void setImg() {
         File fileSaveImage = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
                 "plane_custom.jpg");
         try (FileOutputStream out = new FileOutputStream(fileSaveImage)) {
@@ -124,7 +124,7 @@ public class canvasActivity extends AppCompatActivity implements View.OnTouchLis
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         canvas_iv.setDrawingCacheEnabled(true);
-                        setImg(canvas_iv);
+                        setImg();
                         if(imgSaved!=null){
                             Toast savedToast = Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_LONG);
                             savedToast.show();

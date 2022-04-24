@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class ShopActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -306,6 +310,16 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         coin_num = sp.getInt("oldCoinNum",0);
         totalCoin = coin_num + newCoin;
         shopCoinNum.setText(Integer.toString(totalCoin));
+    }
+
+    public void getimg(){
+        File imgFile = new  File("/document/primary:Android/data/com.example.asm2/files/Pictures/plane_custom.jpg");
+
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+        }
+
     }
 
 

@@ -65,159 +65,131 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="462dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="2dp"
-        android:src="@drawable/shopbg" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/shopbg">
 
-    <ImageButton
-        android:id="@+id/shopPlane1"
-        android:layout_width="120dp"
-        android:layout_height="109dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="21dp"
-        android:background="@drawable/shopplanbg"
-        android:scaleType="fitXY"
-        android:src="@drawable/plane" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shopbg"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="267dp" />
 
-    <TextView
-        android:id="@+id/passView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/shopPlane1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="114dp"
-        android:layout_marginBottom="309dp"
-        android:text="$0"
-        android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$300"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="96dp"
+            tools:layout_editor_absoluteY="597dp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/shopPlane2"
-        android:layout_alignTop="@+id/shopPlane2"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="113dp"
-        android:text="$100"
-        android:textColor="@color/black" />
+        <Button
+            android:id="@+id/shopPlanebtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="65dp"
+            tools:layout_editor_absoluteY="423dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/shopPlane2"
-        android:layout_alignTop="@+id/shopPlane2"
-        android:layout_marginStart="-133dp"
-        android:layout_marginTop="308dp"
-        android:text="$300"
-        android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$420"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="271dp"
+            tools:layout_editor_absoluteY="597dp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/shopPlane2"
-        android:layout_alignTop="@+id/shopPlane2"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="308dp"
-        android:text="$420"
-        android:textColor="@color/black" />
+        <ImageButton
+            android:id="@+id/shopPlane2"
+            android:layout_width="120dp"
+            android:layout_height="109dp"
+            android:background="@drawable/shopplanbg"
+            android:scaleType="fitXY"
+            android:src="@drawable/plane2"
+            tools:layout_editor_absoluteX="228dp"
+            tools:layout_editor_absoluteY="288dp" />
 
-    <ImageButton
-        android:id="@+id/shopPlane2"
-        android:layout_width="120dp"
-        android:layout_height="109dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="21dp"
-        android:background="@drawable/shopplanbg"
-        android:scaleType="fitXY"
-        android:src="@drawable/plane2" />
+        <Button
+            android:id="@+id/shopPlanebtn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="241dp"
+            tools:layout_editor_absoluteY="618dp" />
 
-    <ImageButton
-        android:id="@+id/shopPlane3"
-        android:layout_width="120dp"
-        android:layout_height="109dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="213dp"
-        android:background="@drawable/shopplanbg"
-        android:scaleType="fitXY"
-        android:src="@drawable/plane3" />
+        <Button
+            android:id="@+id/shopPlanebtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="245dp"
+            tools:layout_editor_absoluteY="424dp" />
 
-    <ImageButton
-        android:id="@+id/shopPlane4"
-        android:layout_width="120dp"
-        android:layout_height="109dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="213dp"
-        android:background="@drawable/shopplanbg"
-        android:scaleType="fitXY"
-        android:src="@drawable/plane4" />
+        <ImageButton
+            android:id="@+id/shopPlane1"
+            android:layout_width="120dp"
+            android:layout_height="109dp"
+            android:background="@drawable/shopplanbg"
+            android:scaleType="fitXY"
+            android:src="@drawable/plane"
+            tools:layout_editor_absoluteX="49dp"
+            tools:layout_editor_absoluteY="288dp" />
 
-    <Button
-        android:id="@+id/shopPlanebtn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shopPlane1"
-        android:layout_alignEnd="@+id/shopPlane1"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="16dp"
-        android:text="Button"
-        android:visibility="invisible" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$100"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="281dp"
+            tools:layout_editor_absoluteY="402dp" />
 
-    <Button
-        android:id="@+id/shopPlanebtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignEnd="@+id/shopPlane2"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="15dp"
-        android:text="Button"
-        android:visibility="invisible" />
+        <TextView
+            android:id="@+id/passView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="94dp"
+            tools:layout_editor_absoluteY="402dp" />
 
-    <Button
-        android:id="@+id/shopPlanebtn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignEnd="@+id/shopPlane2"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="192dp"
-        android:text="Button"
-        android:visibility="invisible" />
+        <ImageButton
+            android:id="@+id/shopPlane3"
+            android:layout_width="120dp"
+            android:layout_height="109dp"
+            android:background="@drawable/shopplanbg"
+            android:scaleType="fitXY"
+            android:src="@drawable/plane3"
+            tools:layout_editor_absoluteX="48dp"
+            tools:layout_editor_absoluteY="480dp" />
 
-    <Button
-        android:id="@+id/shopPlanebtn4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignEnd="@+id/shopPlane2"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="19dp"
-        android:text="Button"
-        android:visibility="invisible" />
+        <ImageButton
+            android:id="@+id/shopPlane4"
+            android:layout_width="120dp"
+            android:layout_height="109dp"
+            android:background="@drawable/shopplanbg"
+            android:scaleType="fitXY"
+            android:src="@drawable/plane4"
+            tools:layout_editor_absoluteX="228dp"
+            tools:layout_editor_absoluteY="480dp" />
+
+        <Button
+            android:id="@+id/shopPlanebtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="68dp"
+            tools:layout_editor_absoluteY="618dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>
