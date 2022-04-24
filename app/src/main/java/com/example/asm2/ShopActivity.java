@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView shopCoinNum;
 
-    private View applyPlaneView;
+    private ImageView applyPlaneView;
 
     private Button shopPlanebtn1,shopPlanebtn2,shopPlanebtn3,shopPlanebtn4;
 
@@ -240,7 +243,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void apply3(){
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_3){
-            applyPlaneView.setBackgroundResource(R.drawable.plane3);
+            applyPlaneView.setBackgroundResource(R.drawable.plane4);
             editor.putInt("applyNum",4);
             editor.commit();
             Log.d("buying","test");
@@ -250,9 +253,19 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void apply4(){
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_4){
-            applyPlaneView.setBackgroundResource(R.drawable.plane4);
-            editor.putInt("applyNum",6);
-            editor.commit();
+            File imgFile = new  File("/storage/emulated/0/Android/data/com.example.asm2/files/Pictures/plane_custom.jpg");
+
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                Drawable mDrawable = new BitmapDrawable(getResources(), myBitmap);
+
+
+                applyPlaneView.setBackground(mDrawable);
+
+                editor.putInt("applyNum",6);
+                editor.commit();
+
+
         }
     }
 
@@ -312,15 +325,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopCoinNum.setText(Integer.toString(totalCoin));
     }
 
-    public void getimg(){
-        File imgFile = new  File("/document/primary:Android/data/com.example.asm2/files/Pictures/plane_custom.jpg");
 
-        if(imgFile.exists()){
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-        }
-
-    }
 
 
 }
