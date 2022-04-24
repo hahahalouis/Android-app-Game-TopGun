@@ -273,14 +273,17 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         if(buyStatus_5){
             File imgFile = new  File("/storage/emulated/0/Android/data/com.example.asm2/files/Pictures/plane_custom.jpg");
 
-
+            if(imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 Drawable mDrawable = new BitmapDrawable(getResources(), myBitmap);
 
                 applyPlaneView.setBackground(mDrawable);
-                editor.putInt("applyNum",8);
+                editor.putInt("applyNum", 8);
                 editor.commit();
-
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "you need to say sorry, you have not draw the plane", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
