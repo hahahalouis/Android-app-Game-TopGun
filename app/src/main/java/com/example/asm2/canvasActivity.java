@@ -1,7 +1,9 @@
 package com.example.asm2;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,8 +12,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
@@ -27,8 +31,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.UUID;
 
-public class canvasActivity extends AppCompatActivity implements View.OnTouchListener {
+public class canvasActivity extends AppCompatActivity implements View.OnTouchListener,View.OnClickListener{
 
     ImageView canvas_iv;
     Bitmap bitmap;
@@ -38,6 +44,7 @@ public class canvasActivity extends AppCompatActivity implements View.OnTouchLis
     //    OutputStream outputStream;
     float downx = 0, downy = 0, upx = 0, upy = 0;
     float lastx, lasty;
+    Boolean imgSaved=null;
 
     private static int REQUEST_CODE = 100;
     ImageView bird;
@@ -51,7 +58,7 @@ public class canvasActivity extends AppCompatActivity implements View.OnTouchLis
 
         canvas_iv = findViewById(R.id.canvas_iv);
         canvas_btn = findViewById(R.id.canvas_btn);
-//        canvas_btn.setOnClickListener(this);
+        canvas_btn.setOnClickListener(this);
 
         Display currentDisplay = getWindowManager().getDefaultDisplay();
         float dw = currentDisplay.getWidth();
@@ -72,6 +79,19 @@ public class canvasActivity extends AppCompatActivity implements View.OnTouchLis
         clearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
     }
 
+    private void setImg(ImageView mImageView) {
+        File fileSaveImage = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                "plane_custom.jpg");
+        try (FileOutputStream out = new FileOutputStream(fileSaveImage)) {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imgSaved=true;
+    }
+
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         int action = event.getAction();
@@ -91,7 +111,42 @@ public class canvasActivity extends AppCompatActivity implements View.OnTouchLis
                 lasty = upy;
                 break;
         }
+
         return true;
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.canvas_btn:
+                AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
+                saveDialog.setTitle("Save?");
+                saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        canvas_iv.setDrawingCacheEnabled(true);
+                        setImg(canvas_iv);
+                        if(imgSaved!=null){
+                            Toast savedToast = Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_LONG);
+                            savedToast.show();
+                        }
+                        else {
+                            Toast unSaved = Toast.makeText(getApplicationContext(), "Error, the imgae not saved",Toast.LENGTH_LONG);
+                            unSaved.show();
+                        }
+                        canvas_iv.destroyDrawingCache();
+                    }
+                });
+                saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                saveDialog.show();
+                break;
+
+        }
+
     }
 
 
