@@ -21,7 +21,7 @@ public class StartActivity extends AppCompatActivity {
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally {
-                    Intent prepareIntent = new Intent(StartActivity.this,LevelActivity.class);
+                    Intent prepareIntent = new Intent(StartActivity.this, LevelActivity.class);
                     startActivity(prepareIntent);
                 }
             }
