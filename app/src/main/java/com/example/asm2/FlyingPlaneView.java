@@ -465,15 +465,14 @@ public class FlyingPlaneView extends View{
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
+                    if(pauseStutas){
                     totalTime++;
                     timeText = getTimerText(totalTime);
                     Log.d("timerCancecl"," s: "+ totalTime);
+                    }
                 }
             };
             timer.schedule(timerTask,0,1000);
-        }else if(pauseStutas == false && timerCLickStutas == 0){
-            timer.cancel();
-            Log.d("timerCancel","cancel");
         }
     }
 
