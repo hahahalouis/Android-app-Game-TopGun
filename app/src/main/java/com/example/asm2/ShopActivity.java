@@ -5,28 +5,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class ShopActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton shopBackbtn,shopPlane1,shopPlane2,shopPlane3,shopPlane4;
+    private ImageButton shopBackbtn,shopPlane1,shopPlane2,shopPlane3,shopPlane4,shopPlane5;
 
     private TextView shopCoinNum;
 
-    private View applyPlaneView;
+    private ImageView applyPlaneView;
 
-    private Button shopPlanebtn1,shopPlanebtn2,shopPlanebtn3,shopPlanebtn4;
+    private Button shopPlanebtn1,shopPlanebtn2,shopPlanebtn3,shopPlanebtn4,shopPlanebtn5;
 
-    private boolean buyStatus_1 = true , buyStatus_2 = false, buyStatus_3 = false ,buyStatus_4 = false;
-    private boolean applyStatus_1 = false, applyStatus_2 = false, applyStatus_3 = false, applyStatus_4 = false;
+    private boolean buyStatus_1 = true , buyStatus_2 = false, buyStatus_3 = false ,buyStatus_4 = false,buyStatus_5 = true;
+    private boolean applyStatus_1 = false, applyStatus_2 = false, applyStatus_3 = false, applyStatus_4 = false, applyStatus_5 = false;
 
-    private boolean tooglestutas_1 = true, tooglestutas_2 = true, tooglestutas_3 = true, tooglestutas_4 = true;
+    private boolean tooglestutas_1 = true, tooglestutas_2 = true, tooglestutas_3 = true, tooglestutas_4 = true, tooglestutas_5 = true;
 
     private int coin_num, newCoin,totalCoin;
     public int applyNum;
@@ -93,6 +100,13 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 apply4();
                 break;
+            case R.id.shopPlanebtn5:
+                buyStatus_5 = sp.getBoolean("buyStatus_4",false);
+                if(!buyStatus_5){
+                    buyPlane4();
+                }
+                apply5();
+                break;
         }
     }
 
@@ -107,6 +121,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlanebtn2 = findViewById(R.id.shopPlanebtn2);
         shopPlanebtn3 = findViewById(R.id.shopPlanebtn3);
         shopPlanebtn4 = findViewById(R.id.shopPlanebtn4);
+        shopPlanebtn5 = findViewById(R.id.shopPlanebtn5);
         applyPlaneView = findViewById(R.id.applyPlaneView);
         shopCoinNum = findViewById(R.id.shopCoinNum);
 
@@ -119,6 +134,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         shopPlanebtn2.setOnClickListener(this);
         shopPlanebtn3.setOnClickListener(this);
         shopPlanebtn4.setOnClickListener(this);
+        shopPlanebtn5.setOnClickListener(this);
 
         //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
@@ -242,13 +258,33 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("buying","test");
         }
     }
-
     public void apply4(){
         SharedPreferences.Editor editor = sp.edit();
         if(buyStatus_4){
             applyPlaneView.setBackgroundResource(R.drawable.plane4);
             editor.putInt("applyNum",6);
             editor.commit();
+            Log.d("buying","test");
+        }
+    }
+
+    public void apply5(){
+        SharedPreferences.Editor editor = sp.edit();
+        if(buyStatus_5){
+            File imgFile = new  File("/storage/emulated/0/Android/data/com.example.asm2/files/Pictures/plane_custom.jpg");
+
+            if(imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                Drawable mDrawable = new BitmapDrawable(getResources(), myBitmap);
+
+                applyPlaneView.setBackground(mDrawable);
+                editor.putInt("applyNum", 8);
+                editor.commit();
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "you need to say sorry, you have not draw the plane", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
@@ -307,6 +343,8 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         totalCoin = coin_num + newCoin;
         shopCoinNum.setText(Integer.toString(totalCoin));
     }
+
+
 
 
 }

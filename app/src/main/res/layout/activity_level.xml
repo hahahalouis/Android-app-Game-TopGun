@@ -1155,5 +1155,19 @@
         android:text="Shop"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/tv_custom"
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/level_ic"
+        android:paddingStart="20dp"
+        android:paddingTop="12dp"
+        android:paddingRight="12dp"
+        android:text="Draw"
+        android:textSize="24sp" />
+
 
 </RelativeLayout>

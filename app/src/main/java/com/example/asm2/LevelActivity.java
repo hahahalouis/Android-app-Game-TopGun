@@ -16,7 +16,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             l32,l33,l34,l35,l36,l37,l38,l39,l40,l41,l42,l43,l44,l45,l46,l47,l48,l49,l50,l51,l52,l53,l54,l55,l56,l57,l58,l59,l60,
             l61,l62,l63,l64,l65,l66,l67,l68,l69,l70,l71,l72,l73,l74,l75,l76,l77,l78,l79,l80,l81,l82,l83,l84,l85,l86,l87,l88,l89,
             l90,l91,l92,l93,l94,l95,l96,l97,l98,l99,l100 ;
-    TextView btn_shop;
+    TextView btn_shop,btn_custom;
 
     SharedPreferences sp;
 
@@ -35,6 +35,9 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         switch(view.getId()) {
             case R.id.tv_shop:
                 shopclicked();
+                break;
+            case R.id.tv_custom:
+                goDraw();
                 break;
             case R.id.l1:
             case R.id.l2:
@@ -167,6 +170,11 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         startActivity(gameIntent);
     }
 
+    public void goDraw() {
+        Intent DrawIntent = new Intent(LevelActivity.this, canvasActivity.class);
+        startActivity(DrawIntent);
+    }
+
     public void initObject(){
         l1=findViewById(R.id.l1);
         l2=findViewById(R.id.l2);
@@ -270,7 +278,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         l99=findViewById(R.id.l99);
         l100=findViewById(R.id.l100);
         btn_shop=findViewById(R.id.tv_shop);
-
+        btn_custom=findViewById(R.id.tv_custom);
         l1.setOnClickListener(this);
         l2.setOnClickListener(this);
         l3.setOnClickListener(this);
@@ -372,7 +380,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         l99.setOnClickListener(this);
         l100.setOnClickListener(this);
         btn_shop.setOnClickListener(this);
-
+        btn_custom.setOnClickListener(this);
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
 

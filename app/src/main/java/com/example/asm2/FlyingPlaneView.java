@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -19,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,7 +33,7 @@ public class FlyingPlaneView extends View{
 
     private Bitmap bg,resize_bg,gas,resize_gas, rocket, pause, play;
     private Bitmap life[] = new Bitmap[2];
-    private Bitmap plane[] = new Bitmap[8];
+    private Bitmap plane[] = new Bitmap[10];
 
     private Paint scorePaint = new Paint();
     private Paint clickAlertPaint = new Paint();
@@ -131,6 +134,10 @@ public class FlyingPlaneView extends View{
 
     public FlyingPlaneView(Context context) {
         super(context);
+        File imgFile = new  File("/storage/emulated/0/Android/data/com.example.asm2/files/Pictures/plane_custom.jpg");
+
+
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
         //sound
         sound = new SoundEffect(context);
@@ -143,10 +150,11 @@ public class FlyingPlaneView extends View{
         plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
         plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
-        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3), 200, 200,false);
-        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3_1), 200, 200,false);
-        plane[6] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
-        plane[7] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
+        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
+        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
+
+        plane[8] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
+        plane[9] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
