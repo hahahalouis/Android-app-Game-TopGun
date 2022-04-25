@@ -2,6 +2,7 @@ package com.example.asm2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.UiAutomation;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -20,7 +21,7 @@ public class StartActivity extends AppCompatActivity {
                 }catch(Exception e){
                     e.printStackTrace();
                 }finally {
-                    Intent prepareIntent = new Intent(StartActivity.this, LevelActivity.class);
+                    Intent prepareIntent = new Intent(StartActivity.this,meun.class);
                     startActivity(prepareIntent);
                 }
             }

@@ -21,32 +21,6 @@
             app:srcCompat="@drawable/topgun" />
 
         <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="48dp"
-            android:layout_height="38dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="261dp"
-            android:layout_marginBottom="34dp"
-            app:layout_constraintBottom_toTopOf="@+id/jet1"
-            app:layout_constraintEnd_toStartOf="@+id/shopCoinNum"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/coin" />
-
-        <TextView
-            android:id="@+id/shopCoinNum"
-            android:layout_width="69dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            tools:layout_editor_absoluteY="11dp" />
-
-        <ImageView
             android:id="@+id/jet1"
             android:layout_width="340dp"
             android:layout_height="226dp"
@@ -79,26 +53,38 @@
         <Button
             android:id="@+id/on1"
             android:layout_width="198dp"
-            android:layout_height="44dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="107dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="136dp"
             android:text="PLAY"
-            tools:layout_editor_absoluteX="107dp"
-            tools:layout_editor_absoluteY="551dp" />
-
-        <Button
-            android:id="@+id/tv_shop"
-            android:layout_width="202dp"
-            android:layout_height="40dp"
-            android:text="SHOP"
-            tools:layout_editor_absoluteX="104dp"
-            tools:layout_editor_absoluteY="651dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/on2"
-            android:layout_width="201dp"
-            android:layout_height="41dp"
+            android:layout_width="198dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="107dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="81dp"
             android:text="LEVELS"
-            tools:layout_editor_absoluteX="106dp"
-            tools:layout_editor_absoluteY="602dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/tv1_shop"
+            android:layout_width="198dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="107dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="32dp"
+            android:text="SHOP"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
