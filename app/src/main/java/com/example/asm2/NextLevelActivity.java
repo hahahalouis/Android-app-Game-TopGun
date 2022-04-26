@@ -82,7 +82,7 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.btn_menu2:
-                Intent MenuIntent = new Intent(getApplicationContext(), LevelActivity.class);
+                Intent MenuIntent = new Intent(getApplicationContext(), MenuActivity.class);
                 startActivity(MenuIntent);
                 break;
         }
