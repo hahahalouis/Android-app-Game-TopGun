@@ -116,6 +116,7 @@ public class canvasActivity extends AppCompatActivity{
                     unSaved.show();
                 }
                 signatureView.destroyDrawingCache();
+                Toast.makeText(getApplicationContext(),"Saved, go to shop and apply it !",Toast.LENGTH_SHORT).show();
             }
         });
         saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -154,32 +155,5 @@ public class canvasActivity extends AppCompatActivity{
         });
         ambilWarnaDialog.show();
     }
-
-
-//    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//        int action = event.getAction();
-//        switch (action) {
-//            case MotionEvent.ACTION_DOWN:
-//                downx = event.getX();
-//                downy = event.getY();
-//                lastx = downx;
-//                lasty = downy;
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                upx = event.getX();
-//                upy = event.getY();
-//                canvas.drawLine(lastx, lasty,upx,upy, cpaint);
-//                canvas_iv.invalidate();
-//                lastx = upx;
-//                lasty = upy;
-//                break;
-//        }
-//
-//        return true;
-//    }
-
-
-
 
 }

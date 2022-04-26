@@ -2,14 +2,13 @@ package com.example.asm2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Ui extends AppCompatActivity implements View.OnClickListener {
+public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button on1, on2,btn_shop;
 
     SharedPreferences sp;
@@ -17,7 +16,8 @@ public class Ui extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ui);
+        setContentView(R.layout.activity_menu);
+
         on1 = findViewById(R.id.on1);
         on2 = findViewById(R.id.on2);
         btn_shop = findViewById(R.id.tv1_shop);
@@ -25,9 +25,7 @@ public class Ui extends AppCompatActivity implements View.OnClickListener {
         on1.setOnClickListener(this);
         on2.setOnClickListener(this);
         btn_shop.setOnClickListener(this);
-
     }
-
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -48,12 +46,3 @@ public class Ui extends AppCompatActivity implements View.OnClickListener {
         }
     }
 }
-
-
-
-
-
-
-
-
-
