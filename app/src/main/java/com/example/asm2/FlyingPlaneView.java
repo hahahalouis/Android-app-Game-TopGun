@@ -206,7 +206,7 @@ public class FlyingPlaneView extends View{
 
         //GetSap
         applyNum = sp.getInt("applyNum",0);
-        level = sp.getInt("levelNum",1);
+        level = sp.getInt("levelNum",0);
 
         levlNum = Integer.toString(level);
 

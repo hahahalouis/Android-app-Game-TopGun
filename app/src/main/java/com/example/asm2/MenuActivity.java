@@ -12,7 +12,7 @@ import android.widget.Button;
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button on1, on2,btn_shop,langbtn;
 
-    int lang_num = 0,level;
+    int lang_num,level;
 
     SharedPreferences sp;
 

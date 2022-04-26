@@ -12,6 +12,7 @@ import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private FlyingPlaneView gameView;
@@ -22,10 +23,12 @@ public class MainActivity extends AppCompatActivity {
     Timer timer2;
     TimerTask timerTask;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameView = new FlyingPlaneView(this);
+
 
         try {
             Intent levelIntent = getIntent();
@@ -50,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 
 //    public void startTimer(){
 //       Timer timer = new Timer();

@@ -16,9 +16,10 @@ import android.widget.TextView;
 public class NextLevelActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_again, btn_next, btn_menu2;
     ImageView star1, star2, star3;
-    TextView getScore;
+    TextView getScore,passView,textView;
     Integer level_next, star;
     SharedPreferences sp;
+    int lang_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,8 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
         btn_again.setOnClickListener(this);
         btn_menu2.setOnClickListener(this);
         getScore = findViewById(R.id.getScore);
+        passView = findViewById(R.id.passView);
+        textView = findViewById(R.id.textView);
 
         sp = getApplicationContext().getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
         int score2 = sp.getInt("coinNum", 0);
@@ -56,6 +59,28 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
             star1.setImageResource(R.drawable.star);
             star2.setImageResource(R.drawable.star);
             star3.setImageResource(R.drawable.star);
+        }
+
+        sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
+
+        changeLang();
+    }
+
+    public void changeLang(){
+        lang_num = sp.getInt("lang_num",0);
+        if(lang_num == 0){
+            btn_again.setText("Play again");
+            btn_next.setText("Next LEVEL");
+            btn_menu2.setText("MAIN MENU");
+            passView.setText("You have passed the level!!!");
+            textView.setText("Score");
+
+        }else{
+            btn_again.setText("再玩一次");
+            btn_next.setText("下一關");
+            btn_menu2.setText("回主頁");
+            passView.setText("你成功過關啦！！！");
+            textView.setText("分數");
         }
     }
 

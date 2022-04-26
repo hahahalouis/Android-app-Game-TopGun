@@ -16,6 +16,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     TextView btn_shop,btn_custom;
 
+    int lang_num;
+
     TextView[] levelsView=new TextView[101];
 
     int[] tv_ids={-1,R.id.l1,R.id.l2,R.id.l3,R.id.l4,R.id.l5,R.id.l6,R.id.l7,R.id.l8,R.id.l9,R.id.l10,R.id.l11,R.id.l12,R.id.l13,R.id.l14,R.id.l15,R.id.l16,R.id.l17,R.id.l18,R.id.l19,R.id.l20,R.id.l21,R.id.l22,R.id.l23,R.id.l24,R.id.l25,
@@ -217,5 +219,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             levelsView[i].setOnClickListener(this);
         }
 
+        changeLang();
+    }
+
+    public void changeLang(){
+        lang_num = sp.getInt("lang_num",0);
+        if(lang_num == 0){
+            btn_custom.setText("Draw");
+            btn_shop.setText("Shop");
+        }else{
+            btn_custom.setText("繪畫");
+            btn_shop.setText("商店");
+        }
     }
 }

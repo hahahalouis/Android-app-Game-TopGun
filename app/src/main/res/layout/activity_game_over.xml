@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-black"
-        android:text="Score:"
+        android:text="Score"
         android:textColor="#673AB7"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
