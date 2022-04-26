@@ -101,7 +101,9 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 apply4();
                 break;
             case R.id.shopPlanebtn5:
-                buyStatus_5 = sp.getBoolean("buyStatus_4",false);
+                if(!buyStatus_5){
+                    buyPlane4();
+                }
                 apply5();
                 break;
         }
