@@ -228,17 +228,17 @@ public class FlyingPlaneView extends View{
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
 
-        if(level<=5){
+        if(level<=10){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg);
-        }else if(level<=10){
-            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
-        }else if(level<=15){
-            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingame9);
         }else if(level<=20){
-            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
-        }else if(level<=25){
-            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg5);
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
         }else if(level<=30){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingame9);
+        }else if(level<=40){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
+        }else if(level<=60){
+            bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg5);
+        }else if(level<=80){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg6);
         }else if(level<=100){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg7);
@@ -544,6 +544,7 @@ public class FlyingPlaneView extends View{
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
             editor.putInt("coinNum",score);
+            editor.putInt("unlockLevel",level+1);
             editor.commit();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
