@@ -12,7 +12,7 @@ import android.widget.Button;
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button on1, on2,btn_shop,langbtn;
 
-    int lang_num = 0;
+    int lang_num = 0,level;
 
     SharedPreferences sp;
 
@@ -32,8 +32,14 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         langbtn.setOnClickListener(this);
 
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-
+        level = sp.getInt("levelNum",0);
         changeLang();
+
+        if(level == 0 ){
+            on1.setEnabled(false);
+        }else{
+            on1.setEnabled(true);
+        }
     }
 
     public void onClick(View v) {

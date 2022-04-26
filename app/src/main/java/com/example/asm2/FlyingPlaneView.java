@@ -49,7 +49,7 @@ public class FlyingPlaneView extends View{
     private int lifeCounter = 3;
     public int timerCLickStutas;
     private boolean cLickStutas=false;
-    private int applyNum, level, targetScor;
+    private int applyNum = 0, level, targetScor;
     private int gamelevel=1;
 
     public int totalTime = 0;
@@ -158,8 +158,12 @@ public class FlyingPlaneView extends View{
         plane[6] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
         plane[7] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
 
-        plane[8] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
-        plane[9] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
+        try {
+            plane[8] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
+            plane[9] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
+        }catch (Exception e){
+
+        }
         resize_gas = Bitmap.createScaledBitmap(gas, 100, 100 ,false);
         life[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 80, 80 ,false);
         life[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.greyheart), 80, 80 ,false);
@@ -202,7 +206,7 @@ public class FlyingPlaneView extends View{
 
         //GetSap
         applyNum = sp.getInt("applyNum",0);
-        level = sp.getInt("levelNum",0);
+        level = sp.getInt("levelNum",1);
 
         levlNum = Integer.toString(level);
 

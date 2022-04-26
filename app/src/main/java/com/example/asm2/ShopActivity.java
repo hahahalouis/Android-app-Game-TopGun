@@ -36,7 +36,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private boolean tooglestutas_1 = true, tooglestutas_2 = true, tooglestutas_3 = true, tooglestutas_4 = true, tooglestutas_5 = true;
 
     private int coin_num, newCoin,totalCoin;
-    public int applyNum;
+    public int applyNum = 0;
 
     SharedPreferences sp;
 
