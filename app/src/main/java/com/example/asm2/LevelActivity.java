@@ -12,13 +12,15 @@ import android.widget.TextView;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,l26,l27,l28,l29,l30,l31,
-            l32,l33,l34,l35,l36,l37,l38,l39,l40,l41,l42,l43,l44,l45,l46,l47,l48,l49,l50,l51,l52,l53,l54,l55,l56,l57,l58,l59,l60,
-            l61,l62,l63,l64,l65,l66,l67,l68,l69,l70,l71,l72,l73,l74,l75,l76,l77,l78,l79,l80,l81,l82,l83,l84,l85,l86,l87,l88,l89,
-            l90,l91,l92,l93,l94,l95,l96,l97,l98,l99,l100;
+
     TextView btn_shop,btn_custom;
 
     TextView[] levelsView=new TextView[101];
+
+    int[] tv_ids={-1,R.id.l1,R.id.l2,R.id.l3,R.id.l4,R.id.l5,R.id.l6,R.id.l7,R.id.l8,R.id.l9,R.id.l10,R.id.l11,R.id.l12,R.id.l13,R.id.l14,R.id.l15,R.id.l16,R.id.l17,R.id.l18,R.id.l19,R.id.l20,R.id.l21,R.id.l22,R.id.l23,R.id.l24,R.id.l25,
+            R.id.l26,R.id.l27,R.id.l28,R.id.l29,R.id.l30,R.id.l31,R.id.l32,R.id.l33,R.id.l34,R.id.l35,R.id.l36,R.id.l37,R.id.l38,R.id.l39,R.id.l40,R.id.l41,R.id.l42,R.id.l43,R.id.l44,R.id.l45,R.id.l46,R.id.l47,R.id.l48,R.id.l49,R.id.l50,
+            R.id.l51,R.id.l52,R.id.l53,R.id.l54,R.id.l55,R.id.l56,R.id.l57,R.id.l58,R.id.l59,R.id.l60,R.id.l61,R.id.l62,R.id.l63,R.id.l64,R.id.l65,R.id.l66,R.id.l67,R.id.l68,R.id.l69,R.id.l70,R.id.l71,R.id.l72,R.id.l73,R.id.l74,R.id.l75,
+            R.id.l76,R.id.l77,R.id.l78,R.id.l79,R.id.l80,R.id.l81,R.id.l82,R.id.l83,R.id.l84,R.id.l85,R.id.l86,R.id.l87,R.id.l88,R.id.l89,R.id.l90,R.id.l91,R.id.l92,R.id.l93,R.id.l94,R.id.l95,R.id.l96,R.id.l97,R.id.l98,R.id.l99,R.id.l100};
 
     SharedPreferences sp;
 
@@ -182,107 +184,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public void initObject(){
         levelsView[0]=null;
-        levelsView[1]=findViewById(R.id.l1);
-        levelsView[2]=findViewById(R.id.l2);
-        levelsView[3]=findViewById(R.id.l3);
-        levelsView[4]=findViewById(R.id.l4);
-        levelsView[5]=findViewById(R.id.l5);
-        levelsView[6]=findViewById(R.id.l6);
-        levelsView[7]=findViewById(R.id.l7);
-        levelsView[8]=findViewById(R.id.l8);
-        levelsView[9]=findViewById(R.id.l9);
-        levelsView[10]=findViewById(R.id.l10);
-        levelsView[11]=findViewById(R.id.l11);
-        levelsView[12]=findViewById(R.id.l12);
-        levelsView[13]=findViewById(R.id.l13);
-        levelsView[14]=findViewById(R.id.l14);
-        levelsView[15]=findViewById(R.id.l15);
-        levelsView[16]=findViewById(R.id.l16);
-        levelsView[17]=findViewById(R.id.l17);
-        levelsView[18]=findViewById(R.id.l18);
-        levelsView[19]=findViewById(R.id.l19);
-        levelsView[20]=findViewById(R.id.l20);
-        levelsView[21]=findViewById(R.id.l21);
-        levelsView[22]=findViewById(R.id.l22);
-        levelsView[23]=findViewById(R.id.l23);
-        levelsView[24]=findViewById(R.id.l24);
-        levelsView[25]=findViewById(R.id.l25);
-        levelsView[26]=findViewById(R.id.l26);
-        levelsView[27]=findViewById(R.id.l27);
-        levelsView[28]=findViewById(R.id.l28);
-        levelsView[29]=findViewById(R.id.l29);
-        levelsView[30]=findViewById(R.id.l30);
-        levelsView[31]=findViewById(R.id.l31);
-        levelsView[32]=findViewById(R.id.l32);
-        levelsView[33]=findViewById(R.id.l33);
-        levelsView[34]=findViewById(R.id.l34);
-        levelsView[35]=findViewById(R.id.l35);
-        levelsView[36]=findViewById(R.id.l36);
-        levelsView[37]=findViewById(R.id.l37);
-        levelsView[38]=findViewById(R.id.l38);
-        levelsView[39]=findViewById(R.id.l39);
-        levelsView[40]=findViewById(R.id.l40);
-        levelsView[41]=findViewById(R.id.l41);
-        levelsView[42]=findViewById(R.id.l42);
-        levelsView[43]=findViewById(R.id.l43);
-        levelsView[44]=findViewById(R.id.l44);
-        levelsView[45]=findViewById(R.id.l45);
-        levelsView[46]=findViewById(R.id.l46);
-        levelsView[47]=findViewById(R.id.l47);
-        levelsView[48]=findViewById(R.id.l48);
-        levelsView[49]=findViewById(R.id.l49);
-        levelsView[50]=findViewById(R.id.l50);
-        levelsView[51]=findViewById(R.id.l51);
-        levelsView[52]=findViewById(R.id.l52);
-        levelsView[53]=findViewById(R.id.l53);
-        levelsView[54]=findViewById(R.id.l54);
-        levelsView[55]=findViewById(R.id.l55);
-        levelsView[56]=findViewById(R.id.l56);
-        levelsView[57]=findViewById(R.id.l57);
-        levelsView[58]=findViewById(R.id.l58);
-        levelsView[59]=findViewById(R.id.l59);
-        levelsView[60]=findViewById(R.id.l60);
-        levelsView[61]=findViewById(R.id.l61);
-        levelsView[62]=findViewById(R.id.l62);
-        levelsView[63]=findViewById(R.id.l63);
-        levelsView[64]=findViewById(R.id.l64);
-        levelsView[65]=findViewById(R.id.l65);
-        levelsView[66]=findViewById(R.id.l66);
-        levelsView[67]=findViewById(R.id.l67);
-        levelsView[68]=findViewById(R.id.l68);
-        levelsView[69]=findViewById(R.id.l69);
-        levelsView[70]=findViewById(R.id.l70);
-        levelsView[71]=findViewById(R.id.l71);
-        levelsView[72]=findViewById(R.id.l72);
-        levelsView[73]=findViewById(R.id.l73);
-        levelsView[74]=findViewById(R.id.l74);
-        levelsView[75]=findViewById(R.id.l75);
-        levelsView[76]=findViewById(R.id.l76);
-        levelsView[77]=findViewById(R.id.l77);
-        levelsView[78]=findViewById(R.id.l78);
-        levelsView[79]=findViewById(R.id.l79);
-        levelsView[80]=findViewById(R.id.l80);
-        levelsView[81]=findViewById(R.id.l81);
-        levelsView[82]=findViewById(R.id.l82);
-        levelsView[83]=findViewById(R.id.l83);
-        levelsView[84]=findViewById(R.id.l84);
-        levelsView[85]=findViewById(R.id.l85);
-        levelsView[86]=findViewById(R.id.l86);
-        levelsView[87]=findViewById(R.id.l87);
-        levelsView[88]=findViewById(R.id.l88);
-        levelsView[88]=findViewById(R.id.l88);
-        levelsView[89]=findViewById(R.id.l89);
-        levelsView[90]=findViewById(R.id.l90);
-        levelsView[91]=findViewById(R.id.l91);
-        levelsView[92]=findViewById(R.id.l92);
-        levelsView[93]=findViewById(R.id.l93);
-        levelsView[94]=findViewById(R.id.l94);
-        levelsView[95]=findViewById(R.id.l95);
-        levelsView[96]=findViewById(R.id.l96);
-        levelsView[97]=findViewById(R.id.l97);
-        levelsView[98]=findViewById(R.id.l98);
-        levelsView[99]=findViewById(R.id.l99);
-        levelsView[100]=findViewById(R.id.l100);
+
+        for(int i=1;i<=100;i++){
+            levelsView[i]=findViewById(tv_ids[i]);
+        }
 
         btn_shop=findViewById(R.id.tv_shop);
         btn_custom=findViewById(R.id.tv_custom);
