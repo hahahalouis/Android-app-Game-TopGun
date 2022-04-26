@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    TextView btn_shop,btn_custom;
+    TextView btn_shop,btn_custom,tv_infinite;
 
     int lang_num;
 
@@ -50,6 +50,9 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_back:
                 goBack();
+                break;
+            case R.id.tv_infinite:
+                goInfinite();
                 break;
             case R.id.l1:
             case R.id.l2:
@@ -174,11 +177,21 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public void goLevel(Integer level) {
         //setting speed
-
         Double flying_speed_acc=level*0.7; // 1lv+ 0.7 speed
         //put the values
         Intent gameIntent = new Intent(LevelActivity.this,MainActivity.class);
         gameIntent.putExtra("Speed",flying_speed_acc);
+        startActivity(gameIntent);
+    }
+
+    public void goInfinite(){
+        Intent gameIntent = new Intent(LevelActivity.this,MainActivity.class);
+        gameIntent.putExtra("Speed",1);
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("levelNum",0);
+        editor.commit();
+
         startActivity(gameIntent);
     }
 
@@ -199,6 +212,9 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         for(int i=1;i<=100;i++){
             levelsView[i]=findViewById(tv_ids[i]);
         }
+
+        tv_infinite=findViewById(R.id.tv_infinite);
+        tv_infinite.setOnClickListener(this);
 
         btn_shop=findViewById(R.id.tv_shop);
         btn_custom=findViewById(R.id.tv_custom);

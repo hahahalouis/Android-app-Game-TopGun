@@ -50,7 +50,6 @@ public class FlyingPlaneView extends View{
     public int timerCLickStutas;
     private boolean cLickStutas=false;
     private int applyNum = 0, level, targetScor;
-    private int gamelevel=1;
 
     public int totalTime = 0;
 

@@ -483,6 +483,7 @@
                     android:paddingLeft="24dp"
                     android:paddingTop="8dp"
                     android:text="40" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -1180,6 +1181,19 @@
         android:paddingTop="12dp"
         android:text="Shop"
         android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_infinite"
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="147dp"
+        android:background="@drawable/level_ic"
+        android:paddingStart="10dp"
+        android:paddingTop="12dp"
+        android:text="Infinite"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_custom"
