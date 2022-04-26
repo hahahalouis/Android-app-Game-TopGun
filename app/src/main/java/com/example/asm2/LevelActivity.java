@@ -18,6 +18,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             l90,l91,l92,l93,l94,l95,l96,l97,l98,l99,l100 ;
     TextView btn_shop,btn_custom;
 
+    int lang_num;
+
     SharedPreferences sp;
 
     public int level_Num;
@@ -174,6 +176,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     public void goDraw() {
         Intent DrawIntent = new Intent(LevelActivity.this, canvasActivity.class);
         startActivity(DrawIntent);
+    }
+
+    public void changeLang(){
+        lang_num = sp.getInt("lang_num",0);
+        if(lang_num == 0){
+            btn_shop.setText("Shop");
+            btn_custom.setText("Draw");
+        }else{
+            btn_shop.setText("商店");
+            btn_custom.setText("繪畫");
+        }
     }
 
     public void initObject(){
@@ -385,5 +398,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
 
+
+        changeLang();
     }
 }

@@ -71,6 +71,7 @@ public class FlyingPlaneView extends View{
     private double flying_speed_acc;
 
     SharedPreferences sp;
+    int lang_num;
 
     private Rocket r1=new Rocket(),r2=new Rocket(),r3=new Rocket(),r4=new Rocket(),r5=new Rocket(),r6=new Rocket(),r7=new Rocket(),r8=new Rocket(),r9=new Rocket(),r10=new Rocket(),r11=new Rocket();
     private Gas g1=new Gas(),g2=new Gas(),g3=new Gas(),g4=new Gas(),g5=new Gas(),g6=new Gas(),g7=new Gas(),g8=new Gas(),g9=new Gas(),g10=new Gas(),g11=new Gas();
@@ -462,7 +463,27 @@ public class FlyingPlaneView extends View{
         }else{
             canvas.drawBitmap(play,890,150,null);
         }
+        if(timerCLickStutas == 0){
+            changeLang();
+        }
+
     }
+
+    public void changeLang(){
+        lang_num = sp.getInt("lang_num",0);
+        if(lang_num == 0){
+            clickAlert = "Tap to start";
+            clickTagAlert = "Score ";
+            str_level = "Level ";
+        }else{
+            clickAlert = "點擊屏幕";
+            clickTagAlert = "分數 ";
+            str_level = "關卡 ";
+        }
+    }
+
+
+
     public void startTimer(){
         Timer timer = new Timer();
         if(timerCLickStutas == 1 && pauseStutas){
