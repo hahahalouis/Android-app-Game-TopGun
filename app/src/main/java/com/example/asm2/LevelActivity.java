@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +27,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public Integer level_Num;
     Integer player_max_levels=1;
+    ImageButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,9 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.tv_custom:
                 goDraw();
+                break;
+            case R.id.btn_back:
+                goBack();
                 break;
             case R.id.l1:
             case R.id.l2:
@@ -180,6 +185,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         startActivity(DrawIntent);
     }
 
+    public void goBack(){
+        Intent MenuIntent = new Intent(LevelActivity.this,MenuActivity.class);
+        startActivity(MenuIntent);
+    }
 
 
     public void initObject(){
@@ -191,9 +200,11 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         btn_shop=findViewById(R.id.tv_shop);
         btn_custom=findViewById(R.id.tv_custom);
+        btn_back=findViewById(R.id.btn_back);
 
         btn_shop.setOnClickListener(this);
         btn_custom.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
