@@ -11,17 +11,33 @@
         android:layout_height="match_parent"
         android:background="@drawable/shopbg1">
 
-
-
-        <com.kyanogen.signatureview.SignatureView xmlns:sign="http://schemas.android.com/apk/res-auto"
+        <com.kyanogen.signatureview.SignatureView
             android:id="@+id/signature_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/optionsHolder"
-            sign:backgroundColor="@android:color/transparent"
-            sign:enableSignature="true"
-            sign:penColor="#000000"
-            sign:penSize="5dp" />
+            android:layout_marginBottom="1dp"
+            app:backgroundColor="@android:color/transparent"
+            app:enableSignature="true"
+            app:penColor="#000000"
+            app:penSize="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/canvas_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_arrow_back_ios_24"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+                tools:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/optionsHolder"

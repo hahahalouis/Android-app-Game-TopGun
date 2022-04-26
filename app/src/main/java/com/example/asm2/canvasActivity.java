@@ -34,7 +34,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 public class canvasActivity extends AppCompatActivity{
 
     SignatureView signatureView;
-    ImageView imgEraser , imgColor, imgSave;
+    ImageView imgEraser , imgColor, imgSave,canvas_back;
     SeekBar seekBar;
     TextView txtPenSize;
     int defaultColor;
@@ -54,6 +54,7 @@ public class canvasActivity extends AppCompatActivity{
         imgColor = findViewById(R.id.btnColor);
         imgEraser = findViewById(R.id.btnEraser);
         imgSave = findViewById(R.id.btnSave);
+        canvas_back = findViewById(R.id.canvas_back);
 
         defaultColor = ContextCompat.getColor(canvasActivity.this,R.color.black);
 
@@ -96,6 +97,14 @@ public class canvasActivity extends AppCompatActivity{
                 if(!signatureView.isBitmapEmpty()){
                     saveimg();
                 }
+            }
+        });
+
+        canvas_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backIntent = new Intent(canvasActivity.this, MenuActivity.class);
+                startActivity(backIntent);
             }
         });
     }
