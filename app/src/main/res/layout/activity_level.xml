@@ -7,6 +7,14 @@
     android:background="@drawable/ingamebg"
     tools:context=".LevelActivity">
 
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_baseline_arrow_back_ios_24"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+        tools:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="625dp"
@@ -19,14 +27,6 @@
             android:layout_margin="10dp"
             android:layout_marginTop="15dp"
             android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_arrow_back_ios_24"
-                app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
-                tools:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
             <LinearLayout
                 android:layout_width="match_parent"
