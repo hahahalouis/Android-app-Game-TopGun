@@ -18,6 +18,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             l90,l91,l92,l93,l94,l95,l96,l97,l98,l99,l100;
     TextView btn_shop,btn_custom;
 
+    int lang_num;
+
     TextView[] levelsView=new TextView[101];
 
     SharedPreferences sp;
@@ -395,5 +397,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             levelsView[i].setBackgroundResource(R.drawable.level_locked_ic);
         }
 
+        changeLang();
+    }
+
+    public void changeLang(){
+        lang_num = sp.getInt("lang_num",0);
+        if(lang_num == 0){
+            btn_custom.setText("Draw");
+            btn_shop.setText("Shop");
+        }else{
+            btn_custom.setText("繪畫");
+            btn_shop.setText("商店");
+        }
     }
 }

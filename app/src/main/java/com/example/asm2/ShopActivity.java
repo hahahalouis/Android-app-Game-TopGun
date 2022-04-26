@@ -37,6 +37,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     private int coin_num, newCoin,totalCoin;
     public int applyNum = 0;
+    int lang_num;
 
     SharedPreferences sp;
 
@@ -138,18 +139,37 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         //SP
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
         newCoin = sp.getInt("coinNum",0);
+        lang_num = sp.getInt("lang_num",0);
 
         setCoinNum();
+        changeLang();
     }
+
+    public void changeLang(){
+        if(lang_num == 0){
+            shopPlanebtn5.setText("Apply Customized Plane");
+        }else{
+            shopPlanebtn5.setText("應用你的飛機");
+        }
+    }
+
 
     public void stuffStatus_2(Boolean buyStatus, Boolean applyStatus, Button btn){
         SharedPreferences.Editor editor = sp.edit();
         boolean  buyStatus_2_old = sp.getBoolean("buyStatus_2",false);
 
         if(buyStatus || buyStatus_2_old == true){
-            btn.setText("Apply");
+            if(lang_num == 0){
+                btn.setText("Apply");
+            }else{
+                btn.setText("應用");
+            }
         }else{
-            btn.setText("Buy");
+            if(lang_num == 0){
+                btn.setText("Buy");
+            }else{
+                btn.setText("購買");
+            }
         }
         btn.setVisibility(View.VISIBLE);
     }
@@ -158,9 +178,17 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         boolean  buyStatus_3_old = sp.getBoolean("buyStatus_3",false);
 
         if(buyStatus || buyStatus_3_old == true){
-            btn.setText("Apply");
+            if(lang_num == 0){
+                btn.setText("Apply");
+            }else{
+                btn.setText("應用");
+            }
         }else{
-            btn.setText("Buy");
+            if(lang_num == 0){
+                btn.setText("Buy");
+            }else{
+                btn.setText("購買");
+            }
         }
         btn.setVisibility(View.VISIBLE);
     }
@@ -169,9 +197,17 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         boolean  buyStatus_4_old = sp.getBoolean("buyStatus_4",false);
 
         if(buyStatus || buyStatus_4_old == true){
-            btn.setText("Apply");
+            if(lang_num == 0){
+                btn.setText("Apply");
+            }else{
+                btn.setText("應用");
+            }
         }else{
-            btn.setText("Buy");
+            if(lang_num == 0){
+                btn.setText("Buy");
+            }else{
+                btn.setText("購買");
+            }
         }
         btn.setVisibility(View.VISIBLE);
     }
@@ -190,7 +226,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("b2",""+buyStatus_2);
 
         }else{
-            Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            if(lang_num == 0){
+                Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"金幣不足", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
     public void buyPlane3(){
@@ -208,7 +249,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("buyplane3","pass and buy");
 
         }else{
-            Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            if(lang_num == 0){
+                Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"金幣不足", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
     public void buyPlane4(){
@@ -225,8 +271,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("b2",""+buyStatus_4);
 
         }else{
-            Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
-            Log.d("b2",""+buyStatus_4);
+            if(lang_num == 0){
+                Toast.makeText(getApplicationContext(),"Not enought menoy", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"金幣不足", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
@@ -236,7 +286,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             applyPlaneView.setBackgroundResource(R.drawable.plane);
             editor.putInt("applyNum",0);
             editor.commit();
-            Toast.makeText(getApplicationContext(), "SP sf", Toast.LENGTH_SHORT).show();
         }
     }
 
