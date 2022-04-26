@@ -23,6 +23,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sp;
 
     public Integer level_Num;
+    Integer player_max_levels=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -282,117 +283,22 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         levelsView[98]=findViewById(R.id.l98);
         levelsView[99]=findViewById(R.id.l99);
         levelsView[100]=findViewById(R.id.l100);
+
         btn_shop=findViewById(R.id.tv_shop);
         btn_custom=findViewById(R.id.tv_custom);
 
-        levelsView[1].setOnClickListener(this);
-        levelsView[2].setOnClickListener(this);
-        levelsView[3].setOnClickListener(this);
-        levelsView[4].setOnClickListener(this);
-        levelsView[5].setOnClickListener(this);
-        levelsView[6].setOnClickListener(this);
-        levelsView[7].setOnClickListener(this);
-        levelsView[8].setOnClickListener(this);
-        levelsView[9].setOnClickListener(this);
-        levelsView[10].setOnClickListener(this);
-        levelsView[11].setOnClickListener(this);
-        levelsView[12].setOnClickListener(this);
-        levelsView[13].setOnClickListener(this);
-        levelsView[14].setOnClickListener(this);
-        levelsView[15].setOnClickListener(this);
-        levelsView[16].setOnClickListener(this);
-        levelsView[17].setOnClickListener(this);
-        levelsView[18].setOnClickListener(this);
-        levelsView[19].setOnClickListener(this);
-        levelsView[20].setOnClickListener(this);
-        levelsView[21].setOnClickListener(this);
-        levelsView[22].setOnClickListener(this);
-        levelsView[23].setOnClickListener(this);
-        levelsView[24].setOnClickListener(this);
-        levelsView[25].setOnClickListener(this);
-        levelsView[26].setOnClickListener(this);
-        levelsView[27].setOnClickListener(this);
-        levelsView[28].setOnClickListener(this);
-        levelsView[29].setOnClickListener(this);
-        levelsView[30].setOnClickListener(this);
-        levelsView[31].setOnClickListener(this);
-        levelsView[32].setOnClickListener(this);
-        levelsView[33].setOnClickListener(this);
-        levelsView[34].setOnClickListener(this);
-        levelsView[35].setOnClickListener(this);
-        levelsView[36].setOnClickListener(this);
-        levelsView[37].setOnClickListener(this);
-        levelsView[38].setOnClickListener(this);
-        levelsView[39].setOnClickListener(this);
-        levelsView[40].setOnClickListener(this);
-        levelsView[41].setOnClickListener(this);
-        levelsView[42].setOnClickListener(this);
-        levelsView[43].setOnClickListener(this);
-        levelsView[44].setOnClickListener(this);
-        levelsView[45].setOnClickListener(this);
-        levelsView[46].setOnClickListener(this);
-        levelsView[47].setOnClickListener(this);
-        levelsView[48].setOnClickListener(this);
-        levelsView[49].setOnClickListener(this);
-        levelsView[50].setOnClickListener(this);
-        levelsView[51].setOnClickListener(this);
-        levelsView[52].setOnClickListener(this);
-        levelsView[53].setOnClickListener(this);
-        levelsView[54].setOnClickListener(this);
-        levelsView[55].setOnClickListener(this);
-        levelsView[56].setOnClickListener(this);
-        levelsView[57].setOnClickListener(this);
-        levelsView[58].setOnClickListener(this);
-        levelsView[59].setOnClickListener(this);
-        levelsView[60].setOnClickListener(this);
-        levelsView[61].setOnClickListener(this);
-        levelsView[62].setOnClickListener(this);
-        levelsView[63].setOnClickListener(this);
-        levelsView[64].setOnClickListener(this);
-        levelsView[65].setOnClickListener(this);
-        levelsView[66].setOnClickListener(this);
-        levelsView[67].setOnClickListener(this);
-        levelsView[68].setOnClickListener(this);
-        levelsView[69].setOnClickListener(this);
-        levelsView[70].setOnClickListener(this);
-        levelsView[71].setOnClickListener(this);
-        levelsView[72].setOnClickListener(this);
-        levelsView[73].setOnClickListener(this);
-        levelsView[74].setOnClickListener(this);
-        levelsView[75].setOnClickListener(this);
-        levelsView[76].setOnClickListener(this);
-        levelsView[77].setOnClickListener(this);
-        levelsView[78].setOnClickListener(this);
-        levelsView[79].setOnClickListener(this);
-        levelsView[80].setOnClickListener(this);
-        levelsView[81].setOnClickListener(this);
-        levelsView[82].setOnClickListener(this);
-        levelsView[83].setOnClickListener(this);
-        levelsView[84].setOnClickListener(this);
-        levelsView[85].setOnClickListener(this);
-        levelsView[86].setOnClickListener(this);
-        levelsView[87].setOnClickListener(this);
-        levelsView[88].setOnClickListener(this);
-        levelsView[89].setOnClickListener(this);
-        levelsView[90].setOnClickListener(this);
-        levelsView[91].setOnClickListener(this);
-        levelsView[92].setOnClickListener(this);
-        levelsView[93].setOnClickListener(this);
-        levelsView[94].setOnClickListener(this);
-        levelsView[95].setOnClickListener(this);
-        levelsView[96].setOnClickListener(this);
-        levelsView[97].setOnClickListener(this);
-        levelsView[98].setOnClickListener(this);
-        levelsView[99].setOnClickListener(this);
-        levelsView[100].setOnClickListener(this);
         btn_shop.setOnClickListener(this);
         btn_custom.setOnClickListener(this);
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        Integer unlocklevels=sp.getInt("levelNum",1);
-        for(int i=100;i>unlocklevels;i--){
+        Integer unlocklevels=sp.getInt("unlockLevel",1);
+        player_max_levels=Math.max(unlocklevels,player_max_levels);
+        for(int i=100;i>player_max_levels;i--){
             levelsView[i].setBackgroundResource(R.drawable.level_locked_ic);
+        }
+        for(int i=1;i<=player_max_levels;i++){
+            levelsView[i].setOnClickListener(this);
         }
 
     }
