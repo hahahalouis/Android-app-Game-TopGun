@@ -181,6 +181,7 @@
         android:layout_marginTop="26dp"
         android:layout_marginEnd="16dp"
         android:text="Button"
+        android:background="@drawable/shopbtn_bg"
         android:visibility="invisible" />
 
     <Button
@@ -193,6 +194,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="15dp"
         android:text="Button"
+        android:background="@drawable/shopbtn_bg"
         android:visibility="invisible" />
 
     <Button
@@ -205,6 +207,7 @@
         android:layout_marginTop="216dp"
         android:layout_marginEnd="192dp"
         android:text="Button"
+        android:background="@drawable/shopbtn_bg"
         android:visibility="invisible" />
 
     <Button
@@ -217,18 +220,21 @@
         android:layout_marginTop="216dp"
         android:layout_marginEnd="19dp"
         android:text="Button"
+        android:background="@drawable/shopbtn_bg"
         android:visibility="invisible" />
+
     <Button
         android:id="@+id/shopPlanebtn5"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/shopbtn_bg"
         android:text="Apply customized Plane" />
 
 

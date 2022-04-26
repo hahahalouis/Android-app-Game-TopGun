@@ -34,7 +34,7 @@ public class NextLevelActivity extends AppCompatActivity implements View.OnClick
         btn_menu2.setOnClickListener(this);
         getScore = findViewById(R.id.getScore);
 
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
+        sp = getApplicationContext().getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
         int score2 = sp.getInt("coinNum", 0);
         getScore.setText(String.valueOf(score2));
         level_next = sp.getInt("levelNum",0);

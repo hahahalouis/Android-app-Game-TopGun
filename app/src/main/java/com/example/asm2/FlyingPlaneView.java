@@ -1,5 +1,6 @@
 package com.example.asm2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -92,7 +94,6 @@ public class FlyingPlaneView extends View{
                 {
                     SharedPreferences.Editor editor = sp.edit();
                     sound.playOverSound();
-                    Toast.makeText(getContext(),"Game Over ", Toast.LENGTH_SHORT).show();
                     //sp
                     String str_coinNum = Integer.toString(score);
                     editor.putInt("coinNum",score);
@@ -101,6 +102,7 @@ public class FlyingPlaneView extends View{
 
                     Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                     getContext().startActivity(gameoverIntent);
+
                 }
             }
             if(this.rocketX< 0)
@@ -150,8 +152,10 @@ public class FlyingPlaneView extends View{
         plane[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane1_1), 200, 200,false);
         plane[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2), 200, 200 ,false);
         plane[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane2_1), 200, 200,false);
-        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
-        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
+        plane[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3), 200, 200,false);
+        plane[5] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane3_1), 200, 200,false);
+        plane[6] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4), 200, 200,false);
+        plane[7] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.plane4_1), 200, 200,false);
 
         plane[8] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
         plane[9] = Bitmap.createScaledBitmap(myBitmap, 200, 200,false);
@@ -465,15 +469,14 @@ public class FlyingPlaneView extends View{
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
+                    if(pauseStutas){
                     totalTime++;
                     timeText = getTimerText(totalTime);
                     Log.d("timerCancecl"," s: "+ totalTime);
+                    }
                 }
             };
             timer.schedule(timerTask,0,1000);
-        }else if(pauseStutas == false && timerCLickStutas == 0){
-            timer.cancel();
-            Log.d("timerCancel","cancel");
         }
     }
 

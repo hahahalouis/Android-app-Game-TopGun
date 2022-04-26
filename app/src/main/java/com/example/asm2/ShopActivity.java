@@ -197,7 +197,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void buyPlane3(){
         SharedPreferences.Editor editor = sp.edit();
 
-        if(!buyStatus_3 && totalCoin >= 100){
+        if(!buyStatus_3 && totalCoin >= 300){
             totalCoin = totalCoin - 300;
             shopCoinNum.setText(Integer.toString(totalCoin));
             buyStatus_3 = true;
@@ -215,7 +215,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void buyPlane4(){
         SharedPreferences.Editor editor = sp.edit();
 
-        if(!buyStatus_4 && totalCoin >= 100){
+        if(!buyStatus_4 && totalCoin >= 420){
             totalCoin = totalCoin - 420;
             shopCoinNum.setText(Integer.toString(totalCoin));
             buyStatus_4 = true;
@@ -282,7 +282,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 editor.commit();
             }
             else {
-                Toast.makeText(getApplicationContext(), "you need to say sorry, you have not draw the plane", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Have not draw your own plane yet", Toast.LENGTH_SHORT).show();
             }
 
         }

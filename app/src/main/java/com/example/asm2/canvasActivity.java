@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -38,14 +39,7 @@ public class canvasActivity extends AppCompatActivity{
     TextView txtPenSize;
     int defaultColor;
 
-    ImageView canvas_iv;
     Bitmap bitmap;
-    Canvas canvas;
-    Paint paint, cpaint, clearPaint;
-    Button canvas_btn;
-    //    OutputStream outputStream;
-    float downx = 0, downy = 0, upx = 0, upy = 0;
-    float lastx, lasty;
     Boolean imgSaved=null;
 
 
@@ -53,24 +47,6 @@ public class canvasActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canvas);
-
-        Display currentDisplay = getWindowManager().getDefaultDisplay();
-        float dw = currentDisplay.getWidth();
-        float dh = currentDisplay.getHeight();
-
-//        bitmap = Bitmap.createBitmap((int)dw,(int)dh, Bitmap.Config.ARGB_8888);
-//        canvas = new Canvas(bitmap);
-//        paint = new Paint();
-//        cpaint = new Paint();
-//        paint.setStrokeWidth(20);
-//        paint.setColor(Color.BLACK);
-//        cpaint.setStrokeWidth(10);
-//        cpaint.setColor(Color.RED);
-//        canvas_iv.setImageBitmap(bitmap);
-//        canvas_iv.setOnTouchListener(this);
-
-        clearPaint = new Paint();
-        clearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
         signatureView = findViewById(R.id.signature_view);
         seekBar = findViewById(R.id.penSize);
@@ -134,8 +110,6 @@ public class canvasActivity extends AppCompatActivity{
                 signatureView.setDrawingCacheEnabled(true);
                 setImg();
                 if(imgSaved!=null){
-                    Toast savedToast = Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_LONG);
-                    savedToast.show();
                 }
                 else {
                     Toast unSaved = Toast.makeText(getApplicationContext(), "Error, the imgae not saved",Toast.LENGTH_LONG);

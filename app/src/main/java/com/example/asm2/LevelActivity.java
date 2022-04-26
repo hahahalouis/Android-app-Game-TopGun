@@ -148,6 +148,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
                     editor.putInt("levelNum",level_Num);
                     editor.commit();
+                    Log.d("level_num",":"+level_Num);
 
                 } catch (Exception e) {
                     Log.e("Oh no", e.getMessage(),e);
