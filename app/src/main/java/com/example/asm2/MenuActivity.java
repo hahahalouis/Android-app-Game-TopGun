@@ -78,11 +78,11 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     public void changeLang(){
         lang_num = sp.getInt("lang_num",0);
         if(lang_num == 0){
-            on1.setText("Play");
+            on1.setText("Continue");
             on2.setText("Levels");
             btn_shop.setText("Shop");
         }else{
-            on1.setText("遊玩");
+            on1.setText("繼續");
             on2.setText("關卡");
             btn_shop.setText("商店");
         }

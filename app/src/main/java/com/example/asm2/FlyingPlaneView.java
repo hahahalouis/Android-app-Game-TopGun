@@ -49,7 +49,12 @@ public class FlyingPlaneView extends View{
     private int lifeCounter = 3;
     public int timerCLickStutas;
     private boolean cLickStutas=false;
-    private int applyNum = 0, level, targetScor, bg_level;
+    private int applyNum = 0, level, targetScor;
+    private int timeLimSec;
+    private int timeLimMin;
+    private int timeLevel;
+    private int bgLevel;
+
 
     public int totalTime = 0;
 
@@ -64,6 +69,8 @@ public class FlyingPlaneView extends View{
     private String str_targetScor;
     private String levlNum,str_level = "Level ";
     public String timeText ="00.00";
+    public String str_timeLlim = "min";
+    public String formatTimeLim;
 
     private SoundEffect sound;
 
@@ -218,11 +225,16 @@ public class FlyingPlaneView extends View{
         //GetSap
         applyNum = sp.getInt("applyNum",0);
         level = sp.getInt("levelNum",0);
+
         levlNum = Integer.toString(level);
+        bgLevel = level;
 
-        bg_level=level;
 
-
+        if(level > 50){
+            timeLevel = level;
+            timeLimSec = 30 + ((timeLevel-51) * 5);
+            strLevelChange();
+        }
     }
 
     public void setSpeed(double speed){
@@ -241,19 +253,19 @@ public class FlyingPlaneView extends View{
         canvasHeight = canvas.getHeight();
         canvasWidth = canvas.getWidth();
 
-        if(bg_level<=10){
+        if(bgLevel<=10){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg);
-        }else if(bg_level<=20){
+        }else if(bgLevel<=20){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg2);
-        }else if(bg_level<=30){
+        }else if(bgLevel<=30){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingame9);
-        }else if(bg_level<=40){
+        }else if(bgLevel<=40){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg4);
-        }else if(bg_level<=60){
+        }else if(bgLevel<=60){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg5);
-        }else if(bg_level<=80){
+        }else if(bgLevel<=80){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg6);
-        }else if(bg_level<=100){
+        }else if(bgLevel<=100){
             bg = BitmapFactory.decodeResource(getResources(),R.drawable.ingamebg7);
         }
         resize_bg = Bitmap.createScaledBitmap(bg, canvasWidth,canvasHeight,false);
@@ -277,13 +289,18 @@ public class FlyingPlaneView extends View{
             }
         }
 
-        //Display timer
+//      Display timer
         canvas.drawText(timeText,450,200,scorePaint);
 
         //Display alert
         canvas.drawText(clickAlert,300,700,tapPaint);
         canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
-        canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
+
+        if(level <= 50){
+            canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
+        }else{
+            canvas.drawText(getTimeLim() + str_timeLlim,380,900,clickAlertPaint);
+        }
 
         //start the game
         if(startTouchStatus && pauseStutas) {
@@ -293,6 +310,8 @@ public class FlyingPlaneView extends View{
             str_targetScor = "";
             str_level ="";
             levlNum = "";
+            formatTimeLim = "";
+            str_timeLlim = "";
             minPlaneY = plane[applyNum].getHeight();
             maxPlaneY = canvasHeight - plane[applyNum].getHeight() * 2;
             planeY = planeY + planeSpeed;
@@ -321,8 +340,6 @@ public class FlyingPlaneView extends View{
             } else {
                 canvas.drawBitmap(plane[applyNum], planeX, planeY, null);
             }
-
-            //Log.d("startX","startX:"+startX+" "+startX2+" "+startX3);
 
             switch(level){
                 case 100:
@@ -490,6 +507,29 @@ public class FlyingPlaneView extends View{
 
     }
 
+
+
+    public String getTimeLim(){
+
+        if(!startTouchStatus){
+            while( timeLimSec >= 60){
+                timeLimSec = timeLimSec - 60;
+                timeLimMin ++;
+            }
+            Log.d("timelim",timeLimSec + " " + timeLimMin );
+            formatTimeLim = timeLimMin + " : " + timeLimSec;
+        }else{
+            formatTimeLim = "";
+        }
+
+        return  formatTimeLim;
+    }
+    public void strLevelChange(){
+        if(level > 50){
+            levlNum = Integer.toString(timeLevel - 50);
+        }
+    }
+
     public void changeLang(){
         lang_num = sp.getInt("lang_num",0);
         if(lang_num == 0){
@@ -498,11 +538,10 @@ public class FlyingPlaneView extends View{
             str_level = "Level ";
         }else{
             clickAlert = "點擊屏幕";
-            clickTagAlert = "分數 ";
+            clickTagAlert = "123";
             str_level = "關卡 ";
         }
     }
-
 
 
     public void startTimer(){
@@ -512,9 +551,9 @@ public class FlyingPlaneView extends View{
                 @Override
                 public void run() {
                     if(pauseStutas){
-                    totalTime++;
-                    timeText = getTimerText(totalTime);
-                    Log.d("timerCancecl"," s: "+ totalTime);
+                        totalTime++;
+                        timeText = getTimerText(totalTime);
+                        Log.d("timerCancecl"," s: "+ totalTime);
                     }
                 }
             };

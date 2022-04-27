@@ -249,8 +249,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
         Integer unlocklevels_scoremode=sp.getInt("unlockLevelScore",1);
         Integer unlocklevels_timemode=sp.getInt("unlockLevelTime",1);
-        player_max_levels_scoremode=Math.max(unlocklevels_scoremode,player_max_levels_scoremode);
-        player_max_levels_timemode=Math.max(unlocklevels_timemode,player_max_levels_timemode)+50;
+//        player_max_levels_scoremode=Math.max(unlocklevels_scoremode,player_max_levels_scoremode);
+//        player_max_levels_timemode=Math.max(unlocklevels_timemode,player_max_levels_timemode)+50;
+        player_max_levels_scoremode=100;
+        player_max_levels_timemode=100;
         for(int i=50;i>player_max_levels_scoremode;i--){
             levelsView[i].setBackgroundResource(R.drawable.level_locked_ic);
         }

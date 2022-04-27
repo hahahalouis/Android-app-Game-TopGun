@@ -34,7 +34,7 @@ public class StartActivity extends AppCompatActivity {
                        }
                    });
                    try{
-                       Thread.sleep(5000);
+                       Thread.sleep(100);
 
                    } catch (InterruptedException e){
                        e.printStackTrace();
