@@ -111,7 +111,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                     level_Num = Integer.parseInt(selected_level.getText().toString());
                     goLevel(level_Num);
 
-                    editor.putInt("levelNum_scoremode",level_Num);
+                    editor.putInt("levelNum",level_Num);
                     editor.commit();
 
                 } catch (Exception e) {
@@ -175,7 +175,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                     level_Num = Integer.parseInt(selected_level.getText().toString());
                     goLevel(level_Num);
 
-                    editor.putInt("levelNum_timemode",level_Num+50);
+                    editor.putInt("levelNum",level_Num+50);
                     editor.commit();
 
                 } catch (Exception e) {
