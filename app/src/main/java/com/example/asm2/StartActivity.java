@@ -15,10 +15,6 @@ public class StartActivity extends AppCompatActivity {
     private Handler handler = new Handler();
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +46,6 @@ public class StartActivity extends AppCompatActivity {
                }
            }
            }).start();
-
-
-
-
 
     }
 
