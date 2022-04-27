@@ -104,6 +104,20 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.l48:
             case R.id.l49:
             case R.id.l50:
+                try {
+                    SharedPreferences.Editor editor = sp.edit();
+
+                    TextView selected_level=findViewById(view.getId());
+                    level_Num = Integer.parseInt(selected_level.getText().toString());
+                    goLevel(level_Num);
+
+                    editor.putInt("levelNum_scoremode",level_Num);
+                    editor.commit();
+
+                } catch (Exception e) {
+                    Log.e("Oh no", e.getMessage(),e);
+                }
+                break;
             case R.id.l51:
             case R.id.l52:
             case R.id.l53:
@@ -161,7 +175,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                     level_Num = Integer.parseInt(selected_level.getText().toString());
                     goLevel(level_Num);
 
-                    editor.putInt("levelNum",level_Num);
+                    editor.putInt("levelNum_timemode",level_Num+50);
                     editor.commit();
 
                 } catch (Exception e) {
@@ -180,8 +194,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         Double flying_speed_acc;
         if(level==0){
             flying_speed_acc = 1.0;
-        }else {
+        }else if(level<50){
             flying_speed_acc = level * 0.7; // 1lv+ 0.7 speed
+        }else {
+            flying_speed_acc=(level-50)*0.7;
         }
         //put the values
         Intent gameIntent = new Intent(LevelActivity.this,MainActivity.class);
