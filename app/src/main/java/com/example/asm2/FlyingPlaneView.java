@@ -83,8 +83,11 @@ public class FlyingPlaneView extends View{
         }
 
         public void fly(){
-            this.rocketX = this.rocketX - this.rocketSpeed;
+            if(level==0){
 
+            }else {
+                this.rocketX = this.rocketX - this.rocketSpeed;
+            }
             if(hitRocketChecker(this.rocketX,this.rocketY))
             {
                 this.rocketX = this.rocketX - 500;
@@ -117,8 +120,11 @@ public class FlyingPlaneView extends View{
         int gasX,gasY,gasSpeed=18,startX;
 
         public void fly(){
-            this.gasX = this.gasX - this.gasSpeed;
+            if(level==0){
 
+            }else {
+                this.gasX = this.gasX - this.gasSpeed;
+            }
             if(hitRocketChecker(this.gasX,this.gasY))
             {    winDetect();
                 score = score + 10;

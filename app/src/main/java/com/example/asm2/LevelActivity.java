@@ -28,7 +28,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sp;
 
     public Integer level_Num;
-    Integer player_max_levels=1;
+    Integer player_max_levels_scoremode=1,player_max_levels_timemode=1;
     ImageButton btn_back;
 
     @Override
@@ -226,15 +226,25 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        Integer unlocklevels=sp.getInt("unlockLevel",1);
-        player_max_levels=Math.max(unlocklevels,player_max_levels);
-        for(int i=100;i>player_max_levels;i--){
+        Integer unlocklevels_scoremode=sp.getInt("unlockLevelScore",1);
+        Integer unlocklevels_timemode=sp.getInt("unlockLevelTime",1);
+        player_max_levels_scoremode=Math.max(unlocklevels_scoremode,player_max_levels_scoremode);
+        player_max_levels_timemode=Math.max(unlocklevels_timemode,player_max_levels_timemode)+50;
+        for(int i=50;i>player_max_levels_scoremode;i--){
             levelsView[i].setBackgroundResource(R.drawable.level_locked_ic);
         }
-        for(int i=1;i<=player_max_levels;i++){
+        for(int i=1;i<=player_max_levels_scoremode;i++){
             levelsView[i].setOnClickListener(this);
         }
-
+        for(int i=100;i>player_max_levels_timemode;i--){
+            levelsView[i].setBackgroundResource(R.drawable.level_locked_ic);
+        }
+        for(int i=51;i<=player_max_levels_timemode;i++){
+            levelsView[i].setOnClickListener(this);
+        }
+        for(int i=51;i<=100;i++){
+            levelsView[i].setText(Integer.toString(i-50));
+        }
         changeLang();
     }
 
