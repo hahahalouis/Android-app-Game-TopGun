@@ -42,7 +42,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.tv_shop:
+            case R.id.tv1_shop:
                 shopclicked();
                 break;
             case R.id.tv_custom:
@@ -216,7 +216,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         tv_infinite=findViewById(R.id.tv_infinite);
         tv_infinite.setOnClickListener(this);
 
-        btn_shop=findViewById(R.id.tv_shop);
+        btn_shop=findViewById(R.id.tv1_shop);
         btn_custom=findViewById(R.id.tv_custom);
         btn_back=findViewById(R.id.btn_back);
 
