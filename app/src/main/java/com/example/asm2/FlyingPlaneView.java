@@ -72,7 +72,7 @@ public class FlyingPlaneView extends View{
     SharedPreferences sp;
     int lang_num;
 
-    Boolean isInfinite=false;
+    Boolean isInfinite=false,isTimemode=false;
 
     private Rocket r1=new Rocket(),r2=new Rocket(),r3=new Rocket(),r4=new Rocket(),r5=new Rocket(),r6=new Rocket(),r7=new Rocket(),r8=new Rocket(),r9=new Rocket(),r10=new Rocket(),r11=new Rocket();
     private Gas g1=new Gas(),g2=new Gas(),g3=new Gas(),g4=new Gas(),g5=new Gas(),g6=new Gas(),g7=new Gas(),g8=new Gas(),g9=new Gas(),g10=new Gas(),g11=new Gas();
@@ -387,6 +387,8 @@ public class FlyingPlaneView extends View{
                 case 53:
                 case 52:
                 case 51:
+                    isTimemode=true;
+                    level=level-50;
                     r6.fly();
                     canvas.drawBitmap(rocket, r6.rocketX, r6.rocketY, null);
                 case 50:
