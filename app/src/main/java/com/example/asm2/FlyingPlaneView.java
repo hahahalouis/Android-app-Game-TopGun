@@ -72,19 +72,27 @@ public class FlyingPlaneView extends View{
     SharedPreferences sp;
     int lang_num;
 
+    Boolean isInfinite=false;
+
     private Rocket r1=new Rocket(),r2=new Rocket(),r3=new Rocket(),r4=new Rocket(),r5=new Rocket(),r6=new Rocket(),r7=new Rocket(),r8=new Rocket(),r9=new Rocket(),r10=new Rocket(),r11=new Rocket();
     private Gas g1=new Gas(),g2=new Gas(),g3=new Gas(),g4=new Gas(),g5=new Gas(),g6=new Gas(),g7=new Gas(),g8=new Gas(),g9=new Gas(),g10=new Gas(),g11=new Gas();
 
     public class Rocket{
         public int rocketSpeed,rocketX,rocketY,startX;
+        Boolean isInfinite=false;
 
         public Rocket(){
-            this.rocketSpeed=speedForRocket;
+            if(level==0){
+                this.rocketSpeed=18;
+                isInfinite=true;
+            }else {
+                this.rocketSpeed = speedForRocket;
+            }
         }
 
         public void fly(){
-            if(level==0){
-
+            if(isInfinite){
+                this.rocketX = this.rocketX-(int)Math.floor(level*0.35+this.rocketSpeed*0.25);
             }else {
                 this.rocketX = this.rocketX - this.rocketSpeed;
             }
@@ -120,11 +128,9 @@ public class FlyingPlaneView extends View{
         int gasX,gasY,gasSpeed=18,startX;
 
         public void fly(){
-            if(level==0){
 
-            }else {
-                this.gasX = this.gasX - this.gasSpeed;
-            }
+            this.gasX = this.gasX - this.gasSpeed;
+
             if(hitRocketChecker(this.gasX,this.gasY))
             {    winDetect();
                 score = score + 10;
@@ -462,6 +468,12 @@ public class FlyingPlaneView extends View{
                     r1.fly();
                     canvas.drawBitmap(rocket, r1.rocketX, r1.rocketY, null);
                     break;
+                case 0:
+                    isInfinite=true;
+                    break;
+            }
+            if(isInfinite){
+                level=Math.min(totalTime,100);
             }
 
             if(pauseStutas){
