@@ -324,8 +324,6 @@ public class FlyingPlaneView extends View{
 
             switch(level){
                 case 100:
-                    g11.fly();
-                    canvas.drawBitmap(resize_gas, g11.gasX, g11.gasY, null);
                     r11.fly();
                     canvas.drawBitmap(rocket, r11.rocketX, r11.rocketY, null);
                 case 99:
@@ -338,8 +336,7 @@ public class FlyingPlaneView extends View{
                 case 92:
                 case 91:
                 case 90:
-                    g10.fly();
-                    canvas.drawBitmap(resize_gas, g10.gasX, g10.gasY, null);
+
                     r10.fly();
                     canvas.drawBitmap(rocket, r10.rocketX, r10.rocketY, null);
                 case 89:
@@ -352,8 +349,7 @@ public class FlyingPlaneView extends View{
                 case 82:
                 case 81:
                 case 80:
-                    g9.fly();
-                    canvas.drawBitmap(resize_gas, g9.gasX, g9.gasY, null);
+
                     r9.fly();
                     canvas.drawBitmap(rocket, r9.rocketX, r9.rocketY, null);
                 case 79:
@@ -366,8 +362,7 @@ public class FlyingPlaneView extends View{
                 case 72:
                 case 71:
                 case 70:
-                    g8.fly();
-                    canvas.drawBitmap(resize_gas, g8.gasX, g8.gasY, null);
+
                     r8.fly();
                     canvas.drawBitmap(rocket, r8.rocketX, r8.rocketY, null);
                 case 69:
@@ -380,8 +375,7 @@ public class FlyingPlaneView extends View{
                 case 62:
                 case 61:
                 case 60:
-                    g7.fly();
-                    canvas.drawBitmap(resize_gas, g7.gasX, g7.gasY, null);
+
                     r7.fly();
                     canvas.drawBitmap(rocket, r7.rocketX, r7.rocketY, null);
                 case 59:
@@ -393,6 +387,8 @@ public class FlyingPlaneView extends View{
                 case 53:
                 case 52:
                 case 51:
+                    r6.fly();
+                    canvas.drawBitmap(rocket, r6.rocketX, r6.rocketY, null);
                 case 50:
                     g6.fly();
                     canvas.drawBitmap(resize_gas, g6.gasX, g6.gasY, null);
