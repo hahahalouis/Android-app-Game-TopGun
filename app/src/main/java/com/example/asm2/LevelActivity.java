@@ -247,8 +247,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        Integer unlocklevels_scoremode=sp.getInt("unlockLevelScore",1);
-        Integer unlocklevels_timemode=sp.getInt("unlockLevelTime",1);
+        Integer unlocklevels_scoremode=sp.getInt("unlockLevel",1);
+        Integer unlocklevels_timemode=sp.getInt("unlockLevel",1);
 //        player_max_levels_scoremode=Math.max(unlocklevels_scoremode,player_max_levels_scoremode);
 //        player_max_levels_timemode=Math.max(unlocklevels_timemode,player_max_levels_timemode)+50;
         player_max_levels_scoremode=100;
