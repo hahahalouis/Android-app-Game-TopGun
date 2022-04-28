@@ -414,8 +414,10 @@ public class FlyingPlaneView extends View{
                 case 53:
                 case 52:
                 case 51:
-                    isTimemode=true;
-                    level=level-50;
+                    if(!isInfinite) {
+                        isTimemode = true;
+                        level = level - 50;
+                    }
                     r6.fly();
                     canvas.drawBitmap(rocket, r6.rocketX, r6.rocketY, null);
                 case 50:
@@ -499,7 +501,7 @@ public class FlyingPlaneView extends View{
             }
             if(isInfinite){
                 bgLevel=Math.min(totalTime,100);
-                level=level+1;
+                level=Math.min(totalTime,100);
             }
 
             if(pauseStutas){
@@ -522,7 +524,7 @@ public class FlyingPlaneView extends View{
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
             editor.putInt("coinNum",score);
-            editor.putInt("unlockLevel",level+1);
+            editor.putInt("unlockLevelTime",level+1);
             editor.commit();
             stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
@@ -630,7 +632,7 @@ public class FlyingPlaneView extends View{
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
             editor.putInt("coinNum",score);
-            editor.putInt("unlockLevel",level+1);
+            editor.putInt("unlockLevelScore",level+1);
             editor.commit();
             stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
