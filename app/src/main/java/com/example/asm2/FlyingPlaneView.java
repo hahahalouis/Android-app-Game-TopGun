@@ -524,7 +524,7 @@ public class FlyingPlaneView extends View{
             editor.putInt("coinNum",score);
             editor.putInt("unlockLevel",level+1);
             editor.commit();
-            sound.stopMusic();
+            stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
             Log.d("checkmode","true");
@@ -632,7 +632,7 @@ public class FlyingPlaneView extends View{
             editor.putInt("coinNum",score);
             editor.putInt("unlockLevel",level+1);
             editor.commit();
-            sound.stopMusic();
+            stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
         }
@@ -685,4 +685,12 @@ public class FlyingPlaneView extends View{
 
         return super.onTouchEvent(event);
     }
+
+    public void stopMusic(){
+        sound.stopMusic();
+
+    }
+
 }
+
+

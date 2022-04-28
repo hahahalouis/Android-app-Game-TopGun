@@ -55,7 +55,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed()
+    {      gameView.stopMusic();
+        // code here to show dialog
+        super.onBackPressed();  // optional depending on your needs
+    }
 
 
 //    public void startTimer(){

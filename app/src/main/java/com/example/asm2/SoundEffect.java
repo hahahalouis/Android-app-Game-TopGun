@@ -52,6 +52,7 @@ public class SoundEffect {
     }
 
     public void playMusic(){
+        mediaPlayer.setVolume(0.5f,0.5f);
         mediaPlayer.start();
 
     }
