@@ -524,7 +524,7 @@ public class FlyingPlaneView extends View{
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
             editor.putInt("coinNum",score);
-            editor.putInt("unlockLevel",level+1);
+            editor.putInt("unlockLevelTime",level+1);
             editor.commit();
             sound.stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
@@ -632,7 +632,7 @@ public class FlyingPlaneView extends View{
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
             editor.putInt("coinNum",score);
-            editor.putInt("unlockLevel",level+1);
+            editor.putInt("unlockLevelScore",level+1);
             editor.commit();
             sound.stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);

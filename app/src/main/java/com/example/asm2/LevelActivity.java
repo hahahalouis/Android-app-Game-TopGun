@@ -29,7 +29,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public Integer level_Num;
     Integer player_max_levels_scoremode=1,player_max_levels_timemode=1;
-    ImageButton btn_back;
+    ImageButton ib_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_custom:
                 goDraw();
                 break;
-            case R.id.btn_back:
+            case R.id.ib_back:
                 goBack();
                 break;
             case R.id.tv_infinite:
@@ -239,18 +239,19 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         btn_shop=findViewById(R.id.tv1_shop);
         btn_custom=findViewById(R.id.tv_custom);
-        btn_back=findViewById(R.id.btn_back);
         tv_scoremode = findViewById(R.id.tv_scoremode);
         tv_timemode = findViewById(R.id.tv_timemode);
 
         btn_shop.setOnClickListener(this);
         btn_custom.setOnClickListener(this);
-        btn_back.setOnClickListener(this);
+
+        ib_back=findViewById(R.id.ib_back);
+        ib_back.setOnClickListener(this);
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        Integer unlocklevels_scoremode=sp.getInt("unlockLevel",1);
-        Integer unlocklevels_timemode=sp.getInt("unlockLevel",1);
+        Integer unlocklevels_scoremode=sp.getInt("unlockLevelScore",1);
+        Integer unlocklevels_timemode=sp.getInt("unlockLevelTime",1);
         player_max_levels_scoremode=Math.max(unlocklevels_scoremode,player_max_levels_scoremode);
         player_max_levels_timemode=Math.max(unlocklevels_timemode,player_max_levels_timemode)+50;
        // player_max_levels_scoremode=100;
