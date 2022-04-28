@@ -118,7 +118,7 @@ public class FlyingPlaneView extends View{
                     editor.putInt("coinNum",score);
                     editor.commit();
                     Log.d("Flysp","though rocket");
-
+                    sound.stopMusic();
                     Intent gameoverIntent = new Intent(getContext(), GameOverActivity.class);
                     getContext().startActivity(gameoverIntent);
 
@@ -164,6 +164,8 @@ public class FlyingPlaneView extends View{
 
         //sound
         sound = new SoundEffect(context);
+        sound.playMusic();
+
         //Declare Bitmap
         gas = BitmapFactory.decodeResource(getResources(), R.drawable.oil);
         rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 150, 150 ,false);
@@ -517,6 +519,7 @@ public class FlyingPlaneView extends View{
             editor.putInt("coinNum",score);
             editor.putInt("unlockLevel",level+1);
             editor.commit();
+            sound.stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
             Log.d("checkmode","true");
@@ -622,6 +625,7 @@ public class FlyingPlaneView extends View{
             editor.putInt("coinNum",score);
             editor.putInt("unlockLevel",level+1);
             editor.commit();
+            sound.stopMusic();
             Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
             getContext().startActivity(winIntent);
         }

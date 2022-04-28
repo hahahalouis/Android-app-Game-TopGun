@@ -2,6 +2,7 @@ package com.example.asm2;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 
 public class SoundEffect {
@@ -10,6 +11,8 @@ public class SoundEffect {
     private static int overSound;
     private static int rewardSound;
     private static int botoomSound;
+    private static int flymusic;
+    private MediaPlayer mediaPlayer;
 
     public SoundEffect(Context context) {
 
@@ -19,8 +22,15 @@ public class SoundEffect {
         overSound = soundPool.load(context,R.raw.game_over,1);
         rewardSound = soundPool.load(context,R.raw.reward,1);
         botoomSound = soundPool.load(context,R.raw.bottom,1);
+        flymusic = soundPool.load(context,R.raw.flymusic,1);
+
+        mediaPlayer = MediaPlayer.create(context,R.raw.flymusic);
+        mediaPlayer.setLooping(true);
 
     }
+
+
+
 
     public void playHitSound(){
         soundPool.play(hitSound,1.0f,1.0f,1,0,1.0f);
@@ -41,6 +51,17 @@ public class SoundEffect {
         soundPool.play(botoomSound,1.0f,1.0f,1,0,1.0f);
 
     }
+
+    public void playMusic(){
+        mediaPlayer.start();
+
+    }
+
+
+    public void stopMusic(){
+        mediaPlayer.stop();
+    }
+
 
 
 }
