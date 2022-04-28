@@ -71,6 +71,7 @@ public class FlyingPlaneView extends View{
     public String timeText ="00.00";
     public String str_timeLlim = "min";
     public String formatTimeLim;
+    public String str_score = "Score: ";
 
     private SoundEffect sound;
 
@@ -139,7 +140,8 @@ public class FlyingPlaneView extends View{
             this.gasX = this.gasX - this.gasSpeed;
 
             if(hitRocketChecker(this.gasX,this.gasY))
-            {    winDetect();
+            {
+//                winDetect();
                 score = score + 10;
                 this.gasX = this.gasX - 500;
                 sound.playRewardSound();
@@ -273,7 +275,7 @@ public class FlyingPlaneView extends View{
         //BG
         canvas.drawBitmap(resize_bg,0,0,null);
         //Score
-        canvas.drawText("Score: "+score,70,100,scorePaint);
+        canvas.drawText(str_score  +score,70,100,scorePaint);
         //Display heart
         for( int j = 0 ; j <3 ; j++)
         {
@@ -299,7 +301,7 @@ public class FlyingPlaneView extends View{
         if(level <= 50){
             canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
         }else{
-            canvas.drawText(getTimeLim() + str_timeLlim,380,900,clickAlertPaint);
+            canvas.drawText(getTimeLim() + str_timeLlim,330,900,clickAlertPaint);
         }
 
         //start the game
@@ -508,7 +510,7 @@ public class FlyingPlaneView extends View{
     }
 
     public void timemodeDetect(){
-        if(minutes == timeLimMin && seconds == timeLimSec)
+        if(minutes >= timeLimMin && seconds >= timeLimSec)
         {
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("Heart",lifeCounter);
@@ -552,10 +554,14 @@ public class FlyingPlaneView extends View{
             clickAlert = "Tap to start";
             clickTagAlert = "Score ";
             str_level = "Level ";
+            str_timeLlim ="min";
+            str_score = "Score: ";
         }else{
             clickAlert = "點擊屏幕";
-            clickTagAlert = "123";
+            clickTagAlert = "分數";
             str_level = "關卡 ";
+            str_timeLlim = "分鐘";
+            str_score = "分數： ";
         }
     }
 
@@ -598,7 +604,6 @@ public class FlyingPlaneView extends View{
                 pauseStutas = false;
             }else{
                 pauseStutas = true;
-//                timerCLickStutas = 1;
             }
         }
     }
@@ -665,8 +670,6 @@ public class FlyingPlaneView extends View{
                 timemodeDetect();
                 Log.d("mod change ","timemode" + " " + timeLevel);
             }
-
-
         }
 
         return super.onTouchEvent(event);
