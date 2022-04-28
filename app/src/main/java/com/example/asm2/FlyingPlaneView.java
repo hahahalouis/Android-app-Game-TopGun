@@ -499,6 +499,7 @@ public class FlyingPlaneView extends View{
             }
             if(isInfinite){
                 bgLevel=Math.min(totalTime,100);
+                level=level+1;
             }
 
             if(pauseStutas){
