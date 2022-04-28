@@ -6,13 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button on1, on2,btn_shop,langbtn;
 
-    int lang_num,level;
+    int lang_num = 0,level;
 
     SharedPreferences sp;
 

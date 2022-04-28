@@ -300,7 +300,7 @@ public class FlyingPlaneView extends View{
         //Display alert
         canvas.drawText(clickAlert,300,700,tapPaint);
 
-        if(level >1 && level <= 50){
+        if(level >= 1 && level <= 50){
             canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
             canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
         }else if(level > 50 ){
@@ -320,6 +320,7 @@ public class FlyingPlaneView extends View{
             levlNum = "";
             formatTimeLim = "";
             str_timeLlim = "";
+            str_intinit = "";
             minPlaneY = plane[applyNum].getHeight();
             maxPlaneY = canvasHeight - plane[applyNum].getHeight() * 2;
             planeY = planeY + planeSpeed;
