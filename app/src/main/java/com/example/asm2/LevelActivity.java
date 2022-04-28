@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    TextView btn_shop,btn_custom,tv_infinite;
+    TextView btn_shop,btn_custom,tv_infinite,tv_scoremode ,tv_timemode;
 
     int lang_num;
 
@@ -240,6 +240,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         btn_shop=findViewById(R.id.tv1_shop);
         btn_custom=findViewById(R.id.tv_custom);
         btn_back=findViewById(R.id.btn_back);
+        tv_scoremode = findViewById(R.id.tv_scoremode);
+        tv_timemode = findViewById(R.id.tv_timemode);
 
         btn_shop.setOnClickListener(this);
         btn_custom.setOnClickListener(this);
@@ -247,8 +249,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
-        Integer unlocklevels_scoremode=sp.getInt("unlockLevelScore",1);
-        Integer unlocklevels_timemode=sp.getInt("unlockLevelTime",1);
+        Integer unlocklevels_scoremode=sp.getInt("unlockLevel",1);
+        Integer unlocklevels_timemode=sp.getInt("unlockLevel",1);
 //        player_max_levels_scoremode=Math.max(unlocklevels_scoremode,player_max_levels_scoremode);
 //        player_max_levels_timemode=Math.max(unlocklevels_timemode,player_max_levels_timemode)+50;
         player_max_levels_scoremode=100;
@@ -276,9 +278,15 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         if(lang_num == 0){
             btn_custom.setText("Draw");
             btn_shop.setText("Shop");
+            tv_infinite.setText("Infinite");
+            tv_scoremode.setText("Score Mode");
+            tv_timemode.setText("Time Mode");
         }else{
             btn_custom.setText("繪畫");
             btn_shop.setText("商店");
+            tv_infinite.setText("  無限");
+            tv_scoremode.setText("分數模式");
+            tv_timemode.setText("時間模式");
         }
     }
 }
