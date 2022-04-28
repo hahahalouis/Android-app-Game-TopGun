@@ -8,8 +8,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,7 +35,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     public Integer level_Num;
     Integer player_max_levels_scoremode=1,player_max_levels_timemode=1;
-    ImageButton ib_back;
+    Button btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_custom:
                 goDraw();
                 break;
-            case R.id.ib_back:
+            case R.id.btn_back:
                 goBack();
                 break;
             case R.id.tv_infinite:
@@ -225,8 +228,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void goBack(){
-        Intent MenuIntent = new Intent(LevelActivity.this,MenuActivity.class);
-        startActivity(MenuIntent);
+        Intent LastIntent = new Intent(LevelActivity.this,MenuActivity.class);
+        startActivity(LastIntent);
     }
 
 
@@ -248,8 +251,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         btn_shop.setOnClickListener(this);
         btn_custom.setOnClickListener(this);
 
-        ib_back=findViewById(R.id.ib_back);
-        ib_back.setOnClickListener(this);
+        btn_back=findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(this);
 
         //sp
         sp = getSharedPreferences("ShopSp", Context.MODE_PRIVATE);
