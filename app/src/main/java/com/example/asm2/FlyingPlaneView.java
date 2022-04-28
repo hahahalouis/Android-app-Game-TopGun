@@ -72,6 +72,7 @@ public class FlyingPlaneView extends View{
     public String str_timeLlim = "min";
     public String formatTimeLim;
     public String str_score = "Score: ";
+    public String str_intinit = "Infinite Mode";
 
     private SoundEffect sound;
 
@@ -296,12 +297,15 @@ public class FlyingPlaneView extends View{
 
         //Display alert
         canvas.drawText(clickAlert,300,700,tapPaint);
-        canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
 
-        if(level <= 50){
+        if(level >1 && level <= 50){
             canvas.drawText(clickTagAlert + str_targetScor,340,900,clickAlertPaint);
-        }else{
+            canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
+        }else if(level > 50 ){
             canvas.drawText(getTimeLim() + str_timeLlim,330,900,clickAlertPaint);
+            canvas.drawText(str_level + levlNum,370,800,clickAlertPaint);
+        }else if(level == 0 ){
+            canvas.drawText(str_intinit,290,830,clickAlertPaint);
         }
 
         //start the game
@@ -556,12 +560,14 @@ public class FlyingPlaneView extends View{
             str_level = "Level ";
             str_timeLlim ="min";
             str_score = "Score: ";
+            str_intinit = "Infinite Mode";
         }else{
             clickAlert = "點擊屏幕";
-            clickTagAlert = "分數";
+            clickTagAlert = "分數 ";
             str_level = "關卡 ";
             str_timeLlim = "分鐘";
             str_score = "分數： ";
+            str_intinit = "無限模式";
         }
     }
 
