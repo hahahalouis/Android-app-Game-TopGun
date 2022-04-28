@@ -414,8 +414,10 @@ public class FlyingPlaneView extends View{
                 case 53:
                 case 52:
                 case 51:
-                    isTimemode=true;
-                    level=level-50;
+                    if(!isInfinite) {
+                        isTimemode = true;
+                        level = level - 50;
+                    }
                     r6.fly();
                     canvas.drawBitmap(rocket, r6.rocketX, r6.rocketY, null);
                 case 50:
@@ -499,7 +501,7 @@ public class FlyingPlaneView extends View{
             }
             if(isInfinite){
                 bgLevel=Math.min(totalTime,100);
-                level=level+1;
+                level=Math.min(totalTime,100);
             }
 
             if(pauseStutas){
