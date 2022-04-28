@@ -541,7 +541,7 @@ public class FlyingPlaneView extends View{
             Log.d("timelim",timeLimSec + " " + timeLimMin );
             formatTimeLim = timeLimMin + " : " + timeLimSec;
         }else{
-            formatTimeLim = "";
+            formatTimeLim = " ";
         }
 
         return  formatTimeLim;
