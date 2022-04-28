@@ -54,7 +54,7 @@ public class FlyingPlaneView extends View{
     private int timeLimMin;
     private int timeLevel;
     private int bgLevel;
-
+    private int seconds, minutes;
 
     public int totalTime = 0;
 
@@ -507,6 +507,22 @@ public class FlyingPlaneView extends View{
 
     }
 
+    public void timemodeDetect(){
+        if(minutes == timeLimMin && seconds == timeLimSec)
+        {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt("Heart",lifeCounter);
+            editor.putInt("coinNum",score);
+            editor.putInt("unlockLevel",level+1);
+            editor.commit();
+            Intent winIntent = new Intent(getContext(), NextLevelActivity.class);
+            getContext().startActivity(winIntent);
+            Log.d("checkmode","true");
+        }else{
+            Log.d("checkmode","false");
+        }
+    }
+
 
 
     public String getTimeLim(){
@@ -553,7 +569,6 @@ public class FlyingPlaneView extends View{
                     if(pauseStutas){
                         totalTime++;
                         timeText = getTimerText(totalTime);
-                        Log.d("timerCancecl"," s: "+ totalTime);
                     }
                 }
             };
@@ -564,8 +579,8 @@ public class FlyingPlaneView extends View{
     public String getTimerText(int time){
 
 
-        int seconds = time %  60;
-        int minutes = (time % 3600) / 60;
+        seconds = time %  60;
+        minutes = (time % 3600) / 60;
 
         Log.d("timer2"," m: "+ minutes +" s: "+ seconds);
 
@@ -642,9 +657,16 @@ public class FlyingPlaneView extends View{
             cLickStutas=true;
             startTimer();
             pauseChecker(eventX,eventY);
-            winDetect();
-            Log.d("speed222","s"+speedForRocket);
-            Log.d("through", ""+pauseStutas);
+
+            if(timeLevel <= 50){
+                winDetect();
+                Log.d("mod_change","sciremode"+" " + timeLevel);
+            }else{
+                timemodeDetect();
+                Log.d("mod change ","timemode" + " " + timeLevel);
+            }
+
+
         }
 
         return super.onTouchEvent(event);
