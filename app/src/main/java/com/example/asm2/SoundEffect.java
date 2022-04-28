@@ -11,7 +11,6 @@ public class SoundEffect {
     private static int overSound;
     private static int rewardSound;
     private static int botoomSound;
-    private static int flymusic;
     private MediaPlayer mediaPlayer;
 
     public SoundEffect(Context context) {
@@ -22,9 +21,9 @@ public class SoundEffect {
         overSound = soundPool.load(context,R.raw.game_over,1);
         rewardSound = soundPool.load(context,R.raw.reward,1);
         botoomSound = soundPool.load(context,R.raw.bottom,1);
-        flymusic = soundPool.load(context,R.raw.flymusic,1);
 
-        mediaPlayer = MediaPlayer.create(context,R.raw.flymusic);
+
+        mediaPlayer = MediaPlayer.create(context,R.raw.flymusic2);
         mediaPlayer.setLooping(true);
 
     }
